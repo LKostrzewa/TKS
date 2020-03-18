@@ -62,22 +62,4 @@ public class UserService {
     public List<Client> getAllActiveClients(){
         return users.getAllActiveClients();
     }
-
-    /*@Transactional
-    public void addClientFromUser(User user){
-        Client client = new Client();
-        client.setLogin(user.getLogin());
-        client.setPassword(user.getPassword());
-        client.setName(user.getName());
-        client.setSurname(user.getSurname());
-        client.setActive(user.isActive());
-        client.setType(new NormalClient());
-        addUser(client);
-        //List<GrantedAuthority> authorities = new ArrayList<>();
-        //authorities.add(new SimpleGrantedAuthority(role));
-        //UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getLogin(), user.getPassword(), authorities);
-        //Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
-        //SecurityContextHolder.getContext().setAuthentication(authentication);
-        //addUser(user);
-    }*/
 }

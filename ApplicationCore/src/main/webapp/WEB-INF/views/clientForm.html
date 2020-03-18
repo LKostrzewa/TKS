@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Client</title>
+</head>
+<body>
+<p>Add Client</p>
+<form action="#" th:action="@{add-client}" th:object="${client}" method="post">
+    <table border="1">
+        <tr>
+            <td><label th:text="'Login'" /></td>
+            <td><input type="text" th:field="*{login}" /></td>
+            <td th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Validation Error</td>
+        </tr>
+        <tr>
+            <td><label th:text="'Password'" /></td>
+            <td><input type="password" th:field="*{password}" /></td>
+            <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Validation Error</td>
+        </tr>
+        <!--<tr>
+            <td><label th:text="'Confirm Password'">confirm</label></td>
+            <td><input type="password" th:field="*{matchingPassword}"/></td>
+        </tr>-->
+        <tr>
+            <td><label th:text="'Name'" /></td>
+            <td><input type="text" th:field="*{name}" /></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Surname'" /></td>
+            <td><input type="text" th:field="*{surname}" /></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Add" /></td>
+            <td><input type="hidden" th:field="*{active}"></td>
+        </tr>
+    </table>
+    <a th:href="@{/users/}">Return</a>
+</form>
+</body>
+</html>

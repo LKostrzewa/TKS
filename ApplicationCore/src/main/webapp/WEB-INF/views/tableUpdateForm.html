@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Table Update Form</title>
+</head>
+<body>
+<label th:text="'Update table ' + ${table.id}"/>
+<form th:action="@{/resources/update-table}" th:object="${table}" method="post">
+    <table border="1">
+        <tr>
+            <td><label th:text="'Price'" /></td>
+            <td><input type="text" th:field="*{price}" /></td>
+            <td th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</td>
+        </tr>
+        <tr>
+            <td><label th:text="'Number of people'" /></td>
+            <td><input type="text" th:field="*{numOfPeople}" /></td>
+            <td th:if="${#fields.hasErrors('numOfPeople')}" th:errors="*{numOfPeople}">NumOfPeople Error</td>
+        </tr>
+        <tr>
+            <td><label th:text="'Number'" /></td>
+            <td><input type="text" th:field="*{number}" /></td>
+            <td th:if="${#fields.hasErrors('number')}" th:errors="*{number}">Number Error</td>
+        </tr>
+        <tr>
+            <td><input type="hidden" th:field="*{id}"></td>
+            <td><input type="submit" value="Update" /></td>
+        </tr>
+
+    </table>
+</form>
+<a th:href="@{/resources/}">Return</a>
+</body>
+</html>

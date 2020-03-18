@@ -1,13 +1,8 @@
 package pl.lodz.p.it.tks.model;
 
-import org.hibernate.validator.constraints.NotBlank;
-
-//@PasswordMatches
 public class User {
 
-    @NotBlank(message = "Login cannot be blank")
     private String login;
-    @NotBlank(message = "Password cannot be blank")
     private String password;
     private String matchingPassword;
     private String name;

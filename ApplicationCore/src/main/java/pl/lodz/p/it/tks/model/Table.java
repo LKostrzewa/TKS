@@ -1,12 +1,8 @@
 package pl.lodz.p.it.tks.model;
 
-import javax.validation.constraints.Min;
-
 public class Table extends Resource {
 
-    @Min(value = 0, message = "Number has to be positive integer")
     private int number;
-    @Min(value = 0, message = "Number of people has to be positive integer")
     private int numOfPeople;
 
     public Table(){

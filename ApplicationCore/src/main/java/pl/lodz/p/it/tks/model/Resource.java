@@ -1,14 +1,9 @@
 package pl.lodz.p.it.tks.model;
 
-import org.hibernate.validator.constraints.NotBlank;
-
-import javax.validation.constraints.Min;
 
 public class Resource {
 
-    @NotBlank(message = "Empty ID given")
     private String id;
-    @Min(value = 0, message = "Price has to be positive decimal")
     private double price;
 
     public Resource(){

@@ -1,11 +1,8 @@
 package pl.lodz.p.it.tks.model;
 
-import javax.validation.constraints.Min;
-
 public class BallRoom extends Resource {
 
     private String description;
-    @Min(value = 0, message = "Number of rooms has to be positive integer")
     private int numOfRooms;
 
     public BallRoom(){

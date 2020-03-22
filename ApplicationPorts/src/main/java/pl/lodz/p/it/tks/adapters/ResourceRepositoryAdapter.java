@@ -27,40 +27,20 @@ public class ResourceRepositoryAdapter implements AddResourcePort, DeleteResourc
     private ResourceEnt convertResource(Resource resource){
         if(resource instanceof Table){
             Table table = (Table) resource;
-            TableEnt tableEnt = new TableEnt();
-            tableEnt.setNumber(table.getNumber());
-            tableEnt.setNumOfPeople(table.getNumOfPeople());
-            tableEnt.setId(table.getId());
-            tableEnt.setPrice(table.getPrice());
-            return  tableEnt;
+            return new TableEnt(table.getId(), table.getPrice(), table.getNumber(), table.getNumOfPeople());
         }
         else {
             BallRoom ballRoom = (BallRoom) resource;
-            BallRoomEnt ballRoomEnt = new BallRoomEnt();
-            ballRoomEnt.setDescription(ballRoom.getDescription());
-            ballRoomEnt.setNumOfRooms(ballRoom.getNumOfRooms());
-            ballRoomEnt.setId(ballRoom.getId());
-            ballRoomEnt.setPrice(ballRoom.getPrice());
-            return ballRoomEnt;
+            return new BallRoomEnt(ballRoom.getId(), ballRoom.getPrice(), ballRoom.getDescription(), ballRoom.getNumOfRooms());
         }
     }
 
     private Table convertTableEnt(TableEnt tableEnt){
-        Table table = new Table();
-        table.setNumber(tableEnt.getNumber());
-        table.setNumOfPeople(tableEnt.getNumOfPeople());
-        table.setId(tableEnt.getId());
-        table.setPrice(tableEnt.getPrice());
-        return table;
+        return new Table(tableEnt.getId(), tableEnt.getPrice(), tableEnt.getNumber(), tableEnt.getNumOfPeople());
     }
 
     private BallRoom convertBallRoomEnt(BallRoomEnt ballRoomEnt){
-        BallRoom ballRoom = new BallRoom();
-        ballRoom.setDescription(ballRoomEnt.getDescription());
-        ballRoom.setNumOfRooms(ballRoomEnt.getNumOfRooms());
-        ballRoom.setId(ballRoomEnt.getId());
-        ballRoom.setPrice(ballRoomEnt.getPrice());
-        return ballRoom;
+        return new BallRoom(ballRoomEnt.getId(), ballRoomEnt.getPrice(), ballRoomEnt.getDescription(), ballRoomEnt.getNumOfRooms());
     }
 
     @Override

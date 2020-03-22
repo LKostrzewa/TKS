@@ -4,6 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import pl.lodz.p.it.tks.model.*;
+import pl.lodz.p.it.tks.ports.AddUserPort;
+import pl.lodz.p.it.tks.ports.DeleteUserPort;
+import pl.lodz.p.it.tks.ports.GetUserPort;
+import pl.lodz.p.it.tks.ports.UpdateUserPort;
 import pl.lodz.p.it.tks.repository.UserRepository;
 
 import java.util.List;
@@ -11,11 +15,17 @@ import java.util.List;
 @Service
 public class UserService {
 
-    private UserRepository users;
+    private AddUserPort addUserPort;
+    private GetUserPort getUserPort;
+    private UpdateUserPort updateUserPort;
+    private DeleteUserPort deleteUserPort;
 
     @Autowired
-    public UserService(UserRepository users) {
-        this.users = users;
+    public UserService(AddUserPort addUserPort, GetUserPort getUserPort, UpdateUserPort updateUserPort, DeleteUserPort deleteUserPort) {
+        this.addUserPort = addUserPort;
+        this.getUserPort = getUserPort;
+        this.updateUserPort = updateUserPort;
+        this.deleteUserPort = deleteUserPort;
         addUser(new Administrator("admin", "password", "Jan", "Kowalski"));
         addUser(new Manager("manager", "password", "Piotr", "Nowak"));
         addUser(new Client("romek", "password", "Roman", "Bialek", new NormalClient()));
@@ -23,43 +33,30 @@ public class UserService {
 
     public void addUser(User user){
         user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
-        users.add(user.getLogin(), user);
-    }
-
-    public void changeClientsType(String login, ClientType type) throws RuntimeException {
-        User user = users.get(login);
-        if(user instanceof Client){
-            Client client = (Client)user;
-            client.setType(type);
-        }
-        else throw new RuntimeException("This user is not a client");
+        addUserPort.addUser(user);
     }
 
     public User getUser(String login){
-        return users.get(login);
+        return getUserPort.getUser(login);
+    }
+
+    public void deleteUser(String id){
+        deleteUserPort.deleteUser(id);
     }
 
     public void updateUser(String id, User user){
-        users.update(id, user);
-    }
-
-    public void activateUser(String login){
-        users.get(login).setActive(true);
-    }
-
-    public void deactivateUser(String login){
-        users.get(login).setActive(false);
+        updateUserPort.updateUser(id, user);
     }
 
     public List<User> getAllUsers(){
-        return users.getAll();
+        return getUserPort.getAllUsers();
     }
 
     public List<Client> getAllClients(){
-        return users.getAllClients();
+        return getUserPort.getAllClients();
     }
 
     public List<Client> getAllActiveClients(){
-        return users.getAllActiveClients();
+        return getUserPort.getAllActiveClients();
     }
 }

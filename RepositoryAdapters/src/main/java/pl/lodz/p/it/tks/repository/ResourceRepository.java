@@ -11,14 +11,14 @@ import java.util.List;
 @Repository
 public class ResourceRepository extends RepositoryTemplate<ResourceEnt> {
 
-    public List<TableEnt> getAllTables(){
+    public List<TableEnt> getAllTableEnts(){
         List<TableEnt> list = new ArrayList<>();
         getAll().stream().filter(t -> t instanceof TableEnt)
                 .forEach(t -> list.add((TableEnt) t));
         return list;
     }
 
-    public List<BallRoomEnt> getAllBallRooms(){
+    public List<BallRoomEnt> getAllBallRoomEnts(){
         List<BallRoomEnt> list = new ArrayList<>();
         getAll().stream().filter(b -> b instanceof BallRoomEnt)
                 .forEach(b -> list.add((BallRoomEnt) b));

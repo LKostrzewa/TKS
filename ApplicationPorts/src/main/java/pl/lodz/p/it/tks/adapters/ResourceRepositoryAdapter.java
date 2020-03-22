@@ -8,11 +8,14 @@ import pl.lodz.p.it.tks.data.TableEnt;
 import pl.lodz.p.it.tks.model.BallRoom;
 import pl.lodz.p.it.tks.model.Resource;
 import pl.lodz.p.it.tks.model.Table;
-import pl.lodz.p.it.tks.ports.ResourcePort;
+import pl.lodz.p.it.tks.ports.*;
 import pl.lodz.p.it.tks.repository.ResourceRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
-public class ResourceRepositoryAdapter implements ResourcePort {
+public class ResourceRepositoryAdapter implements AddResourcePort, DeleteResourcePort, GetResourcesPort, UpdateResourcePort {
 
     private ResourceRepository repository;
 
@@ -42,6 +45,24 @@ public class ResourceRepositoryAdapter implements ResourcePort {
         }
     }
 
+    private Table convertTableEnt(TableEnt tableEnt){
+        Table table = new Table();
+        table.setNumber(tableEnt.getNumber());
+        table.setNumOfPeople(tableEnt.getNumOfPeople());
+        table.setId(tableEnt.getId());
+        table.setPrice(tableEnt.getPrice());
+        return table;
+    }
+
+    private BallRoom convertBallRoomEnt(BallRoomEnt ballRoomEnt){
+        BallRoom ballRoom = new BallRoom();
+        ballRoom.setDescription(ballRoomEnt.getDescription());
+        ballRoom.setNumOfRooms(ballRoomEnt.getNumOfRooms());
+        ballRoom.setId(ballRoomEnt.getId());
+        ballRoom.setPrice(ballRoomEnt.getPrice());
+        return ballRoom;
+    }
+
     @Override
     public ResourceEnt addResource(Resource resource){
         ResourceEnt resourceEnt = convertResource(resource);
@@ -53,7 +74,42 @@ public class ResourceRepositoryAdapter implements ResourcePort {
         repository.delete(id);
     }
 
+    @Override
     public Resource getResource(String id){
+        if(repository.get(id) instanceof TableEnt)
+            return convertTableEnt((TableEnt)repository.get(id));
+        else return convertBallRoomEnt((BallRoomEnt)repository.get(id));
+    }
 
+    @Override
+    public List<Resource> getAllResources(){
+        List<Resource> resources = new ArrayList<>();
+        for(ResourceEnt resourceEnt : repository.getAll()){
+            resources.add(getResource(resourceEnt.getId()));
+        }
+        return resources;
+    }
+
+    @Override
+    public List<Table> getAllTables(){
+        List<Table> tables = new ArrayList<>();
+        for (TableEnt tableEnt : repository.getAllTableEnts()){
+            tables.add(convertTableEnt(tableEnt));
+        }
+        return tables;
+    }
+
+    @Override
+    public List<BallRoom> getAllBallRooms(){
+        List<BallRoom> ballRooms = new ArrayList<>();
+        for(BallRoomEnt ballRoomEnt : repository.getAllBallRoomEnts()){
+            ballRooms.add(convertBallRoomEnt(ballRoomEnt));
+        }
+        return ballRooms;
+    }
+
+    @Override
+    public void updateResource(String id, Resource resource){
+        repository.update(id, convertResource(resource));
     }
 }

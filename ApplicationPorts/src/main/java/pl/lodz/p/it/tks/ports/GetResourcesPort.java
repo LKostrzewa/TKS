@@ -7,8 +7,8 @@ import pl.lodz.p.it.tks.model.Table;
 import java.util.List;
 
 public interface GetResourcesPort {
-    List<Resource> getAllResources();
     Resource getResource(String id);
+    List<Resource> getAllResources();
     List<Table> getAllTables();
-    List<BallRoom> getAllBallRoom();
+    List<BallRoom> getAllBallRooms();
 }

@@ -7,7 +7,7 @@ import java.util.Map;
 
 public abstract class RepositoryTemplate<T> {
 
-    private Map<String, T> data = new HashMap<String, T>();
+    private Map<String, T> data = new HashMap<>();
 
     public T add (String key, T value){
         return data.putIfAbsent(key, value);

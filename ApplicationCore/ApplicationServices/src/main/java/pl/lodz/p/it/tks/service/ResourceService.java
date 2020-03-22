@@ -2,29 +2,29 @@ package pl.lodz.p.it.tks.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.lodz.p.it.tks.ports.ResourcePort;
 import pl.lodz.p.it.tks.model.BallRoom;
 import pl.lodz.p.it.tks.model.Resource;
 import pl.lodz.p.it.tks.model.Table;
-import pl.lodz.p.it.tks.repository.ResourceRepository;
 
 import java.util.List;
 
 @Service
 public class ResourceService {
 
-    private ResourceRepository resources;
+    private ResourcePort resources;
 
     @Autowired
-    public ResourceService(ResourceRepository resources) {
+    public ResourceService(ResourcePort resources) {
         this.resources = resources;
     }
 
     public boolean addResource(Resource resource) {
-        return (resources.add(resource.getId(), resource) == null);
+        return (resources.addResource(resource) == null);
     }
 
     public void deleteResource(String id) {
-        resources.delete(id);
+        resources.deleteResource(id);
     }
 
     public List<Resource> getAllResources() {

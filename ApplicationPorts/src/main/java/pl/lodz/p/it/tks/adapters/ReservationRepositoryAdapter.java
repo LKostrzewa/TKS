@@ -6,16 +6,18 @@ import pl.lodz.p.it.tks.converters.ReservationConverter;
 import pl.lodz.p.it.tks.data.ReservationEnt;
 import pl.lodz.p.it.tks.model.Reservation;
 import pl.lodz.p.it.tks.ports.AddReservationPort;
+import pl.lodz.p.it.tks.ports.DeleteReservationPort;
 import pl.lodz.p.it.tks.repository.ReservationRepository;
 
 @Component
-public class ReservationRepositoryAdapter implements AddReservationPort {
+public class ReservationRepositoryAdapter implements AddReservationPort, DeleteReservationPort {
     private ReservationRepository repository;
     private ReservationConverter converter;
 
     @Autowired
     public ReservationRepositoryAdapter(ReservationRepository repository) {
         this.repository = repository;
+        converter = new ReservationConverter();
     }
 
     @Override
@@ -24,4 +26,8 @@ public class ReservationRepositoryAdapter implements AddReservationPort {
     }
 
 
+    @Override
+    public void deleteReservation(String id) {
+        repository.delete(id);
+    }
 }

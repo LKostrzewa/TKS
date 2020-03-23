@@ -2,6 +2,7 @@ package pl.lodz.p.it.tks.adapters;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import pl.lodz.p.it.tks.converters.ResourceConverter;
 import pl.lodz.p.it.tks.data.BallRoomEnt;
 import pl.lodz.p.it.tks.data.ResourceEnt;
 import pl.lodz.p.it.tks.data.TableEnt;
@@ -18,35 +19,18 @@ import java.util.List;
 public class ResourceRepositoryAdapter implements AddResourcePort, DeleteResourcePort, GetResourcesPort, UpdateResourcePort {
 
     private ResourceRepository repository;
+    private ResourceConverter converter;
 
     @Autowired
     public ResourceRepositoryAdapter(ResourceRepository repository) {
         this.repository = repository;
-    }
-
-    private ResourceEnt convertResource(Resource resource){
-        if(resource instanceof Table){
-            Table table = (Table) resource;
-            return new TableEnt(table.getId(), table.getPrice(), table.getNumber(), table.getNumOfPeople());
-        }
-        else {
-            BallRoom ballRoom = (BallRoom) resource;
-            return new BallRoomEnt(ballRoom.getId(), ballRoom.getPrice(), ballRoom.getDescription(), ballRoom.getNumOfRooms());
-        }
-    }
-
-    private Table convertTableEnt(TableEnt tableEnt){
-        return new Table(tableEnt.getId(), tableEnt.getPrice(), tableEnt.getNumber(), tableEnt.getNumOfPeople());
-    }
-
-    private BallRoom convertBallRoomEnt(BallRoomEnt ballRoomEnt){
-        return new BallRoom(ballRoomEnt.getId(), ballRoomEnt.getPrice(), ballRoomEnt.getDescription(), ballRoomEnt.getNumOfRooms());
+        converter = new ResourceConverter();
     }
 
     @Override
-    public ResourceEnt addResource(Resource resource){
-        ResourceEnt resourceEnt = convertResource(resource);
-        return repository.add(resourceEnt.getId(), resourceEnt);
+    public boolean addResource(Resource resource){
+        ResourceEnt resourceEnt = converter.convertResource(resource);
+        return repository.add(resourceEnt.getId(), resourceEnt) == null;
     }
 
     @Override
@@ -57,8 +41,8 @@ public class ResourceRepositoryAdapter implements AddResourcePort, DeleteResourc
     @Override
     public Resource getResource(String id){
         if(repository.get(id) instanceof TableEnt)
-            return convertTableEnt((TableEnt)repository.get(id));
-        else return convertBallRoomEnt((BallRoomEnt)repository.get(id));
+            return converter.convertTableEnt((TableEnt)repository.get(id));
+        else return converter.convertBallRoomEnt((BallRoomEnt)repository.get(id));
     }
 
     @Override
@@ -74,7 +58,7 @@ public class ResourceRepositoryAdapter implements AddResourcePort, DeleteResourc
     public List<Table> getAllTables(){
         List<Table> tables = new ArrayList<>();
         for (TableEnt tableEnt : repository.getAllTableEnts()){
-            tables.add(convertTableEnt(tableEnt));
+            tables.add(converter.convertTableEnt(tableEnt));
         }
         return tables;
     }
@@ -83,13 +67,13 @@ public class ResourceRepositoryAdapter implements AddResourcePort, DeleteResourc
     public List<BallRoom> getAllBallRooms(){
         List<BallRoom> ballRooms = new ArrayList<>();
         for(BallRoomEnt ballRoomEnt : repository.getAllBallRoomEnts()){
-            ballRooms.add(convertBallRoomEnt(ballRoomEnt));
+            ballRooms.add(converter.convertBallRoomEnt(ballRoomEnt));
         }
         return ballRooms;
     }
 
     @Override
     public void updateResource(String id, Resource resource){
-        repository.update(id, convertResource(resource));
+        repository.update(id, converter.convertResource(resource));
     }
 }

@@ -26,7 +26,7 @@ public class ResourceService {
     }
 
     public boolean addResource(Resource resource) {
-        return (addResourcePort.addResource(resource) == null);
+        return (addResourcePort.addResource(resource));
     }
 
     public void deleteResource(String id) {

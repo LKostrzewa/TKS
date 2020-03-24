@@ -5,6 +5,10 @@ import org.springframework.stereotype.Service;
 import pl.lodz.p.it.tks.exceptions.InactiveClientException;
 import pl.lodz.p.it.tks.exceptions.ResourceTakenException;
 import pl.lodz.p.it.tks.model.Reservation;
+import pl.lodz.p.it.tks.ports.AddReservationPort;
+import pl.lodz.p.it.tks.ports.DeleteReservationPort;
+import pl.lodz.p.it.tks.ports.GetReservationsPort;
+import pl.lodz.p.it.tks.ports.UpdateReservationPort;
 import pl.lodz.p.it.tks.repository.ReservationRepository;
 
 import java.time.Duration;
@@ -15,20 +19,24 @@ import java.util.List;
 public class ReservationService {
 
 
-    private ReservationRepository reservations;
+    private AddReservationPort addReservationPort;
+    private GetReservationsPort getReservationsPort;
+    private DeleteReservationPort deleteReservationPort;
 
     @Autowired
-    public ReservationService(ReservationRepository reservations) {
-        this.reservations = reservations;
+    public ReservationService(AddReservationPort addReservationPort, GetReservationsPort getReservationsPort, DeleteReservationPort deleteReservationPort) {
+        this.addReservationPort = addReservationPort;
+        this.getReservationsPort = getReservationsPort;
+        this.deleteReservationPort = deleteReservationPort;
     }
 
     public void startReservation(Reservation reservation) /*Runtime bo w testach wygoniej :)*/throws RuntimeException {
-        if(reservations.getReservedReservations(reservation.getResource().getId()).isPresent())
+        if(getReservationsPort.getReservedReservations(reservation.getResource().getId()).isPresent())
             throw new ResourceTakenException("Reservation impossible, that resource is already taken");
         if(!reservation.getClient().isActive()){
             throw new InactiveClientException("Cannot reserve, client is inactive");
         }
-        else reservations.add(reservation.getId(), reservation);
+        else addReservationPort.addReservation(reservation);
     }
 
     public void endReservation(String id, LocalDateTime end){
@@ -38,12 +46,12 @@ public class ReservationService {
     }
 
     public void deleteReservation(String id){
-        if(reservations.get(id).getEnding() == null)
-            reservations.delete(id);
+        if(getReservationsPort.getReservation(id).getEnding() == null)
+            deleteReservationPort.deleteReservation(id);
     }
 
     public double countReservationPrice(String id){
-        Reservation r = reservations.get(id);
+        Reservation r = getReservationsPort.getReservation(id);
         Duration duration = Duration.between(r.getBeginning(), r.getEnding());
         long diff = duration.toHours();
         double price = r.getResource().getPrice();
@@ -51,14 +59,14 @@ public class ReservationService {
     }
 
     public List<Reservation> getAllReservations(){
-        return reservations.getAll();
+        return getReservationsPort.getAllReservations();
     }
 
     public List<Reservation> getAllClientReservations(String login){
-        return reservations.getReservationsForClient(login);
+        return getReservationsPort.getReservationsForClient(login);
     }
 
     public Reservation getReservation(String id){
-        return reservations.get(id);
+        return getReservationsPort.getReservation(id);
     }
 }

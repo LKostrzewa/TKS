@@ -8,6 +8,7 @@ import pl.lodz.p.it.tks.model.Reservation;
 import pl.lodz.p.it.tks.ports.AddReservationPort;
 import pl.lodz.p.it.tks.ports.DeleteReservationPort;
 import pl.lodz.p.it.tks.ports.GetReservationsPort;
+import pl.lodz.p.it.tks.ports.UpdateReservationPort;
 import pl.lodz.p.it.tks.repository.ReservationRepository;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Component
-public class ReservationRepositoryAdapter implements AddReservationPort, DeleteReservationPort, GetReservationsPort {
+public class ReservationRepositoryAdapter implements AddReservationPort, DeleteReservationPort, GetReservationsPort, UpdateReservationPort {
     private ReservationRepository repository;
     private ReservationConverter converter;
 
@@ -78,5 +79,10 @@ public class ReservationRepositoryAdapter implements AddReservationPort, DeleteR
             reservations.add(converter.convertReservationEnt(reservationEnt));
         }
         return reservations.stream().findAny();
+    }
+
+    @Override
+    public void updateReservation(String id, Reservation reservation) {
+        repository.update(id, converter.convertReservation(reservation));
     }
 }

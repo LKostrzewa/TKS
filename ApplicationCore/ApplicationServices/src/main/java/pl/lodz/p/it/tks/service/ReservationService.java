@@ -22,12 +22,14 @@ public class ReservationService {
     private AddReservationPort addReservationPort;
     private GetReservationsPort getReservationsPort;
     private DeleteReservationPort deleteReservationPort;
+    private UpdateReservationPort updateReservationPort;
 
     @Autowired
-    public ReservationService(AddReservationPort addReservationPort, GetReservationsPort getReservationsPort, DeleteReservationPort deleteReservationPort) {
+    public ReservationService(AddReservationPort addReservationPort, GetReservationsPort getReservationsPort, DeleteReservationPort deleteReservationPort, UpdateReservationPort updateReservationPort) {
         this.addReservationPort = addReservationPort;
         this.getReservationsPort = getReservationsPort;
         this.deleteReservationPort = deleteReservationPort;
+        this.updateReservationPort = updateReservationPort;
     }
 
     public void startReservation(Reservation reservation) /*Runtime bo w testach wygoniej :)*/throws RuntimeException {
@@ -41,8 +43,10 @@ public class ReservationService {
 
     public void endReservation(String id, LocalDateTime end){
         Reservation r = getReservation(id);
-        if(r.getClient().isActive())
+        if(r.getClient().isActive()){
             r.setEnding(end);
+            updateReservationPort.updateReservation(id, r);
+        }
     }
 
     public void deleteReservation(String id){

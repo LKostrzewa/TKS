@@ -7,7 +7,6 @@
     <artifactId>TKS</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-  <groupId>pl.lodz.p.it.tks</groupId>
   <artifactId>ApplicationPorts</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>ApplicationPorts</name>
@@ -19,12 +18,6 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
-      <dependency>
-          <groupId>pl.lodz.p.it.tks</groupId>
-          <artifactId>ApplicationCore</artifactId>
-          <version>1.0-SNAPSHOT</version>
-          <scope>compile</scope>
-      </dependency>
     <dependency>
       <groupId>pl.lodz.p.it.tks</groupId>
       <artifactId>RepositoryAdapters</artifactId>

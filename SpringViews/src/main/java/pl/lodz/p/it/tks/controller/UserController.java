@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.lodz.p.it.tks.model.Client;
 import pl.lodz.p.it.tks.service.UserService;
+import pl.lodz.p.it.tks.useCases.UserUseCase;
 
 import javax.validation.Valid;
 
@@ -14,7 +15,7 @@ import javax.validation.Valid;
 @RequestMapping("/users")
 public class UserController {
 
-    private UserService userService;
+    private UserUseCase userService;
 
     @Autowired
     public UserController(UserService userService) {

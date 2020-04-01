@@ -6,11 +6,12 @@ import pl.lodz.p.it.tks.ports.*;
 import pl.lodz.p.it.tks.model.BallRoom;
 import pl.lodz.p.it.tks.model.Resource;
 import pl.lodz.p.it.tks.model.Table;
+import pl.lodz.p.it.tks.useCases.ResourceUseCase;
 
 import java.util.List;
 
 @Service
-public class ResourceService {
+public class ResourceService implements ResourceUseCase {
 
     private AddResourcePort addResourcePort;
     private UpdateResourcePort updateResourcePort;
@@ -25,30 +26,37 @@ public class ResourceService {
         this.deleteResourcePort = deleteResourcePort;
     }
 
+    @Override
     public boolean addResource(Resource resource) {
         return (addResourcePort.addResource(resource));
     }
 
+    @Override
     public void deleteResource(String id) {
         deleteResourcePort.deleteResource(id);
     }
 
+    @Override
     public List<Resource> getAllResources() {
         return getResourcesPort.getAllResources();
     }
 
+    @Override
     public Resource getResource(String id) {
         return getResourcesPort.getResource(id);
     }
 
+    @Override
     public List<Table> getAllTables() {
         return getResourcesPort.getAllTables();
     }
 
+    @Override
     public List<BallRoom> getAllBallRoom() {
         return getResourcesPort.getAllBallRooms();
     }
 
+    @Override
     public void updateResource(String id, Resource resource) {
         updateResourcePort.updateResource(id, resource);
     }

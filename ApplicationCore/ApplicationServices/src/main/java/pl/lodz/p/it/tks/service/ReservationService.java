@@ -10,13 +10,14 @@ import pl.lodz.p.it.tks.ports.DeleteReservationPort;
 import pl.lodz.p.it.tks.ports.GetReservationsPort;
 import pl.lodz.p.it.tks.ports.UpdateReservationPort;
 import pl.lodz.p.it.tks.repository.ReservationRepository;
+import pl.lodz.p.it.tks.useCases.ReservationUseCase;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class ReservationService {
+public class ReservationService implements ReservationUseCase {
 
 
     private AddReservationPort addReservationPort;
@@ -32,6 +33,7 @@ public class ReservationService {
         this.updateReservationPort = updateReservationPort;
     }
 
+    @Override
     public void startReservation(Reservation reservation) /*Runtime bo w testach wygoniej :)*/throws RuntimeException {
         if(getReservationsPort.getReservedReservations(reservation.getResource().getId()).isPresent())
             throw new ResourceTakenException("Reservation impossible, that resource is already taken");
@@ -41,6 +43,7 @@ public class ReservationService {
         else addReservationPort.addReservation(reservation);
     }
 
+    @Override
     public void endReservation(String id, LocalDateTime end){
         Reservation r = getReservation(id);
         if(r.getClient().isActive()){
@@ -49,11 +52,13 @@ public class ReservationService {
         }
     }
 
+    @Override
     public void deleteReservation(String id){
         if(getReservationsPort.getReservation(id).getEnding() == null)
             deleteReservationPort.deleteReservation(id);
     }
 
+    @Override
     public double countReservationPrice(String id){
         Reservation r = getReservationsPort.getReservation(id);
         Duration duration = Duration.between(r.getBeginning(), r.getEnding());
@@ -62,14 +67,17 @@ public class ReservationService {
         return price*diff - r.getClient().getDiscount(price);
     }
 
+    @Override
     public List<Reservation> getAllReservations(){
         return getReservationsPort.getAllReservations();
     }
 
+    @Override
     public List<Reservation> getAllClientReservations(String login){
         return getReservationsPort.getReservationsForClient(login);
     }
 
+    @Override
     public Reservation getReservation(String id){
         return getReservationsPort.getReservation(id);
     }

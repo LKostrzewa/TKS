@@ -14,6 +14,9 @@ import pl.lodz.p.it.tks.model.Reservation;
 import pl.lodz.p.it.tks.service.ReservationService;
 import pl.lodz.p.it.tks.service.ResourceService;
 import pl.lodz.p.it.tks.service.UserService;
+import pl.lodz.p.it.tks.useCases.ReservationUseCase;
+import pl.lodz.p.it.tks.useCases.ResourceUseCase;
+import pl.lodz.p.it.tks.useCases.UserUseCase;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -23,9 +26,9 @@ import java.time.LocalDateTime;
 @RequestMapping("/reservations")
 public class ReservationController {
 
-    private ReservationService reservationService;
-    private UserService userService;
-    private ResourceService resourceService;
+    private ReservationUseCase reservationService;
+    private UserUseCase userService;
+    private ResourceUseCase resourceService;
 
     @Autowired
     public ReservationController(ReservationService reservationService, UserService userService, ResourceService resourceService) {

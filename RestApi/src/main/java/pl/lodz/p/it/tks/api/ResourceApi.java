@@ -8,11 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import pl.lodz.p.it.tks.model.BallRoom;
 import pl.lodz.p.it.tks.model.Resource;
 import pl.lodz.p.it.tks.model.Table;
-import pl.lodz.p.it.tks.service.ResourceService;
-import pl.lodz.p.it.tks.useCases.ResourceUseCase.AddResourceUseCase;
-import pl.lodz.p.it.tks.useCases.ResourceUseCase.DeleteResourceUseCase;
-import pl.lodz.p.it.tks.useCases.ResourceUseCase.UpdateResourceUseCase;
-import pl.lodz.p.it.tks.useCases.ResourceUseCase.UtilsResourceUseCase;
+import pl.lodz.p.it.tks.useCases.resourceUseCase.AddResourceUseCase;
+import pl.lodz.p.it.tks.useCases.resourceUseCase.DeleteResourceUseCase;
+import pl.lodz.p.it.tks.useCases.resourceUseCase.UpdateResourceUseCase;
+import pl.lodz.p.it.tks.useCases.resourceUseCase.UtilsResourceUseCase;
 
 import javax.validation.Valid;
 import java.util.List;

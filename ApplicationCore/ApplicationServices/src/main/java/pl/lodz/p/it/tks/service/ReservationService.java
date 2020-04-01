@@ -9,10 +9,10 @@ import pl.lodz.p.it.tks.ports.AddReservationPort;
 import pl.lodz.p.it.tks.ports.DeleteReservationPort;
 import pl.lodz.p.it.tks.ports.GetReservationsPort;
 import pl.lodz.p.it.tks.ports.UpdateReservationPort;
-import pl.lodz.p.it.tks.useCases.ReservationUseCase.DeleteReservationUseCase;
-import pl.lodz.p.it.tks.useCases.ReservationUseCase.EndReservationUseCase;
-import pl.lodz.p.it.tks.useCases.ReservationUseCase.StartReservationUseCase;
-import pl.lodz.p.it.tks.useCases.ReservationUseCase.UtilsReservationUseCase;
+import pl.lodz.p.it.tks.useCases.reservationUseCase.DeleteReservationUseCase;
+import pl.lodz.p.it.tks.useCases.reservationUseCase.EndReservationUseCase;
+import pl.lodz.p.it.tks.useCases.reservationUseCase.StartReservationUseCase;
+import pl.lodz.p.it.tks.useCases.reservationUseCase.UtilsReservationUseCase;
 
 import java.time.Duration;
 import java.time.LocalDateTime;

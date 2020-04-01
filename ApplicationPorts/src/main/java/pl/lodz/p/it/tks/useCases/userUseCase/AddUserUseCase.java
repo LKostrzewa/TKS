@@ -1,4 +1,4 @@
-package pl.lodz.p.it.tks.useCases.UserUseCase;
+package pl.lodz.p.it.tks.useCases.userUseCase;
 
 import pl.lodz.p.it.tks.model.User;
 

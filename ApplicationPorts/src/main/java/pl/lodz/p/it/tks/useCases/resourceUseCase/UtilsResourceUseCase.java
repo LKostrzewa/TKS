@@ -1,4 +1,4 @@
-package pl.lodz.p.it.tks.useCases.ResourceUseCase;
+package pl.lodz.p.it.tks.useCases.resourceUseCase;
 
 import pl.lodz.p.it.tks.model.BallRoom;
 import pl.lodz.p.it.tks.model.Resource;

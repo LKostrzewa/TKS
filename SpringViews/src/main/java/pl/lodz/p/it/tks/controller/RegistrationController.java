@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import pl.lodz.p.it.tks.model.Client;
-import pl.lodz.p.it.tks.service.UserService;
-import pl.lodz.p.it.tks.useCases.UserUseCase.AddUserUseCase;
+import pl.lodz.p.it.tks.useCases.userUseCase.AddUserUseCase;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;

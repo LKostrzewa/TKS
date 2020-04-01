@@ -8,10 +8,10 @@ import pl.lodz.p.it.tks.ports.AddUserPort;
 import pl.lodz.p.it.tks.ports.DeleteUserPort;
 import pl.lodz.p.it.tks.ports.GetUserPort;
 import pl.lodz.p.it.tks.ports.UpdateUserPort;
-import pl.lodz.p.it.tks.useCases.UserUseCase.AddUserUseCase;
-import pl.lodz.p.it.tks.useCases.UserUseCase.DeleteUserUseCase;
-import pl.lodz.p.it.tks.useCases.UserUseCase.UpdateUserUseCase;
-import pl.lodz.p.it.tks.useCases.UserUseCase.UtilsUserUseCase;
+import pl.lodz.p.it.tks.useCases.userUseCase.AddUserUseCase;
+import pl.lodz.p.it.tks.useCases.userUseCase.DeleteUserUseCase;
+import pl.lodz.p.it.tks.useCases.userUseCase.UpdateUserUseCase;
+import pl.lodz.p.it.tks.useCases.userUseCase.UtilsUserUseCase;
 
 import java.util.List;
 

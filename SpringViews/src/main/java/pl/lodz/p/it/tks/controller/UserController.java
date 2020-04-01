@@ -6,10 +6,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.lodz.p.it.tks.model.Client;
-import pl.lodz.p.it.tks.service.UserService;
-import pl.lodz.p.it.tks.useCases.UserUseCase.AddUserUseCase;
-import pl.lodz.p.it.tks.useCases.UserUseCase.UpdateUserUseCase;
-import pl.lodz.p.it.tks.useCases.UserUseCase.UtilsUserUseCase;
+import pl.lodz.p.it.tks.useCases.userUseCase.AddUserUseCase;
+import pl.lodz.p.it.tks.useCases.userUseCase.UpdateUserUseCase;
+import pl.lodz.p.it.tks.useCases.userUseCase.UtilsUserUseCase;
 
 import javax.validation.Valid;
 

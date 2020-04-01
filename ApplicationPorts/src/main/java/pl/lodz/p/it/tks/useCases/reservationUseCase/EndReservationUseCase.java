@@ -1,4 +1,4 @@
-package pl.lodz.p.it.tks.useCases.ReservationUseCase;
+package pl.lodz.p.it.tks.useCases.reservationUseCase;
 
 import java.time.LocalDateTime;
 

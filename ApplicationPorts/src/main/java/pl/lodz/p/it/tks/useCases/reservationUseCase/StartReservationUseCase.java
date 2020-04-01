@@ -1,4 +1,4 @@
-package pl.lodz.p.it.tks.useCases.ReservationUseCase;
+package pl.lodz.p.it.tks.useCases.reservationUseCase;
 
 import pl.lodz.p.it.tks.model.Reservation;
 

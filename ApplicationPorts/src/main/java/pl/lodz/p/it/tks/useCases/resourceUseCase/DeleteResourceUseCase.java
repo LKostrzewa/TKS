@@ -1,4 +1,4 @@
-package pl.lodz.p.it.tks.useCases.ResourceUseCase;
+package pl.lodz.p.it.tks.useCases.resourceUseCase;
 
 public interface DeleteResourceUseCase {
     void deleteResource(String id);

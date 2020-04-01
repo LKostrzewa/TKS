@@ -8,13 +8,15 @@ import pl.lodz.p.it.tks.ports.AddUserPort;
 import pl.lodz.p.it.tks.ports.DeleteUserPort;
 import pl.lodz.p.it.tks.ports.GetUserPort;
 import pl.lodz.p.it.tks.ports.UpdateUserPort;
-import pl.lodz.p.it.tks.repository.UserRepository;
-import pl.lodz.p.it.tks.useCases.UserUseCase;
+import pl.lodz.p.it.tks.useCases.UserUseCase.AddUserUseCase;
+import pl.lodz.p.it.tks.useCases.UserUseCase.DeleteUserUseCase;
+import pl.lodz.p.it.tks.useCases.UserUseCase.UpdateUserUseCase;
+import pl.lodz.p.it.tks.useCases.UserUseCase.UtilsUserUseCase;
 
 import java.util.List;
 
 @Service
-public class UserService implements UserUseCase {
+public class UserService implements AddUserUseCase, DeleteUserUseCase, UpdateUserUseCase, UtilsUserUseCase {
 
     private AddUserPort addUserPort;
     private GetUserPort getUserPort;

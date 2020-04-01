@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import pl.lodz.p.it.tks.model.Client;
 import pl.lodz.p.it.tks.service.UserService;
-import pl.lodz.p.it.tks.useCases.UserUseCase;
+import pl.lodz.p.it.tks.useCases.UserUseCase.AddUserUseCase;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -19,11 +19,11 @@ import javax.validation.Valid;
 @Controller
 public class RegistrationController {
 
-    private UserUseCase userService;
+    private AddUserUseCase addUserService;
 
     @Autowired
-    public RegistrationController(UserService userService) {
-        this.userService = userService;
+    public RegistrationController(AddUserUseCase userService) {
+        this.addUserService = userService;
     }
 
     @RequestMapping
@@ -63,7 +63,7 @@ public class RegistrationController {
     @PostMapping("/register")
     public String addClient(@Valid @ModelAttribute("client") Client client, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
-            userService.addUser(client);
+            addUserService.addUser(client);
             //userService.addClientFromUser(client);
             return "redirect:/reservations/";
         }

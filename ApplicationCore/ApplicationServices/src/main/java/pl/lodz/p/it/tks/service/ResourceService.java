@@ -6,12 +6,15 @@ import pl.lodz.p.it.tks.ports.*;
 import pl.lodz.p.it.tks.model.BallRoom;
 import pl.lodz.p.it.tks.model.Resource;
 import pl.lodz.p.it.tks.model.Table;
-import pl.lodz.p.it.tks.useCases.ResourceUseCase;
+import pl.lodz.p.it.tks.useCases.ResourceUseCase.AddResourceUseCase;
+import pl.lodz.p.it.tks.useCases.ResourceUseCase.DeleteResourceUseCase;
+import pl.lodz.p.it.tks.useCases.ResourceUseCase.UpdateResourceUseCase;
+import pl.lodz.p.it.tks.useCases.ResourceUseCase.UtilsResourceUseCase;
 
 import java.util.List;
 
 @Service
-public class ResourceService implements ResourceUseCase {
+public class ResourceService implements AddResourceUseCase, UpdateResourceUseCase, DeleteResourceUseCase, UtilsResourceUseCase {
 
     private AddResourcePort addResourcePort;
     private UpdateResourcePort updateResourcePort;

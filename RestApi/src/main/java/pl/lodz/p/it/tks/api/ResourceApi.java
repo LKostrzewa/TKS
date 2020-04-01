@@ -9,6 +9,10 @@ import pl.lodz.p.it.tks.model.BallRoom;
 import pl.lodz.p.it.tks.model.Resource;
 import pl.lodz.p.it.tks.model.Table;
 import pl.lodz.p.it.tks.service.ResourceService;
+import pl.lodz.p.it.tks.useCases.ResourceUseCase.AddResourceUseCase;
+import pl.lodz.p.it.tks.useCases.ResourceUseCase.DeleteResourceUseCase;
+import pl.lodz.p.it.tks.useCases.ResourceUseCase.UpdateResourceUseCase;
+import pl.lodz.p.it.tks.useCases.ResourceUseCase.UtilsResourceUseCase;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -17,18 +21,24 @@ import java.util.List;
 @RequestMapping("/api/resources")
 public class ResourceApi {
 
-    private final ResourceService resourceService;
+    private AddResourceUseCase addResourceService;
+    private UpdateResourceUseCase updateResourceService;
+    private DeleteResourceUseCase deleteResourceService;
+    private UtilsResourceUseCase utilsResourceService;
 
     @Autowired
-    public ResourceApi(ResourceService resourceService) {
-        this.resourceService = resourceService;
-        resourceService.addResource(new BallRoom("testBallRoom", 10, "JakisTekst", 5));
-        resourceService.addResource(new Table("test", 10, 10, 10));
+    public ResourceApi(AddResourceUseCase addResourceService, UpdateResourceUseCase updateResourceService, DeleteResourceUseCase deleteResourceService, UtilsResourceUseCase utilsResourceService) {
+        this.addResourceService = addResourceService;
+        this.updateResourceService = updateResourceService;
+        this.deleteResourceService = deleteResourceService;
+        this.utilsResourceService = utilsResourceService;
+        addResourceService.addResource(new BallRoom("testBallRoom", 10, "JakisTekst", 5));
+        addResourceService.addResource(new Table("test", 10, 10, 10));
     }
 
     private ResponseEntity addResource(Resource resource, BindingResult bindingResult){
         if (!bindingResult.hasErrors()) {
-            if (resourceService.addResource(resource)) {
+            if (addResourceService.addResource(resource)) {
                 return new ResponseEntity(HttpStatus.OK);
             }
             else return new ResponseEntity(HttpStatus.BAD_REQUEST);
@@ -48,33 +58,33 @@ public class ResourceApi {
 
     @GetMapping
     public List<Resource> getAllResource() {
-        return resourceService.getAllResources();
+        return utilsResourceService.getAllResources();
     }
 
     @GetMapping("/all-tables")
     public List<Table> showAllTables() {
-        return resourceService.getAllTables();
+        return utilsResourceService.getAllTables();
     }
 
     @GetMapping("/all-rooms")
     public List<BallRoom> getAllRooms() {
-        return resourceService.getAllBallRoom();
+        return utilsResourceService.getAllBallRoom();
     }
 
     @GetMapping("/get-resource/{id}")
     public Resource getResource(@PathVariable String id) {
-        return resourceService.getResource(id);
+        return utilsResourceService.getResource(id);
     }
 
     @DeleteMapping("/delete-resource/{id}")
     public ResponseEntity<?> deleteResource(@PathVariable String id) {
-        resourceService.deleteResource(id);
+        deleteResourceService.deleteResource(id);
         return ResponseEntity.ok().build();
     }
 
     private ResponseEntity updateResource(Resource resource, BindingResult bindingResult){
         if (!bindingResult.hasErrors()) {
-            resourceService.updateResource(resource.getId(), resource);
+            updateResourceService.updateResource(resource.getId(), resource);
             return new ResponseEntity(HttpStatus.OK);
         }
         return new ResponseEntity(HttpStatus.BAD_REQUEST);

@@ -9,15 +9,17 @@ import pl.lodz.p.it.tks.ports.AddReservationPort;
 import pl.lodz.p.it.tks.ports.DeleteReservationPort;
 import pl.lodz.p.it.tks.ports.GetReservationsPort;
 import pl.lodz.p.it.tks.ports.UpdateReservationPort;
-import pl.lodz.p.it.tks.repository.ReservationRepository;
-import pl.lodz.p.it.tks.useCases.ReservationUseCase;
+import pl.lodz.p.it.tks.useCases.ReservationUseCase.DeleteReservationUseCase;
+import pl.lodz.p.it.tks.useCases.ReservationUseCase.EndReservationUseCase;
+import pl.lodz.p.it.tks.useCases.ReservationUseCase.StartReservationUseCase;
+import pl.lodz.p.it.tks.useCases.ReservationUseCase.UtilsReservationUseCase;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class ReservationService implements ReservationUseCase {
+public class ReservationService implements StartReservationUseCase, EndReservationUseCase, DeleteReservationUseCase, UtilsReservationUseCase {
 
 
     private AddReservationPort addReservationPort;

@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.lodz.p.it.tks.model.Client;
 import pl.lodz.p.it.tks.service.UserService;
-import pl.lodz.p.it.tks.useCases.UserUseCase;
+import pl.lodz.p.it.tks.useCases.UserUseCase.AddUserUseCase;
+import pl.lodz.p.it.tks.useCases.UserUseCase.UpdateUserUseCase;
+import pl.lodz.p.it.tks.useCases.UserUseCase.UtilsUserUseCase;
 
 import javax.validation.Valid;
 
@@ -15,11 +17,15 @@ import javax.validation.Valid;
 @RequestMapping("/users")
 public class UserController {
 
-    private UserUseCase userService;
+    private AddUserUseCase addUserService;
+    private UpdateUserUseCase updateUserService;
+    private UtilsUserUseCase utilsUserService;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(AddUserUseCase addUserService,UpdateUserUseCase updateUserService,UtilsUserUseCase utilsUserService) {
+        this.addUserService = addUserService;
+        this.updateUserService = updateUserService;
+        this.utilsUserService = utilsUserService;
     }
 
     @GetMapping("/add-client")
@@ -31,7 +37,7 @@ public class UserController {
     public String addClient(@Valid @ModelAttribute("client") Client client, BindingResult bindingResult){
         if (!bindingResult.hasErrors()){
             //userService.addClientFromUser(user);
-            userService.addUser(client);
+            addUserService.addUser(client);
             return "redirect:/users/";
         }
         return "clientForm";
@@ -39,13 +45,13 @@ public class UserController {
 
     @RequestMapping("/update-client/{login}")
     public ModelAndView showClientUpdateForm(@PathVariable String login){
-        return new ModelAndView("clientUpdateForm", "client", userService.getUser(login));
+        return new ModelAndView("clientUpdateForm", "client", utilsUserService.getUser(login));
     }
 
     @PostMapping("/update-client")
     public String updateClient(@Valid @ModelAttribute Client client, BindingResult bindingResult){
         if (!bindingResult.hasErrors()){
-            userService.updateUser(client.getLogin(), client);
+            updateUserService.updateUser(client.getLogin(), client);
             return "redirect:/users/";
         }
         return "clientUpdateForm";
@@ -53,6 +59,6 @@ public class UserController {
 
     @RequestMapping
     public ModelAndView showAllClients(){
-        return new ModelAndView("allClient", "clients", userService.getAllClients());
+        return new ModelAndView("allClient", "clients", utilsUserService.getAllClients());
     }
 }

@@ -25,6 +25,6 @@ class ReservationRepositoryTest {
 
     @Test
     void getReservation() {
-        Assertions.assertEquals(reservation, reservationRepository.get("1"));
+        assertEquals(reservation, reservationRepository.get("1"));
     }
 }

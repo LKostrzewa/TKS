@@ -53,7 +53,7 @@ public class ResourceController {
             e.printStackTrace();
         }
         try {
-            keyStore.load(new FileInputStream(new File("/Users/pawelbialek/.keystore")),
+            keyStore.load(new FileInputStream(new File("C:\\Users\\Lukasz\\.keystore")),
                     keyStorePassword.toCharArray());
         } catch (IOException e) {
             e.printStackTrace();

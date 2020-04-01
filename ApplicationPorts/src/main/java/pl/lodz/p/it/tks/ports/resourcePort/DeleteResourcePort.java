@@ -1,4 +1,4 @@
-package pl.lodz.p.it.tks.ports;
+package pl.lodz.p.it.tks.ports.resourcePort;
 
 public interface DeleteResourcePort {
     void deleteResource(String id);

@@ -1,4 +1,4 @@
-package pl.lodz.p.it.tks.ports;
+package pl.lodz.p.it.tks.ports.userPort;
 
 import pl.lodz.p.it.tks.model.Client;
 import pl.lodz.p.it.tks.model.User;

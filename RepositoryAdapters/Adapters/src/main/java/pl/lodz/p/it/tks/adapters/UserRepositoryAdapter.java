@@ -5,10 +5,10 @@ import org.springframework.stereotype.Component;
 import pl.lodz.p.it.tks.converters.UserConverter;
 import pl.lodz.p.it.tks.data.*;
 import pl.lodz.p.it.tks.model.*;
-import pl.lodz.p.it.tks.ports.AddUserPort;
-import pl.lodz.p.it.tks.ports.DeleteUserPort;
-import pl.lodz.p.it.tks.ports.GetUserPort;
-import pl.lodz.p.it.tks.ports.UpdateUserPort;
+import pl.lodz.p.it.tks.ports.userPort.AddUserPort;
+import pl.lodz.p.it.tks.ports.userPort.DeleteUserPort;
+import pl.lodz.p.it.tks.ports.userPort.GetUserPort;
+import pl.lodz.p.it.tks.ports.userPort.UpdateUserPort;
 import pl.lodz.p.it.tks.repository.UserRepository;
 
 import java.util.ArrayList;

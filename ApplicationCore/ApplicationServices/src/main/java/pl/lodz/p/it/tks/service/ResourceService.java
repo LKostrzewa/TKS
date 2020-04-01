@@ -2,10 +2,13 @@ package pl.lodz.p.it.tks.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.lodz.p.it.tks.ports.*;
 import pl.lodz.p.it.tks.model.BallRoom;
 import pl.lodz.p.it.tks.model.Resource;
 import pl.lodz.p.it.tks.model.Table;
+import pl.lodz.p.it.tks.ports.resourcePort.AddResourcePort;
+import pl.lodz.p.it.tks.ports.resourcePort.DeleteResourcePort;
+import pl.lodz.p.it.tks.ports.resourcePort.GetResourcesPort;
+import pl.lodz.p.it.tks.ports.resourcePort.UpdateResourcePort;
 import pl.lodz.p.it.tks.useCases.resourceUseCase.AddResourceUseCase;
 import pl.lodz.p.it.tks.useCases.resourceUseCase.DeleteResourceUseCase;
 import pl.lodz.p.it.tks.useCases.resourceUseCase.UpdateResourceUseCase;

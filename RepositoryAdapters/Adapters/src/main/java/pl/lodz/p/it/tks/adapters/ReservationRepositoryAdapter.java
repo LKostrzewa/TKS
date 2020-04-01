@@ -5,10 +5,10 @@ import org.springframework.stereotype.Component;
 import pl.lodz.p.it.tks.converters.ReservationConverter;
 import pl.lodz.p.it.tks.data.ReservationEnt;
 import pl.lodz.p.it.tks.model.Reservation;
-import pl.lodz.p.it.tks.ports.AddReservationPort;
-import pl.lodz.p.it.tks.ports.DeleteReservationPort;
-import pl.lodz.p.it.tks.ports.GetReservationsPort;
-import pl.lodz.p.it.tks.ports.UpdateReservationPort;
+import pl.lodz.p.it.tks.ports.reservationPort.AddReservationPort;
+import pl.lodz.p.it.tks.ports.reservationPort.DeleteReservationPort;
+import pl.lodz.p.it.tks.ports.reservationPort.GetReservationsPort;
+import pl.lodz.p.it.tks.ports.reservationPort.UpdateReservationPort;
 import pl.lodz.p.it.tks.repository.ReservationRepository;
 
 import java.util.ArrayList;

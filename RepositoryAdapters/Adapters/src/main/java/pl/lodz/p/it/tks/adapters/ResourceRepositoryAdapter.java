@@ -9,7 +9,10 @@ import pl.lodz.p.it.tks.data.TableEnt;
 import pl.lodz.p.it.tks.model.BallRoom;
 import pl.lodz.p.it.tks.model.Resource;
 import pl.lodz.p.it.tks.model.Table;
-import pl.lodz.p.it.tks.ports.*;
+import pl.lodz.p.it.tks.ports.resourcePort.AddResourcePort;
+import pl.lodz.p.it.tks.ports.resourcePort.DeleteResourcePort;
+import pl.lodz.p.it.tks.ports.resourcePort.GetResourcesPort;
+import pl.lodz.p.it.tks.ports.resourcePort.UpdateResourcePort;
 import pl.lodz.p.it.tks.repository.ResourceRepository;
 
 import java.util.ArrayList;

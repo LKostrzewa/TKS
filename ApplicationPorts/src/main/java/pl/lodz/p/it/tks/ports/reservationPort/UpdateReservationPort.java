@@ -1,4 +1,4 @@
-package pl.lodz.p.it.tks.ports;
+package pl.lodz.p.it.tks.ports.reservationPort;
 
 import pl.lodz.p.it.tks.model.Reservation;
 

@@ -15,6 +15,7 @@ import pl.lodz.p.it.tks.useCases.resourceUseCase.DeleteResourceUseCase;
 import pl.lodz.p.it.tks.useCases.resourceUseCase.UpdateResourceUseCase;
 import pl.lodz.p.it.tks.useCases.resourceUseCase.UtilsResourceUseCase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -30,37 +31,46 @@ public class ResourceViewAdapter implements AddResourceUseCase, DeleteResourceUs
     }
 
     @Override
-    public boolean addResource(ResourceDTO resource) {
-        return false;
+    public boolean addResource(ResourceDTO resourceDTO) {
+        Resource resource = resourceViewConverter.convertResourceDTO(resourceDTO);
+        return resourceService.addResource(resource);
     }
 
     @Override
     public void deleteResource(String id) {
-
+        resourceService.deleteResource(id);
     }
 
     @Override
     public void updateResource(String id, ResourceDTO resource) {
-
+        resourceService.updateResource(id, resourceViewConverter.convertResourceDTO(resource));
     }
 
     @Override
     public List<ResourceDTO> getAllResources() {
-        return null;
+        List<ResourceDTO> resourceDTOS = new ArrayList<>();
+        resourceService.getAllResources().forEach(r -> resourceDTOS.add(getResource(r.getId())));
+        return resourceDTOS;
     }
 
     @Override
     public ResourceDTO getResource(String id) {
-        return null;
+        if(resourceService.getResource(id) instanceof Table)
+            return resourceViewConverter.convertTable((Table) resourceService.getResource(id));
+        else return resourceViewConverter.convertBallRoom((BallRoom)resourceService.getResource(id));
     }
 
     @Override
     public List<TableDTO> getAllTables() {
-        return null;
+        List<TableDTO> tableDTOS = new ArrayList<>();
+        resourceService.getAllTables().forEach(r -> tableDTOS.add(resourceViewConverter.convertTable(r)));
+        return tableDTOS;
     }
 
     @Override
     public List<BallRoomDTO> getAllBallRoom() {
-        return null;
+        List<BallRoomDTO> ballRoomDTOS = new ArrayList<>();
+        resourceService.getAllBallRoom().forEach(r -> ballRoomDTOS.add(resourceViewConverter.convertBallRoom(r)));
+        return ballRoomDTOS;
     }
 }

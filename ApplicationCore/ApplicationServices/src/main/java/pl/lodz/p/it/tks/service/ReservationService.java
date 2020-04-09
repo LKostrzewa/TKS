@@ -9,18 +9,13 @@ import pl.lodz.p.it.tks.ports.reservationPort.AddReservationPort;
 import pl.lodz.p.it.tks.ports.reservationPort.DeleteReservationPort;
 import pl.lodz.p.it.tks.ports.reservationPort.GetReservationsPort;
 import pl.lodz.p.it.tks.ports.reservationPort.UpdateReservationPort;
-import pl.lodz.p.it.tks.useCases.reservationUseCase.DeleteReservationUseCase;
-import pl.lodz.p.it.tks.useCases.reservationUseCase.EndReservationUseCase;
-import pl.lodz.p.it.tks.useCases.reservationUseCase.StartReservationUseCase;
-import pl.lodz.p.it.tks.useCases.reservationUseCase.UtilsReservationUseCase;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class ReservationService implements StartReservationUseCase, EndReservationUseCase, DeleteReservationUseCase, UtilsReservationUseCase {
-
+public class ReservationService {
 
     private AddReservationPort addReservationPort;
     private GetReservationsPort getReservationsPort;
@@ -35,7 +30,6 @@ public class ReservationService implements StartReservationUseCase, EndReservati
         this.updateReservationPort = updateReservationPort;
     }
 
-    @Override
     public void startReservation(Reservation reservation) /*Runtime bo w testach wygoniej :)*/throws RuntimeException {
         if(getReservationsPort.getReservedReservations(reservation.getResource().getId()).isPresent())
             throw new ResourceTakenException("Reservation impossible, that resource is already taken");
@@ -45,7 +39,6 @@ public class ReservationService implements StartReservationUseCase, EndReservati
         else addReservationPort.addReservation(reservation);
     }
 
-    @Override
     public void endReservation(String id, LocalDateTime end){
         Reservation r = getReservation(id);
         if(r.getClient().isActive()){
@@ -54,13 +47,11 @@ public class ReservationService implements StartReservationUseCase, EndReservati
         }
     }
 
-    @Override
     public void deleteReservation(String id){
         if(getReservationsPort.getReservation(id).getEnding() == null)
             deleteReservationPort.deleteReservation(id);
     }
 
-    @Override
     public double countReservationPrice(String id){
         Reservation r = getReservationsPort.getReservation(id);
         Duration duration = Duration.between(r.getBeginning(), r.getEnding());
@@ -69,17 +60,14 @@ public class ReservationService implements StartReservationUseCase, EndReservati
         return price*diff - r.getClient().getDiscount(price);
     }
 
-    @Override
     public List<Reservation> getAllReservations(){
         return getReservationsPort.getAllReservations();
     }
 
-    @Override
     public List<Reservation> getAllClientReservations(String login){
         return getReservationsPort.getReservationsForClient(login);
     }
 
-    @Override
     public Reservation getReservation(String id){
         return getReservationsPort.getReservation(id);
     }

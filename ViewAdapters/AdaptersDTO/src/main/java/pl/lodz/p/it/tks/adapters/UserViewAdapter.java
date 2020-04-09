@@ -4,7 +4,9 @@ import org.springframework.stereotype.Component;
 import pl.lodz.p.it.tks.converters.UserViewConverter;
 import pl.lodz.p.it.tks.dto.ClientDTO;
 import pl.lodz.p.it.tks.dto.UserDTO;
+import pl.lodz.p.it.tks.model.Administrator;
 import pl.lodz.p.it.tks.model.Client;
+import pl.lodz.p.it.tks.model.Manager;
 import pl.lodz.p.it.tks.model.User;
 import pl.lodz.p.it.tks.service.UserService;
 import pl.lodz.p.it.tks.useCases.userUseCase.AddUserUseCase;
@@ -12,6 +14,7 @@ import pl.lodz.p.it.tks.useCases.userUseCase.DeleteUserUseCase;
 import pl.lodz.p.it.tks.useCases.userUseCase.UpdateUserUseCase;
 import pl.lodz.p.it.tks.useCases.userUseCase.UtilsUserUseCase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -42,21 +45,29 @@ public class UserViewAdapter implements AddUserUseCase, DeleteUserUseCase, Updat
 
     @Override
     public UserDTO getUser(String login) {
-        return null;
+        if(userService.getUser(login) instanceof Client) return userViewConverter.convertClient((Client)userService.getUser(login));
+        else if (userService.getUser(login) instanceof Administrator) return userViewConverter.convertAdministrator((Administrator)userService.getUser(login));
+        else return userViewConverter.convertManager((Manager)userService.getUser(login));
     }
 
     @Override
     public List<UserDTO> getAllUsers() {
-        return null;
+        List<UserDTO> userDTOS = new ArrayList<>();
+        userService.getAllUsers().forEach(user -> userDTOS.add(getUser(user.getLogin())));
+        return userDTOS;
     }
 
     @Override
     public List<ClientDTO> getAllClients() {
-        return null;
+        List<ClientDTO> clientDTOS = new ArrayList<>();
+        userService.getAllClients().forEach(client -> clientDTOS.add(userViewConverter.convertClient(client)));
+        return clientDTOS;
     }
 
     @Override
     public List<ClientDTO> getAllActiveClients() {
-        return null;
+        List<ClientDTO> clientDTOS = new ArrayList<>();
+        userService.getAllActiveClients().forEach(client -> clientDTOS.add(userViewConverter.convertClient(client)));
+        return clientDTOS;
     }
 }

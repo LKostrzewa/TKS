@@ -3,6 +3,9 @@ package pl.lodz.p.it.tks.adapters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.lodz.p.it.tks.converters.ResourceViewConverter;
+import pl.lodz.p.it.tks.dto.BallRoomDTO;
+import pl.lodz.p.it.tks.dto.ResourceDTO;
+import pl.lodz.p.it.tks.dto.TableDTO;
 import pl.lodz.p.it.tks.model.BallRoom;
 import pl.lodz.p.it.tks.model.Resource;
 import pl.lodz.p.it.tks.model.Table;
@@ -27,7 +30,7 @@ public class ResourceViewAdapter implements AddResourceUseCase, DeleteResourceUs
     }
 
     @Override
-    public boolean addResource(Resource resource) {
+    public boolean addResource(ResourceDTO resource) {
         return false;
     }
 
@@ -37,27 +40,27 @@ public class ResourceViewAdapter implements AddResourceUseCase, DeleteResourceUs
     }
 
     @Override
-    public void updateResource(String id, Resource resource) {
+    public void updateResource(String id, ResourceDTO resource) {
 
     }
 
     @Override
-    public List<Resource> getAllResources() {
+    public List<ResourceDTO> getAllResources() {
         return null;
     }
 
     @Override
-    public Resource getResource(String id) {
+    public ResourceDTO getResource(String id) {
         return null;
     }
 
     @Override
-    public List<Table> getAllTables() {
+    public List<TableDTO> getAllTables() {
         return null;
     }
 
     @Override
-    public List<BallRoom> getAllBallRoom() {
+    public List<BallRoomDTO> getAllBallRoom() {
         return null;
     }
 }

@@ -5,9 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import pl.lodz.p.it.tks.model.BallRoom;
-import pl.lodz.p.it.tks.model.Resource;
-import pl.lodz.p.it.tks.model.Table;
+import pl.lodz.p.it.tks.dto.BallRoomDTO;
+import pl.lodz.p.it.tks.dto.ResourceDTO;
+import pl.lodz.p.it.tks.dto.TableDTO;
 import pl.lodz.p.it.tks.useCases.resourceUseCase.AddResourceUseCase;
 import pl.lodz.p.it.tks.useCases.resourceUseCase.DeleteResourceUseCase;
 import pl.lodz.p.it.tks.useCases.resourceUseCase.UpdateResourceUseCase;
@@ -31,11 +31,11 @@ public class ResourceApi {
         this.updateResourceService = updateResourceService;
         this.deleteResourceService = deleteResourceService;
         this.utilsResourceService = utilsResourceService;
-        addResourceService.addResource(new BallRoom("testBallRoom", 10, "JakisTekst", 5));
-        addResourceService.addResource(new Table("test", 10, 10, 10));
+        addResourceService.addResource(new BallRoomDTO("testBallRoom", 10, "JakisTekst", 5));
+        addResourceService.addResource(new TableDTO("test", 10, 10, 10));
     }
 
-    private ResponseEntity addResource(Resource resource, BindingResult bindingResult){
+    private ResponseEntity addResource(ResourceDTO resource, BindingResult bindingResult){
         if (!bindingResult.hasErrors()) {
             if (addResourceService.addResource(resource)) {
                 return new ResponseEntity(HttpStatus.OK);
@@ -46,32 +46,32 @@ public class ResourceApi {
     }
 
     @PostMapping("/add-table")
-    public ResponseEntity addTable(@Valid @RequestBody Table resource, BindingResult bindingResult) {
+    public ResponseEntity addTable(@Valid @RequestBody TableDTO resource, BindingResult bindingResult) {
         return addResource(resource, bindingResult);
     }
 
     @PostMapping("/add-room")
-    public ResponseEntity addBallRoom(@Valid @RequestBody BallRoom resource, BindingResult bindingResult) {
+    public ResponseEntity addBallRoom(@Valid @RequestBody BallRoomDTO resource, BindingResult bindingResult) {
         return addResource(resource, bindingResult);
     }
 
     @GetMapping
-    public List<Resource> getAllResource() {
+    public List<ResourceDTO> getAllResource() {
         return utilsResourceService.getAllResources();
     }
 
     @GetMapping("/all-tables")
-    public List<Table> showAllTables() {
+    public List<TableDTO> showAllTables() {
         return utilsResourceService.getAllTables();
     }
 
     @GetMapping("/all-rooms")
-    public List<BallRoom> getAllRooms() {
+    public List<BallRoomDTO> getAllRooms() {
         return utilsResourceService.getAllBallRoom();
     }
 
     @GetMapping("/get-resource/{id}")
-    public Resource getResource(@PathVariable String id) {
+    public ResourceDTO getResource(@PathVariable String id) {
         return utilsResourceService.getResource(id);
     }
 
@@ -81,7 +81,7 @@ public class ResourceApi {
         return ResponseEntity.ok().build();
     }
 
-    private ResponseEntity updateResource(Resource resource, BindingResult bindingResult){
+    private ResponseEntity updateResource(ResourceDTO resource, BindingResult bindingResult){
         if (!bindingResult.hasErrors()) {
             updateResourceService.updateResource(resource.getId(), resource);
             return new ResponseEntity(HttpStatus.OK);
@@ -90,12 +90,12 @@ public class ResourceApi {
     }
 
     @PutMapping("/update-table")
-    public ResponseEntity updateTable(@Valid @RequestBody Table resource, BindingResult bindingResult) {
+    public ResponseEntity updateTable(@Valid @RequestBody TableDTO resource, BindingResult bindingResult) {
         return updateResource(resource, bindingResult);
     }
 
     @PutMapping("/update-room")
-    public ResponseEntity updateBallRoom(@Valid @RequestBody BallRoom resource, BindingResult bindingResult) {
+    public ResponseEntity updateBallRoom(@Valid @RequestBody BallRoomDTO resource, BindingResult bindingResult) {
         return updateResource(resource, bindingResult);
     }
 }

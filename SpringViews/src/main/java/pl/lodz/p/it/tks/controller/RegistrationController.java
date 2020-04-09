@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import pl.lodz.p.it.tks.dto.ClientDTO;
 import pl.lodz.p.it.tks.model.Client;
 import pl.lodz.p.it.tks.useCases.userUseCase.AddUserUseCase;
 
@@ -54,13 +55,13 @@ public class RegistrationController {
     public ModelAndView showRegisterPage() {
         //User user = new User();
         //user.setActive(false);
-        Client client = new Client();
+        ClientDTO client = new ClientDTO();
         client.setActive(false);
         return new ModelAndView("register", "client", client);
     }
 
     @PostMapping("/register")
-    public String addClient(@Valid @ModelAttribute("client") Client client, BindingResult bindingResult) {
+    public String addClient(@Valid @ModelAttribute("client") ClientDTO client, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
             addUserService.addUser(client);
             //userService.addClientFromUser(client);

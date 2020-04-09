@@ -1,14 +1,14 @@
 package pl.lodz.p.it.tks.useCases.resourceUseCase;
 
-import pl.lodz.p.it.tks.model.BallRoom;
-import pl.lodz.p.it.tks.model.Resource;
-import pl.lodz.p.it.tks.model.Table;
+import pl.lodz.p.it.tks.dto.BallRoomDTO;
+import pl.lodz.p.it.tks.dto.ResourceDTO;
+import pl.lodz.p.it.tks.dto.TableDTO;
 
 import java.util.List;
 
 public interface UtilsResourceUseCase {
-    List<Resource> getAllResources();
-    Resource getResource(String id);
-    List<Table> getAllTables();
-    List<BallRoom> getAllBallRoom();
+    List<ResourceDTO> getAllResources();
+    ResourceDTO getResource(String id);
+    List<TableDTO> getAllTables();
+    List<BallRoomDTO> getAllBallRoom();
 }

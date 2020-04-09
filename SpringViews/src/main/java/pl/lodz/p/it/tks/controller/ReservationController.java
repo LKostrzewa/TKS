@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import pl.lodz.p.it.tks.dto.ClientDTO;
+import pl.lodz.p.it.tks.dto.ReservationDTO;
 import pl.lodz.p.it.tks.model.Client;
 import pl.lodz.p.it.tks.model.Reservation;
 import pl.lodz.p.it.tks.useCases.reservationUseCase.DeleteReservationUseCase;
@@ -58,14 +60,14 @@ public class ReservationController {
     }
 
     @PostMapping("/add-reservation")
-    public String addReservation(@Valid @ModelAttribute Reservation reservation, BindingResult bindingResult, Model model){
+    public String addReservation(@Valid @ModelAttribute ReservationDTO reservation, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()){
             model.addAttribute("clients", utilsUserService.getAllActiveClients());
             model.addAttribute("resources", utilsResourceService.getAllResources());
             return "reservationForm";
         }
         try{
-            reservation.setClient((Client)utilsUserService.getUser(reservation.getClient().getLogin()));
+            reservation.setClient((ClientDTO)utilsUserService.getUser(reservation.getClient().getLogin()));
             reservation.setResource(utilsResourceService.getResource(reservation.getResource().getId()));
             startReservationService.startReservation(reservation);
         }

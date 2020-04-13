@@ -1,7 +1,8 @@
 package pl.lodz.p.it.tks.useCases.resourceUseCase;
 
-import pl.lodz.p.it.tks.model.Resource;
+
+import pl.lodz.p.it.tks.dto.ResourceDTO;
 
 public interface AddResourceUseCase {
-    boolean addResource(Resource resource);
+    boolean addResource(ResourceDTO resourceDTO);
 }

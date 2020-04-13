@@ -4,14 +4,20 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>pl.lodz.p.it.tks</groupId>
-    <artifactId>TKS</artifactId>
+    <artifactId>ViewAdapters</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-  <artifactId>RestApi</artifactId>
+  <artifactId>AdaptersDTO</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>RestApi</name>
+  <name>AdaptersDTO</name>
   <url>http://maven.apache.org</url>
   <dependencies>
+    <dependency>
+      <groupId>pl.lodz.p.it.tks</groupId>
+      <artifactId>ViewModel</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
     <dependency>
       <groupId>pl.lodz.p.it.tks</groupId>
       <artifactId>ViewPorts</artifactId>
@@ -20,7 +26,7 @@
     </dependency>
     <dependency>
       <groupId>pl.lodz.p.it.tks</groupId>
-      <artifactId>ViewAdapters</artifactId>
+      <artifactId>ApplicationServices</artifactId>
       <version>1.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>

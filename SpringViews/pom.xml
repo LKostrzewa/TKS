@@ -14,12 +14,12 @@
     <name>SpringViews</name>
     <url>http://maven.apache.org</url>
     <dependencies>
-        <dependency>
+        <!--<dependency>
             <groupId>pl.lodz.p.it.tks</groupId>
             <artifactId>ApplicationServices</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>pl.lodz.p.it.tks</groupId>
             <artifactId>RestApi</artifactId>
@@ -29,6 +29,18 @@
         <dependency>
             <groupId>pl.lodz.p.it.tks</groupId>
             <artifactId>Adapters</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>pl.lodz.p.it.tks</groupId>
+            <artifactId>ViewPorts</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>pl.lodz.p.it.tks</groupId>
+            <artifactId>AdaptersDTO</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

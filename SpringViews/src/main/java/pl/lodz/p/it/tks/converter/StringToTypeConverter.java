@@ -1,21 +1,21 @@
 package pl.lodz.p.it.tks.converter;
 
 import org.springframework.core.convert.converter.Converter;
-import pl.lodz.p.it.tks.model.ClientType;
-import pl.lodz.p.it.tks.model.NormalClient;
-import pl.lodz.p.it.tks.model.PremiumClient;
-import pl.lodz.p.it.tks.model.RegularClient;
+import pl.lodz.p.it.tks.dto.ClientTypeDTO;
+import pl.lodz.p.it.tks.dto.NormalClientDTO;
+import pl.lodz.p.it.tks.dto.PremiumClientDTO;
+import pl.lodz.p.it.tks.dto.RegularClientDTO;
 
-public class StringToTypeConverter implements Converter<String, ClientType> {
+public class StringToTypeConverter implements Converter<String, ClientTypeDTO> {
 
     @Override
-    public ClientType convert(String s) {
+    public ClientTypeDTO convert(String s) {
         switch (s){
             case "Regular":
-                return new RegularClient();
+                return new RegularClientDTO();
             case "Premium":
-                return new PremiumClient();
+                return new PremiumClientDTO();
         }
-        return new NormalClient();
+        return new NormalClientDTO();
     }
 }

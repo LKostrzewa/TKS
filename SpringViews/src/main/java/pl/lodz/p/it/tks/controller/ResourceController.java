@@ -36,7 +36,7 @@ import java.util.List;
 @RequestMapping("/resources/")
 public class ResourceController {
 
-    private String urlBase = "https://localhost:8443/restaurant/api/resources";
+    private String urlBase = "https://localhost:8443/api/resources";
     private RestTemplate rest;
     private HttpHeaders headers;
 

@@ -12,12 +12,12 @@
     <xs:element name="getResourceResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="resource" type="country"/>
+                <xs:element name="resource" type="resource"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
-    <xs:complexType name="country">
+    <xs:complexType name="resource">
         <xs:sequence>
             <xs:element name="id" type="xs:string"/>
             <xs:element name="price" type="xs:double"/>

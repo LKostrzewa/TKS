@@ -431,10 +431,8 @@
             
     
     <module>ViewPorts</module>
-          
-    
-    <module>SOAPApi</module>
       
+    <module>SoapAdapters</module>
   </modules>
     
 

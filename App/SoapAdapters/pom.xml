@@ -7,8 +7,16 @@
     <artifactId>TKS</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-  <artifactId>SOAPApi</artifactId>
+  <artifactId>SoapAdapters</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>SOAPApi</name>
+  <name>SoapAdapters</name>
   <url>http://maven.apache.org</url>
+  <dependencies>
+    <dependency>
+      <groupId>pl.lodz.p.it.tks</groupId>
+      <artifactId>ApplicationServices</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
 </project>

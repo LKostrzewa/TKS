@@ -1,4 +1,4 @@
-package pl.lodz.p.it.tks.soap.app;
+package com.baeldung.springsoap.gen;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

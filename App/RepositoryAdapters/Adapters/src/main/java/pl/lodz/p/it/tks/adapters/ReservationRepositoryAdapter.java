@@ -12,6 +12,7 @@ import pl.lodz.p.it.tks.ports.reservationPort.UpdateReservationPort;
 import pl.lodz.p.it.tks.repository.ReservationRepository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -73,7 +74,9 @@ public class ReservationRepositoryAdapter implements AddReservationPort, DeleteR
     @Override
     public Optional<Reservation> getReservedReservations(String id) {
         List<Reservation> reservations = new ArrayList<>();
-        List<ReservationEnt> reservationsEnts = repository.getReservedReservations(id).stream().collect(Collectors.toList());
+        List<ReservationEnt> reservationsEnts = repository.getReservedReservations(id);
+        //Java 9+ version
+        //List<ReservationEnt> reservationsEnts = repository.getReservedReservations(id).stream().collect(Collectors.toList());
         for(ReservationEnt reservationEnt : reservationsEnts){
             reservations.add(converter.convertReservationEnt(reservationEnt));
         }

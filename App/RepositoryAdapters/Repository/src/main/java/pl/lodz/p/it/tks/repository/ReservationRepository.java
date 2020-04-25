@@ -3,6 +3,7 @@ package pl.lodz.p.it.tks.repository;
 import org.springframework.stereotype.Repository;
 import pl.lodz.p.it.tks.data.ReservationEnt;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -22,8 +23,14 @@ public class ReservationRepository extends RepositoryTemplate<ReservationEnt> {
                 .collect(Collectors.toList());
     }
 
-    public Optional<ReservationEnt> getReservedReservations(String id){
+    public List<ReservationEnt> getReservedReservations(String id){
+        /* Java 9+ version
         return getReservationsForResource(id).stream().filter(
-                r -> r.getEnding() == null).findAny();
+                r -> r.getEnding() == null).findAny();*/
+        List<ReservationEnt> reservationEnts = new ArrayList<>();
+        for(ReservationEnt r : getReservationsForResource(id)){
+            if(r.getEnding() == null) reservationEnts.add(r);
+        }
+        return reservationEnts;
     }
 }

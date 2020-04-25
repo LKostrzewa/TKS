@@ -31,8 +31,6 @@ public class ResourceApi {
         this.updateResourceService = updateResourceService;
         this.deleteResourceService = deleteResourceService;
         this.utilsResourceService = utilsResourceService;
-        addResourceService.addResource(new BallRoomDTO("testBallRoom", 10, "JakisTekst", 5));
-        addResourceService.addResource(new TableDTO("test", 10, 10, 10));
     }
 
     private ResponseEntity addResource(ResourceDTO resource, BindingResult bindingResult){

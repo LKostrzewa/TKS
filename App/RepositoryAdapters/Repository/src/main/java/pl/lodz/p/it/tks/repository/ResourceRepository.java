@@ -11,11 +11,6 @@ import java.util.List;
 @Repository
 public class ResourceRepository extends RepositoryTemplate<ResourceEnt> {
 
-    public ResourceRepository(){
-        add("testBallRoom", new BallRoomEnt("testBallRoom", 10, "JakisTekst", 5));
-        add("test", new TableEnt("test", 10, 10, 10));
-    }
-
     public List<TableEnt> getAllTableEnts(){
         List<TableEnt> list = new ArrayList<>();
         getAll().stream().filter(t -> t instanceof TableEnt)

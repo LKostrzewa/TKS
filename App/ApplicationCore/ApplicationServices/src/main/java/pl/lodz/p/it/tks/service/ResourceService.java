@@ -26,8 +26,9 @@ public class ResourceService {
         this.updateResourcePort = updateResourcePort;
         this.getResourcesPort = getResourcesPort;
         this.deleteResourcePort = deleteResourcePort;
-        //addResourcePort.addResource(new BallRoom("testBallRoom", 10, "JakisTekst", 5));
-        //addResourcePort.addResource(new Table("test", 10, 10, 10));
+        addResourcePort.addResource(new BallRoom("testBallRoom", 10, "JakisTekst", 5));
+        addResourcePort.addResource(new Table("test", 10, 10, 10));
+        addResourcePort.addResource(new Table("testTable", 56.12, 21, 4));
     }
 
     public boolean addResource(Resource resource) {

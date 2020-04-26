@@ -13,15 +13,86 @@
     <xs:element name="getResourceResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="resource" type="tns:resource"/>
+                <xs:element name="resource" type="tns:resourceSOAP"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
-    <xs:complexType name="resource">
+    <xs:element name="postBallRoomRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:string"/>
+                <xs:element name="price" type="xs:double"/>
+                <xs:element name="description" type="xs:string"/>
+                <xs:element name="numOfRooms" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="postBallRoomResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="postTableRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:string"/>
+                <xs:element name="price" type="xs:double"/>
+                <xs:element name="number" type="xs:int"/>
+                <xs:element name="numOfPeople" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="postTableResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="resourceSOAP">
         <xs:sequence>
             <xs:element name="id" type="xs:string"/>
             <xs:element name="price" type="xs:double"/>
         </xs:sequence>
     </xs:complexType>
+    
+    <xs:complexType name="ballRoomSOAP">
+        <xs:complexContent>
+            <xs:extension base="tns:resourceSOAP">
+                <xs:sequence>
+                    <xs:element name="description" type="xs:string"/>
+                    <xs:element name="numOfRooms" type="xs:int"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="tableSOAP">
+        <xs:complexContent>
+            <xs:extension base="tns:resourceSOAP">
+                <xs:sequence>
+                    <xs:element name="number" type="xs:int"/>
+                    <xs:element name="numOfPeople" type="xs:int"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    
+    <xs:element name="getTablesRequest"/>
+
+    <xs:element name="getTablesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="table" type="tns:tableSOAP" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>

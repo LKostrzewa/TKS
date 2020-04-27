@@ -1,0 +1,12 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:gs="http://www.baeldung.com/springsoap/gen">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <gs:postTableRequest>
+                <gs:id>test1</gs:id>
+                <gs:price>12.1</gs:price>
+                <gs:number>15</gs:number>
+                <gs:numOfPeople>4</gs:numOfPeople>
+        </gs:postTableRequest>
+    </soapenv:Body>
+</soapenv:Envelope>

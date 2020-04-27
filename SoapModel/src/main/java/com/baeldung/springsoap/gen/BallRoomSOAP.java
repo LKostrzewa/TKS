@@ -11,24 +11,23 @@ package com.baeldung.springsoap.gen;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for resourceSOAP complex type.
+ * <p>Java class for ballRoomSOAP complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="resourceSOAP">
+ * &lt;complexType name="ballRoomSOAP">
  *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *     &lt;extension base="{http://www.baeldung.com/springsoap/gen}resourceSOAP">
  *       &lt;sequence>
- *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="price" type="{http://www.w3.org/2001/XMLSchema}double"/>
+ *         &lt;element name="description" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="numOfRooms" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
- *     &lt;/restriction>
+ *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
@@ -36,58 +35,56 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "resourceSOAP", propOrder = {
-    "id",
-    "price"
+@XmlType(name = "ballRoomSOAP", propOrder = {
+    "description",
+    "numOfRooms"
 })
-@XmlSeeAlso({
-    BallRoomSOAP.class,
-    TableSOAP.class
-})
-public class ResourceSOAP {
+public class BallRoomSOAP
+    extends ResourceSOAP
+{
 
     @XmlElement(required = true)
-    protected String id;
-    protected double price;
+    protected String description;
+    protected int numOfRooms;
 
     /**
-     * Gets the value of the id property.
+     * Gets the value of the description property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getId() {
-        return id;
+    public String getDescription() {
+        return description;
     }
 
     /**
-     * Sets the value of the id property.
+     * Sets the value of the description property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setId(String value) {
-        this.id = value;
+    public void setDescription(String value) {
+        this.description = value;
     }
 
     /**
-     * Gets the value of the price property.
+     * Gets the value of the numOfRooms property.
      * 
      */
-    public double getPrice() {
-        return price;
+    public int getNumOfRooms() {
+        return numOfRooms;
     }
 
     /**
-     * Sets the value of the price property.
+     * Sets the value of the numOfRooms property.
      * 
      */
-    public void setPrice(double value) {
-        this.price = value;
+    public void setNumOfRooms(int value) {
+        this.numOfRooms = value;
     }
 
 }

@@ -11,7 +11,6 @@ import pl.lodz.p.it.tks.ResourceSoapAdapter;
 public class ResourceEndpoint {
     private static final String NAMESPACE_URI = "http://www.baeldung.com/springsoap/gen";
 
-    //private ResourceRepository resourceRepository;
     private ResourceSoapAdapter resourceSoapAdapter;
 
     @Autowired
@@ -24,7 +23,41 @@ public class ResourceEndpoint {
     public GetResourceResponse getResource(@RequestPayload GetResourceRequest request) {
         GetResourceResponse response = new GetResourceResponse();
         response.setResource(resourceSoapAdapter.findResource(request.getId()));
-
         return response;
     }
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "postBallRoomRequest")
+    @ResponsePayload
+    public PostBallRoomResponse postBallRoom(@RequestPayload PostBallRoomRequest request) {
+        PostBallRoomResponse response = new PostBallRoomResponse();
+        BallRoomSOAP ballRoomSOAP = new BallRoomSOAP();
+        ballRoomSOAP.setId(request.getId());
+        ballRoomSOAP.setPrice(request.getPrice());
+        ballRoomSOAP.setDescription(request.getDescription());
+        ballRoomSOAP.setNumOfRooms(request.getNumOfRooms());
+        response.setId(resourceSoapAdapter.addBallRoom(ballRoomSOAP));
+        return response;
+    }
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "postTableRequest")
+    @ResponsePayload
+    public PostTableResponse postTable(@RequestPayload PostTableRequest request) {
+        PostTableResponse response = new PostTableResponse();
+        TableSOAP tableSOAP = new TableSOAP();
+        tableSOAP.setId(request.getId());
+        tableSOAP.setPrice(request.getPrice());
+        tableSOAP.setNumber(request.getNumber());
+        tableSOAP.setNumOfPeople(request.getNumOfPeople());
+        response.setId(resourceSoapAdapter.addTable(tableSOAP));
+        return response;
+    }
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getTablesRequest")
+    @ResponsePayload
+    public GetTablesResponse getTables(){
+        GetTablesResponse getTablesResponse = new GetTablesResponse();
+        getTablesResponse.setTable(resourceSoapAdapter.getTables());
+        return getTablesResponse;
+    }
+
 }

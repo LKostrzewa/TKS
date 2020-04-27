@@ -11,22 +11,24 @@ package com.baeldung.springsoap.gen;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for resourceSOAP complex type.
+ * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="resourceSOAP">
+ * &lt;complexType>
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="price" type="{http://www.w3.org/2001/XMLSchema}double"/>
+ *         &lt;element name="number" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="numOfPeople" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,19 +38,20 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "resourceSOAP", propOrder = {
+@XmlType(name = "", propOrder = {
     "id",
-    "price"
+    "price",
+    "number",
+    "numOfPeople"
 })
-@XmlSeeAlso({
-    BallRoomSOAP.class,
-    TableSOAP.class
-})
-public class ResourceSOAP {
+@XmlRootElement(name = "postTableRequest")
+public class PostTableRequest {
 
     @XmlElement(required = true)
     protected String id;
     protected double price;
+    protected int number;
+    protected int numOfPeople;
 
     /**
      * Gets the value of the id property.
@@ -88,6 +91,38 @@ public class ResourceSOAP {
      */
     public void setPrice(double value) {
         this.price = value;
+    }
+
+    /**
+     * Gets the value of the number property.
+     * 
+     */
+    public int getNumber() {
+        return number;
+    }
+
+    /**
+     * Sets the value of the number property.
+     * 
+     */
+    public void setNumber(int value) {
+        this.number = value;
+    }
+
+    /**
+     * Gets the value of the numOfPeople property.
+     * 
+     */
+    public int getNumOfPeople() {
+        return numOfPeople;
+    }
+
+    /**
+     * Sets the value of the numOfPeople property.
+     * 
+     */
+    public void setNumOfPeople(int value) {
+        this.numOfPeople = value;
     }
 
 }

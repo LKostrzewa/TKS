@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="resource" type="{http://www.baeldung.com/springsoap/gen}resourceSOAP"/>
+ *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,36 +36,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "resource"
+    "id"
 })
-@XmlRootElement(name = "getResourceResponse")
-public class GetResourceResponse {
+@XmlRootElement(name = "postBallRoomResponse")
+public class PostBallRoomResponse {
 
     @XmlElement(required = true)
-    protected ResourceSOAP resource;
+    protected String id;
 
     /**
-     * Gets the value of the resource property.
+     * Gets the value of the id property.
      * 
      * @return
      *     possible object is
-     *     {@link ResourceSOAP }
+     *     {@link String }
      *     
      */
-    public ResourceSOAP getResource() {
-        return resource;
+    public String getId() {
+        return id;
     }
 
     /**
-     * Sets the value of the resource property.
+     * Sets the value of the id property.
      * 
      * @param value
      *     allowed object is
-     *     {@link ResourceSOAP }
+     *     {@link String }
      *     
      */
-    public void setResource(ResourceSOAP value) {
-        this.resource = value;
+    public void setId(String value) {
+        this.id = value;
     }
 
 }

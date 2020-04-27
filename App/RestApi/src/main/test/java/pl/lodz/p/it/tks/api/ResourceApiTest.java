@@ -68,7 +68,7 @@ class ResourceApiTest {
         String responseJSON = EntityUtils.toString(response.getEntity());
         JSONArray test = new JSONArray(responseJSON);
 
-        Assertions.assertEquals(2, test.length());
+        Assertions.assertEquals(3, test.length());
 
         JSONObject body = new JSONObject()
                 .put("number",10)
@@ -88,7 +88,7 @@ class ResourceApiTest {
         responseJSON = EntityUtils.toString(response.getEntity());
         test = new JSONArray(responseJSON);
 
-        Assertions.assertEquals(3, test.length());
+        Assertions.assertEquals(4, test.length());
     }
 
     @Test
@@ -173,7 +173,7 @@ class ResourceApiTest {
         String responseJSON = EntityUtils.toString(response.getEntity());
         JSONArray test = new JSONArray(responseJSON);
 
-        Assertions.assertEquals(2, test.length());
+        Assertions.assertEquals(3, test.length());
     }
 
 }

@@ -38,8 +38,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "id"
 })
-@XmlRootElement(name = "getResourceRequest")
-public class GetResourceRequest {
+@XmlRootElement(name = "deleteResourceRequest")
+public class DeleteResourceRequest {
 
     @XmlElement(required = true)
     protected String id;

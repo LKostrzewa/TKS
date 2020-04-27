@@ -57,4 +57,9 @@ public class ResourceSoapAdapter {
                 .map(entity -> modelMapper.map(entity, TableSOAP.class))
                 .collect(Collectors.toList());
     }
+
+    public String deleteResource(String id) {
+        resourceService.deleteResource(id);
+        return "OK";
+    }
 }

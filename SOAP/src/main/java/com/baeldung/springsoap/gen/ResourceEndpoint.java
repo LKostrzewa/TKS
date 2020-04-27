@@ -60,4 +60,12 @@ public class ResourceEndpoint {
         return getTablesResponse;
     }
 
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "deleteResourceRequest")
+    @ResponsePayload
+    public DeleteResourceResponse deleteResource(@RequestPayload DeleteResourceRequest request){
+        DeleteResourceResponse response = new DeleteResourceResponse();
+        response.setInfo(resourceSoapAdapter.deleteResource(request.getId()));
+        return response;
+    }
+
 }

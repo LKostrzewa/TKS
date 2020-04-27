@@ -56,6 +56,22 @@
         </xs:complexType>
     </xs:element>
 
+    <xs:element name="deleteResourceRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteResourceResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="info" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
     <xs:complexType name="resourceSOAP">
         <xs:sequence>
             <xs:element name="id" type="xs:string"/>

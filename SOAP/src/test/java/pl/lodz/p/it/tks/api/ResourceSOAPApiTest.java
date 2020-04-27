@@ -81,4 +81,15 @@ public class ResourceSOAPApiTest {
         element = executePost("getTables.xml");
         Assertions.assertEquals(element.getElementsByTagName("ns2:table").getLength(), 3);
     }
+
+    @Test
+    @Order(4)
+    public void deleteTest() throws IOException, ParserConfigurationException, SAXException {
+        Element element = executePost("deleteTable.xml");
+        //Jazda z testami xdd
+        Assertions.assertEquals(element.getElementsByTagName("ns2:info").item(0).getTextContent(), "OK");
+
+        element = executePost("getTables.xml");
+        Assertions.assertEquals(element.getElementsByTagName("ns2:table").getLength(), 2);
+    }
 }

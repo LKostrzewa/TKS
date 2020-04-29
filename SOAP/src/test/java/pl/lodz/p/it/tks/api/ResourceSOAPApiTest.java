@@ -54,7 +54,7 @@ public class ResourceSOAPApiTest {
     public void getTest() throws IOException, ParserConfigurationException, SAXException {
         //Wczytanie z pliku xml
         Element element = executePost("getTable.xml");
-        //Jazda z testami xdd
+        //Asercje
         Assertions.assertEquals(element.getElementsByTagName("ns2:price").item(0).getTextContent(), "10.0");
     }
 
@@ -63,7 +63,7 @@ public class ResourceSOAPApiTest {
     public void postTest() throws IOException, ParserConfigurationException, SAXException {
 
         Element element = executePost("postTable.xml");
-        //Jazda z testami xdd
+        //Asercje
         Assertions.assertEquals(element.getElementsByTagName("ns2:id").item(0).getTextContent(), "test1");
 
         //Sprawdzanie poprawnego dodania
@@ -75,7 +75,7 @@ public class ResourceSOAPApiTest {
     @Order(3)
     public void wrongPostTest() throws IOException, ParserConfigurationException, SAXException {
         Element element = executePost("postTable.xml");
-        //Jazda z testami xdd
+        //Asercje
         Assertions.assertEquals(element.getElementsByTagName("ns2:id").item(0).getTextContent(), "IM SO SORRY");
         //Sprawdzenie niedodania elementu
         element = executePost("getTables.xml");
@@ -86,7 +86,7 @@ public class ResourceSOAPApiTest {
     @Order(4)
     public void deleteTest() throws IOException, ParserConfigurationException, SAXException {
         Element element = executePost("deleteTable.xml");
-        //Jazda z testami xdd
+        //Asercje
         Assertions.assertEquals(element.getElementsByTagName("ns2:info").item(0).getTextContent(), "OK");
 
         element = executePost("getTables.xml");

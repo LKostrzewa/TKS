@@ -57,7 +57,8 @@ public class ResourceEndpoint {
     @ResponsePayload
     public GetTablesResponse getTables(){
         GetTablesResponse getTablesResponse = new GetTablesResponse();
-        getTablesResponse.setTable(resourceSoapAdapter.getTables());
+        getTablesResponse.getTable().addAll(resourceSoapAdapter.getTables());
+        //getTablesResponse.setTable(resourceSoapAdapter.getTables());
         return getTablesResponse;
     }
 

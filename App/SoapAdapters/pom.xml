@@ -18,11 +18,6 @@
       <version>1.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
-    <!--<dependency>
-      <groupId>com.baeldung.springsoap.gen</groupId>
-      <artifactId>SoapModel</artifactId>
-      <version>1.0-SNAPSHOT</version>
-    </dependency>-->
   </dependencies>
   <modules>
     <module>AdaptersSOAP</module>

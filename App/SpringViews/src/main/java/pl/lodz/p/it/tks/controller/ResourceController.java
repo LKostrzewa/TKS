@@ -36,7 +36,7 @@ import java.util.List;
 @RequestMapping("/resources/")
 public class ResourceController {
 
-    private String urlBase = "https://localhost:8443/api/resources";
+    private String urlBase = "http://localhost:8080/api/resources";
     private RestTemplate rest;
     private HttpHeaders headers;
 
@@ -45,7 +45,7 @@ public class ResourceController {
         headers.add("Content-Type", "application/json");
         headers.add("Accept", "*/*");
 
-        String keyStorePassword = "changeit";
+        /*String keyStorePassword = "changeit";
         KeyStore keyStore = null;
         try {
             keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
@@ -82,7 +82,9 @@ public class ResourceController {
         }
 
         HttpClient httpClient = HttpClients.custom().setSSLSocketFactory(
-                socketFactory).build();
+                socketFactory).build();*/
+
+        HttpClient httpClient = HttpClients.createDefault();
 
         ClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(
                 httpClient);

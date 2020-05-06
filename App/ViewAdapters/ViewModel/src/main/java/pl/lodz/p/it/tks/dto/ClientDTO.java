@@ -1,7 +1,12 @@
 package pl.lodz.p.it.tks.dto;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+//@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class ClientDTO extends UserDTO {
 
+    @JsonIgnore
     private ClientTypeDTO type;
     //private String typeName;
 

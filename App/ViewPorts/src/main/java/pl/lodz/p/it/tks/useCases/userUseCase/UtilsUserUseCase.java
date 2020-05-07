@@ -10,6 +10,4 @@ import java.util.List;
 public interface UtilsUserUseCase {
     UserDTO getUser(String login);
     List<UserDTO> getAllUsers();
-    List<ClientDTO> getAllClients();
-    List<ClientDTO> getAllActiveClients();
 }

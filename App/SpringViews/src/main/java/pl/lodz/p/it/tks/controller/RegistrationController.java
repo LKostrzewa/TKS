@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import pl.lodz.p.it.tks.dto.ClientDTO;
+import pl.lodz.p.it.tks.dto.UserDTO;
 import pl.lodz.p.it.tks.model.Client;
 import pl.lodz.p.it.tks.useCases.userUseCase.AddUserUseCase;
 
@@ -61,9 +62,9 @@ public class RegistrationController {
     }
 
     @PostMapping("/register")
-    public String addClient(@Valid @ModelAttribute("client") ClientDTO client, BindingResult bindingResult) {
+    public String addClient(@Valid @ModelAttribute("client") UserDTO user, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
-            addUserService.addUser(client);
+            addUserService.addUser(user);
             //userService.addClientFromUser(client);
             return "redirect:/reservations/";
         }

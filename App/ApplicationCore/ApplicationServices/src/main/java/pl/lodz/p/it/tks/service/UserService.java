@@ -27,7 +27,7 @@ public class UserService  {
         this.deleteUserPort = deleteUserPort;
         addUser(new Administrator("admin", "password", "Jan", "Kowalski"));
         addUser(new Manager("manager", "password", "Piotr", "Nowak"));
-        addUser(new Client("romek", "password", "Roman", "Bialek", new NormalClient()));
+        addUser(new User("romek", "password", "Roman", "Bialek"));
     }
 
     public void addUser(User user){
@@ -49,13 +49,5 @@ public class UserService  {
 
     public List<User> getAllUsers(){
         return getUserPort.getAllUsers();
-    }
-
-    public List<Client> getAllClients(){
-        return getUserPort.getAllClients();
-    }
-
-    public List<Client> getAllActiveClients(){
-        return getUserPort.getAllActiveClients();
     }
 }

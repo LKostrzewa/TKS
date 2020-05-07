@@ -14,20 +14,4 @@ public class UserRepository extends RepositoryTemplate<UserEnt> {
         add("admin", new Administrator("admin", "password", "Jan", "Kowalski"));
         add("manger", new Manager("manager", "password", "Piotr", "Nowak"));
     }*/
-
-    public List<ClientEnt> getAllClients(){
-        List<ClientEnt> clients = new ArrayList<>();
-        for(UserEnt c : getAll()){
-            if(c instanceof ClientEnt) clients.add((ClientEnt) c);
-        }
-        return clients;
-    }
-
-    public List<ClientEnt> getAllActiveClients(){
-        List<ClientEnt> clients = new ArrayList<>();
-        for(UserEnt c : getAll()){
-            if(c instanceof ClientEnt && c.isActive()) clients.add((ClientEnt) c);
-        }
-        return clients;
-    }
 }

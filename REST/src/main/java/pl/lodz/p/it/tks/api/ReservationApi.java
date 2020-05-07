@@ -17,8 +17,9 @@ public class ReservationApi {
     private StartReservationUseCase startReservationUseCase;
 
     @Autowired
-    public ReservationApi(UtilsReservationUseCase utilsReservationUseCase) {
+    public ReservationApi(UtilsReservationUseCase utilsReservationUseCase, StartReservationUseCase startReservationUseCase) {
         this.utilsReservationUseCase = utilsReservationUseCase;
+        this.startReservationUseCase = startReservationUseCase;
     }
 
     @GetMapping

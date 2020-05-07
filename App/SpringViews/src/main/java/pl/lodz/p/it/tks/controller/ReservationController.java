@@ -13,6 +13,7 @@ import pl.lodz.p.it.tks.dto.ClientDTO;
 import pl.lodz.p.it.tks.dto.ReservationDTO;
 import pl.lodz.p.it.tks.model.Client;
 import pl.lodz.p.it.tks.model.Reservation;
+import pl.lodz.p.it.tks.useCases.clientUseCase.UtilsClientUseCase;
 import pl.lodz.p.it.tks.useCases.reservationUseCase.DeleteReservationUseCase;
 import pl.lodz.p.it.tks.useCases.reservationUseCase.EndReservationUseCase;
 import pl.lodz.p.it.tks.useCases.reservationUseCase.StartReservationUseCase;
@@ -32,16 +33,16 @@ public class ReservationController {
     private EndReservationUseCase endReservationService;
     private DeleteReservationUseCase deleteReservationService;
     private UtilsReservationUseCase utilsReservationService;
-    private UtilsUserUseCase utilsUserService;
+    private UtilsClientUseCase utilsClientService;
     private UtilsResourceUseCase utilsResourceService;
 
     @Autowired
-    public ReservationController(StartReservationUseCase startReservationService, EndReservationUseCase endReservationService, DeleteReservationUseCase deleteReservationService, UtilsReservationUseCase utilsReservationService, UtilsUserUseCase utilsUserService, UtilsResourceUseCase utilsResourceService) {
+    public ReservationController(StartReservationUseCase startReservationService, EndReservationUseCase endReservationService, DeleteReservationUseCase deleteReservationService, UtilsReservationUseCase utilsReservationService, UtilsClientUseCase utilsClientService, UtilsResourceUseCase utilsResourceService) {
         this.startReservationService = startReservationService;
         this.endReservationService = endReservationService;
         this.deleteReservationService = deleteReservationService;
         this.utilsReservationService = utilsReservationService;
-        this.utilsUserService = utilsUserService;
+        this.utilsClientService = utilsClientService;
         this.utilsResourceService = utilsResourceService;
     }
 
@@ -52,9 +53,9 @@ public class ReservationController {
         modelAndView.addObject("resources", utilsResourceService.getAllResources());
         UserDetails userDetails = (UserDetails)authentication.getPrincipal();
         if(userDetails.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))){
-            modelAndView.addObject("clients", utilsUserService.getAllActiveClients());
+            modelAndView.addObject("clients", utilsClientService.getAllActiveClients());
         } else {
-            modelAndView.addObject("clients", utilsUserService.getUser(userDetails.getUsername()));
+            modelAndView.addObject("clients", utilsClientService.getClient(userDetails.getUsername()));
         }
         return modelAndView;
     }
@@ -62,12 +63,12 @@ public class ReservationController {
     @PostMapping("/add-reservation")
     public String addReservation(@Valid @ModelAttribute ReservationDTO reservation, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()){
-            model.addAttribute("clients", utilsUserService.getAllActiveClients());
+            model.addAttribute("clients", utilsClientService.getAllActiveClients());
             model.addAttribute("resources", utilsResourceService.getAllResources());
             return "reservationForm";
         }
         try{
-            reservation.setClient((ClientDTO)utilsUserService.getUser(reservation.getClient().getLogin()));
+            reservation.setClient((ClientDTO)utilsClientService.getClient(reservation.getClient().getLogin()));
             reservation.setResource(utilsResourceService.getResource(reservation.getResource().getId()));
             startReservationService.startReservation(reservation);
         }
@@ -88,11 +89,11 @@ public class ReservationController {
     public ModelAndView showAllReservations(Authentication authentication, HttpServletRequest request){
         UserDetails userDetails = (UserDetails)authentication.getPrincipal();
             if(userDetails.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))){
-                ModelAndView modelAndView = new ModelAndView("allReservation", "reservations", utilsReservationService.getAllReservations());
-                modelAndView.addObject("role", authentication.getAuthorities().toArray()[0]);
+                return new ModelAndView("allReservation", "reservations", utilsReservationService.getAllReservations());
+                /*modelAndView.addObject("role", authentication.getAuthorities().toArray()[0]);
                 modelAndView.addObject("login", request.getRemoteUser());
                 return modelAndView;
-                //return new ModelAndView("allReservation", "reservations", reservationService.getAllReservations());
+                //return new ModelAndView("allReservation", "reservations", reservationService.getAllReservations());*/
         }
         ModelAndView modelAndView = new ModelAndView("allReservation", "reservations", utilsReservationService.getAllClientReservations(userDetails.getUsername()));
         modelAndView.addObject("role", authentication.getAuthorities().toArray()[0]);

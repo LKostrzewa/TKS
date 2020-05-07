@@ -8,6 +8,4 @@ import java.util.List;
 public interface GetUserPort {
     User getUser(String id);
     List<User> getAllUsers();
-    List<Client> getAllClients();
-    List<Client> getAllActiveClients();
 }

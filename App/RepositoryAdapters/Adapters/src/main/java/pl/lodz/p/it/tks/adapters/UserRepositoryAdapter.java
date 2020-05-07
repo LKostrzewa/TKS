@@ -38,9 +38,9 @@ public class UserRepositoryAdapter implements AddUserPort, DeleteUserPort, GetUs
 
     @Override
     public User getUser(String id) {
-        if(repository.get(id) instanceof ClientEnt) return converter.convertClientEnt((ClientEnt)repository.get(id));
-        else if(repository.get(id) instanceof AdministratorEnt) return converter.convertAdministratorEnt((AdministratorEnt)repository.get(id));
-        else return converter.convertManagerEnt((ManagerEnt)repository.get(id));
+        if(repository.get(id) instanceof AdministratorEnt) return converter.convertAdministratorEnt((AdministratorEnt)repository.get(id));
+        else if(repository.get(id) instanceof ManagerEnt) return converter.convertManagerEnt((ManagerEnt)repository.get(id));
+        else return converter.convertUserEnt(repository.get(id));
     }
 
     @Override
@@ -50,24 +50,6 @@ public class UserRepositoryAdapter implements AddUserPort, DeleteUserPort, GetUs
             users.add(getUser(userEnt.getLogin()));
         }
         return users;
-    }
-
-    @Override
-    public List<Client> getAllClients() {
-        List<Client> clients = new ArrayList<>();
-        for (ClientEnt clientEnt : repository.getAllClients()){
-            clients.add(converter.convertClientEnt(clientEnt));
-        }
-        return clients;
-    }
-
-    @Override
-    public List<Client> getAllActiveClients() {
-        List<Client> clients = new ArrayList<>();
-        for (ClientEnt clientEnt : repository.getAllActiveClients()){
-            clients.add(converter.convertClientEnt(clientEnt));
-        }
-        return clients;
     }
 
     @Override

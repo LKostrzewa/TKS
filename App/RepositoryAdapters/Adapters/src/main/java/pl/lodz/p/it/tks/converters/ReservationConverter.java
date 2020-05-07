@@ -5,19 +5,18 @@ import pl.lodz.p.it.tks.data.*;
 import pl.lodz.p.it.tks.model.Client;
 import pl.lodz.p.it.tks.model.Reservation;
 import pl.lodz.p.it.tks.model.Resource;
-import pl.lodz.p.it.tks.model.Table;
 
 public class ReservationConverter {
-    private UserConverter userConverter;
+    private ClientConverter clientConverter;
     private ResourceConverter resourceConverter;
 
     public ReservationConverter() {
-        userConverter = new UserConverter();
+        clientConverter = new ClientConverter();
         resourceConverter = new ResourceConverter();
     }
 
     public ReservationEnt convertReservation(Reservation reservation){
-        ClientEnt clientEnt = (ClientEnt) userConverter.convertUser(reservation.getClient());
+        ClientEnt clientEnt = (ClientEnt) clientConverter.convertClient(reservation.getClient());
         ResourceEnt resourceEnt = resourceConverter.convertResource(reservation.getResource());
         ReservationEnt reservationEnt = new ReservationEnt(reservation.getId(), resourceEnt, clientEnt, reservation.getBeginning());
         reservationEnt.setEnding(reservation.getEnding());
@@ -25,7 +24,7 @@ public class ReservationConverter {
     }
 
     public Reservation convertReservationEnt(ReservationEnt reservationEnt){
-        Client client = userConverter.convertClientEnt(reservationEnt.getClient());
+        Client client = clientConverter.convertClientEnt(reservationEnt.getClient());
         Resource resource;
         if(reservationEnt.getResource() instanceof TableEnt){
             resource = resourceConverter.convertTableEnt((TableEnt)reservationEnt.getResource());

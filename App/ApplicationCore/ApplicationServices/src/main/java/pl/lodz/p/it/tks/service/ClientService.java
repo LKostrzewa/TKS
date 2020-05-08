@@ -5,7 +5,6 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import pl.lodz.p.it.tks.model.Client;
 import pl.lodz.p.it.tks.model.NormalClient;
-import pl.lodz.p.it.tks.model.User;
 import pl.lodz.p.it.tks.ports.clientPort.AddClientPort;
 import pl.lodz.p.it.tks.ports.clientPort.DeleteClientPort;
 import pl.lodz.p.it.tks.ports.clientPort.GetClientPort;

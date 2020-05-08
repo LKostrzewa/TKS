@@ -3,10 +3,7 @@ package pl.lodz.p.it.tks.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.lodz.p.it.tks.dto.ClientDTO;
-import pl.lodz.p.it.tks.useCases.userUseCase.AddUserUseCase;
-import pl.lodz.p.it.tks.useCases.userUseCase.DeleteUserUseCase;
-import pl.lodz.p.it.tks.useCases.userUseCase.UpdateUserUseCase;
-import pl.lodz.p.it.tks.useCases.userUseCase.UtilsUserUseCase;
+import pl.lodz.p.it.tks.useCases.clientUseCase.*;
 
 import java.util.List;
 
@@ -15,46 +12,46 @@ import java.util.List;
 public class ClientApi {
 
     //tutaj klienci po refaktor najak
-    private AddUserUseCase addUserUseCase;
-    private UpdateUserUseCase updateUserUseCase;
-    private DeleteUserUseCase deleteUserUseCase;
-    private UtilsUserUseCase utilsUserUseCase;
+    private AddClientUseCase addClientUseCase;
+    private UpdateClientUseCase updateClientUseCase;
+    private DeleteClientUseCase deleteClientUseCase;
+    private UtilsClientUseCase utilsClientUseCase;
 
     @Autowired
-    public ClientApi(AddUserUseCase addUserUseCase, UpdateUserUseCase updateUserUseCase, DeleteUserUseCase deleteUserUseCase, UtilsUserUseCase utilsUserUseCase) {
-        this.addUserUseCase = addUserUseCase;
-        this.updateUserUseCase = updateUserUseCase;
-        this.deleteUserUseCase = deleteUserUseCase;
-        this.utilsUserUseCase = utilsUserUseCase;
+    public ClientApi(AddClientUseCase addClientUseCase, UpdateClientUseCase updateClientUseCase, DeleteClientUseCase deleteClientUseCase, UtilsClientUseCase utilsClientUseCase) {
+        this.addClientUseCase = addClientUseCase;
+        this.updateClientUseCase = updateClientUseCase;
+        this.deleteClientUseCase = deleteClientUseCase;
+        this.utilsClientUseCase = utilsClientUseCase;
     }
 
     @GetMapping
     public List<ClientDTO> getAllClient(){
-        return utilsUserUseCase.getAllClients();
+        return utilsClientUseCase.getAllClients();
     }
 
     @GetMapping("/active")
     public List<ClientDTO> getAllActiveClients() {
-        return utilsUserUseCase.getAllActiveClients();
+        return utilsClientUseCase.getAllActiveClients();
     }
 
     @GetMapping("/{login}")
     public ClientDTO getClient(@PathVariable String login) {
-        return (ClientDTO) utilsUserUseCase.getUser(login);
+        return (ClientDTO) utilsClientUseCase.getClient(login);
     }
 
     @PostMapping
     public void addClient(@RequestBody ClientDTO clientDTO) {
-        addUserUseCase.addUser(clientDTO);
+        addClientUseCase.addClient(clientDTO);
     }
 
     @PutMapping
     public void updateClient(@RequestBody ClientDTO clientDTO) {
-        updateUserUseCase.updateUser(clientDTO.getLogin(), clientDTO);
+        updateClientUseCase.updateClient(clientDTO.getLogin(), clientDTO);
     }
 
     @DeleteMapping("/{login}")
     public void deleteClient(@PathVariable String login) {
-        deleteUserUseCase.deleteUser(login);
+        deleteClientUseCase.deleteClient(login);
     }
 }

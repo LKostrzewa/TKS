@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
-import pl.lodz.p.it.tks.model.BallRoom;
-import pl.lodz.p.it.tks.model.Resource;
-import pl.lodz.p.it.tks.model.Table;
+import pl.lodz.p.it.tks.dto.BallRoomDTO;
+import pl.lodz.p.it.tks.dto.ResourceDTO;
+import pl.lodz.p.it.tks.dto.TableDTO;
 
 import javax.validation.Valid;
 import java.io.File;
@@ -93,19 +93,19 @@ public class ResourceController {
 
     @GetMapping("/add-table")
     public ModelAndView showTableForm() {
-        return new ModelAndView("tableForm", "table", new Table());
+        return new ModelAndView("tableForm", "table", new TableDTO());
     }
 
     @GetMapping("/add-room")
     public ModelAndView showBallRoomForm() {
-        return new ModelAndView("ballRoomForm", "ballRoom", new BallRoom());
+        return new ModelAndView("ballRoomForm", "ballRoom", new BallRoomDTO());
     }
 
     @PostMapping("/add-table")
-    public String addTable(@Valid @ModelAttribute Table resource, BindingResult bindingResult, Model model) {
+    public String addTable(@Valid @ModelAttribute TableDTO resource, BindingResult bindingResult, Model model) {
         if (!bindingResult.hasErrors()) {
             headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-            HttpEntity<Table> entity = new HttpEntity<>(resource, headers);
+            HttpEntity<TableDTO> entity = new HttpEntity<>(resource, headers);
             try{
                 rest.exchange(urlBase + "/add-table", HttpMethod.POST, entity, String.class);
             }
@@ -120,10 +120,10 @@ public class ResourceController {
     }
 
     @PostMapping("/add-room")
-    public String addBallRoom(@Valid @ModelAttribute BallRoom resource, BindingResult bindingResult) {
+    public String addBallRoom(@Valid @ModelAttribute BallRoomDTO resource, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
             headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-            HttpEntity<BallRoom> entity = new HttpEntity<>(resource, headers);
+            HttpEntity<BallRoomDTO> entity = new HttpEntity<>(resource, headers);
             rest.exchange(urlBase + "/add-room", HttpMethod.POST, entity, String.class);
             return "redirect:/resources/";
         }
@@ -135,7 +135,7 @@ public class ResourceController {
         List<Object> resourceList = rest.exchange(urlBase + "", HttpMethod.GET,
                 null, new ParameterizedTypeReference<List<Object>>() {
                 }).getBody();
-        List<Resource> resources = new ArrayList<>();
+        List<ResourceDTO> resources = new ArrayList<>();
         for (Object obj : resourceList) {
             resources.add(getFromJson(obj));
         }
@@ -144,16 +144,16 @@ public class ResourceController {
 
     @GetMapping(path = "/all-tables")
     public ModelAndView showAllTables() {
-        List<Table> tables = rest.exchange(urlBase + "/all-tables", HttpMethod.GET,
-                null, new ParameterizedTypeReference<List<Table>>() {
+        List<TableDTO> tables = rest.exchange(urlBase + "/all-tables", HttpMethod.GET,
+                null, new ParameterizedTypeReference<List<TableDTO>>() {
                 }).getBody();
         return new ModelAndView("allResource", "resource", tables);
     }
 
     @GetMapping("/all-rooms")
     public ModelAndView getAllRooms() {
-        List<BallRoom> ballRooms = rest.exchange(urlBase + "/all-rooms", HttpMethod.GET,
-                null, new ParameterizedTypeReference<List<BallRoom>>() {
+        List<BallRoomDTO> ballRooms = rest.exchange(urlBase + "/all-rooms", HttpMethod.GET,
+                null, new ParameterizedTypeReference<List<BallRoomDTO>>() {
                 }).getBody();
         return new ModelAndView("allResource", "resource", ballRooms);
     }
@@ -164,14 +164,14 @@ public class ResourceController {
         return "redirect:/resources/";
     }
 
-    private Resource getFromJson(Object obj) {
+    private ResourceDTO getFromJson(Object obj) {
         Gson gson = new Gson();
-        Resource resource;
+        ResourceDTO resource;
         if(obj.toString().contains("numOfPeople")){
-            resource = gson.fromJson(obj.toString(), Table.class);
+            resource = gson.fromJson(obj.toString(), TableDTO.class);
         }
         else {
-            resource = gson.fromJson(obj.toString(), BallRoom.class);
+            resource = gson.fromJson(obj.toString(), BallRoomDTO.class);
         }
         return resource;
     }
@@ -180,40 +180,40 @@ public class ResourceController {
     public ModelAndView showUpdateForm(@PathVariable String id) {
         Object obj = rest.exchange(urlBase + "/get-resource/" + id, HttpMethod.GET,
                 null, Object.class).getBody();
-        Resource resource = getFromJson(obj);
-        if (resource instanceof Table) {
-            return showUpdateTableForm((Table) resource);
+        ResourceDTO resource = getFromJson(obj);
+        if (resource instanceof TableDTO) {
+            return showUpdateTableForm((TableDTO) resource);
         } else {
-            return showUpdateBallRoomForm((BallRoom) resource);
+            return showUpdateBallRoomForm((BallRoomDTO) resource);
         }
     }
 
-    private ModelAndView showUpdateTableForm(Table table) {
+    private ModelAndView showUpdateTableForm(TableDTO table) {
         return new ModelAndView("tableUpdateForm", "table", table);
     }
 
     @PostMapping("/update-table")
-    public String updateTable(@Valid @ModelAttribute Table table, BindingResult bindingResult) {
+    public String updateTable(@Valid @ModelAttribute TableDTO table, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "tableUpdateForm";
         }
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-        HttpEntity<Table> entity = new HttpEntity<>(table, headers);
+        HttpEntity<TableDTO> entity = new HttpEntity<>(table, headers);
         rest.exchange(urlBase + "/update-table", HttpMethod.PUT, entity, String.class);
         return "redirect:/resources/";
     }
 
-    private ModelAndView showUpdateBallRoomForm(BallRoom ballRoom) {
+    private ModelAndView showUpdateBallRoomForm(BallRoomDTO ballRoom) {
         return new ModelAndView("ballRoomUpdateForm", "room", ballRoom);
     }
 
     @PostMapping("/update-room")
-    public String updateBallRoom(@Valid @ModelAttribute BallRoom ballRoom, BindingResult bindingResult) {
+    public String updateBallRoom(@Valid @ModelAttribute BallRoomDTO ballRoom, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "ballRoomUpdateForm";
         }
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-        HttpEntity<BallRoom> entity = new HttpEntity<>(ballRoom, headers);
+        HttpEntity<BallRoomDTO> entity = new HttpEntity<>(ballRoom, headers);
         rest.exchange(urlBase + "/update-room", HttpMethod.PUT, entity, String.class);
         return "redirect:/resources/";
     }

@@ -2,9 +2,7 @@ package pl.lodz.p.it.tks.repository;
 
 import org.springframework.stereotype.Repository;
 import pl.lodz.p.it.tks.data.ClientEnt;
-import pl.lodz.p.it.tks.data.UserEnt;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

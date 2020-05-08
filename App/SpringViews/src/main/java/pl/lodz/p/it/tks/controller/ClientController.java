@@ -6,7 +6,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.lodz.p.it.tks.dto.ClientDTO;
-import pl.lodz.p.it.tks.model.Client;
 import pl.lodz.p.it.tks.useCases.clientUseCase.AddClientUseCase;
 import pl.lodz.p.it.tks.useCases.clientUseCase.UpdateClientUseCase;
 import pl.lodz.p.it.tks.useCases.clientUseCase.UtilsClientUseCase;

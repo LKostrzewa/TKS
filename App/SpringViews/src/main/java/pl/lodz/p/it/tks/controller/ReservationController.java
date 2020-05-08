@@ -11,15 +11,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.lodz.p.it.tks.dto.ClientDTO;
 import pl.lodz.p.it.tks.dto.ReservationDTO;
-import pl.lodz.p.it.tks.model.Client;
-import pl.lodz.p.it.tks.model.Reservation;
 import pl.lodz.p.it.tks.useCases.clientUseCase.UtilsClientUseCase;
 import pl.lodz.p.it.tks.useCases.reservationUseCase.DeleteReservationUseCase;
 import pl.lodz.p.it.tks.useCases.reservationUseCase.EndReservationUseCase;
 import pl.lodz.p.it.tks.useCases.reservationUseCase.StartReservationUseCase;
 import pl.lodz.p.it.tks.useCases.reservationUseCase.UtilsReservationUseCase;
 import pl.lodz.p.it.tks.useCases.resourceUseCase.UtilsResourceUseCase;
-import pl.lodz.p.it.tks.useCases.userUseCase.UtilsUserUseCase;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -48,7 +45,7 @@ public class ReservationController {
 
     @GetMapping("/add-reservation")
     public ModelAndView showReservationForm(Authentication authentication){
-        ModelAndView modelAndView = new ModelAndView("reservationForm", "reservation", new Reservation());
+        ModelAndView modelAndView = new ModelAndView("reservationForm", "reservation", new ReservationDTO());
         //modelAndView.addObject("clients", userService.getAllActiveClients());
         modelAndView.addObject("resources", utilsResourceService.getAllResources());
         UserDetails userDetails = (UserDetails)authentication.getPrincipal();
@@ -68,7 +65,7 @@ public class ReservationController {
             return "reservationForm";
         }
         try{
-            reservation.setClient((ClientDTO)utilsClientService.getClient(reservation.getClient().getLogin()));
+            reservation.setClient(utilsClientService.getClient(reservation.getClient().getLogin()));
             reservation.setResource(utilsResourceService.getResource(reservation.getResource().getId()));
             startReservationService.startReservation(reservation);
         }

@@ -9,7 +9,6 @@ public class UserEnt {
     private String login;
     @NotBlank(message = "Password cannot be blank")
     private String password;
-    private String matchingPassword;
     private String name;
     private String surname;
     private boolean isActive;
@@ -64,14 +63,6 @@ public class UserEnt {
 
     public void setSurname(String surname) {
         this.surname = surname;
-    }
-
-    public String getMatchingPassword() {
-        return matchingPassword;
-    }
-
-    public void setMatchingPassword(String matchingPassword) {
-        this.matchingPassword = matchingPassword;
     }
 
 }

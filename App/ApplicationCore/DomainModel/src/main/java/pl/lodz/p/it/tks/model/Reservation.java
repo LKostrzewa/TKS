@@ -66,7 +66,7 @@ public class Reservation {
         final StringBuilder sb = new StringBuilder("Reservation ");
         sb.append("id ").append(id).append(" of");
         sb.append(" resource ").append(resource.getId()).append(" by");
-        sb.append(" client ").append(client.getLogin());
+        sb.append(" client ").append(client.getId());
         sb.append(", begins ").append(beginning);
         sb.append(", ends ").append(ending);
         return sb.toString();

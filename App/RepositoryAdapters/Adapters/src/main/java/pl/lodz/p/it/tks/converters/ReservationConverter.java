@@ -16,7 +16,7 @@ public class ReservationConverter {
     }
 
     public ReservationEnt convertReservation(Reservation reservation){
-        ClientEnt clientEnt = (ClientEnt) clientConverter.convertClient(reservation.getClient());
+        ClientEnt clientEnt = clientConverter.convertClient(reservation.getClient());
         ResourceEnt resourceEnt = resourceConverter.convertResource(reservation.getResource());
         ReservationEnt reservationEnt = new ReservationEnt(reservation.getId(), resourceEnt, clientEnt, reservation.getBeginning());
         reservationEnt.setEnding(reservation.getEnding());

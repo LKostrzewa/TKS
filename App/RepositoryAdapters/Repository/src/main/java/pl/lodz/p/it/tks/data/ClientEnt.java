@@ -5,11 +5,8 @@ import org.hibernate.validator.constraints.NotBlank;
 public class ClientEnt {
 
     private ClientTypeEnt type;
-    @NotBlank(message = "Login cannot be blank")
-    private String login;
-    @NotBlank(message = "Password cannot be blank")
-    private String password;
-    private String matchingPassword;
+    @NotBlank(message = "Id cannot be blank")
+    private String id;
     private String name;
     private String surname;
     private boolean isActive;
@@ -18,25 +15,16 @@ public class ClientEnt {
         type = new NormalClientEnt();
     }
 
-    public ClientEnt(String login, String password, String name, String surname, ClientTypeEnt type) {
-        this.login = login;
-        this.password = password;
+    public ClientEnt(String id, String name, String surname, ClientTypeEnt type) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.isActive = true;
         this.type = type;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getLogin() {
-        return login;
+    public String getId() {
+        return id;
     }
 
     public String getName() {
@@ -55,8 +43,8 @@ public class ClientEnt {
         isActive = active;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setName(String name) {
@@ -67,14 +55,6 @@ public class ClientEnt {
         this.surname = surname;
     }
 
-    public String getMatchingPassword() {
-        return matchingPassword;
-    }
-
-    public void setMatchingPassword(String matchingPassword) {
-        this.matchingPassword = matchingPassword;
-    }
-
     @Override
     public String toString() {
         String tmp;
@@ -82,15 +62,8 @@ public class ClientEnt {
             tmp = "is active";
         }
         else tmp = "is inactive";
-        return "Client login " + getLogin() + " full name " + getName()
+        return "Client login " + getId() + " full name " + getName()
                 + " " + getSurname() + " " + getType() + " type " + tmp;
-        /*return "Client{" +
-                "login='" + getLogin() + '\'' +
-                ", name='" + getName() + '\'' +
-                ", surname='" + getSurname() + '\'' +
-                ", type=" + type + '\'' +
-                ", isActive='" + isActive() + '\'' +
-                '}';*/
     }
 
     public ClientTypeEnt getType() {

@@ -12,7 +12,7 @@ public class ClientViewConverter {
     }
 
     public Client convertClientDTO(ClientDTO clientDTO) {
-        return new Client(clientDTO.getLogin(), clientDTO.getPassword(), clientDTO.getName(), clientDTO.getSurname(), convertClientTypeDTO((clientDTO).getType()));
+        return new Client(clientDTO.getId(), clientDTO.getName(), clientDTO.getSurname(), convertClientTypeDTO((clientDTO).getType()));
     }
 
     public ClientDTO convertClient(Client client){
@@ -20,9 +20,8 @@ public class ClientViewConverter {
         if(client.getType() instanceof NormalClient) clientTypeDTO = new NormalClientDTO();
         else if(client.getType() instanceof RegularClient) clientTypeDTO = new RegularClientDTO();
         else clientTypeDTO = new PremiumClientDTO();
-        ClientDTO clientDTO = new ClientDTO(client.getLogin(), client.getPassword(), client.getName(), client.getSurname(), clientTypeDTO);
+        ClientDTO clientDTO = new ClientDTO(client.getId(), client.getName(), client.getSurname(), clientTypeDTO);
         clientDTO.setActive(client.isActive());
-        clientDTO.setMatchingPassword(client.getMatchingPassword());
         return clientDTO;
     }
 }

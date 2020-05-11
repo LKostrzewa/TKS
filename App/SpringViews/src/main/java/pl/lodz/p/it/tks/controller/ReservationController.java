@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import pl.lodz.p.it.tks.dto.ClientDTO;
 import pl.lodz.p.it.tks.dto.ReservationDTO;
 import pl.lodz.p.it.tks.useCases.clientUseCase.UtilsClientUseCase;
 import pl.lodz.p.it.tks.useCases.reservationUseCase.DeleteReservationUseCase;
@@ -65,7 +64,7 @@ public class ReservationController {
             return "reservationForm";
         }
         try{
-            reservation.setClient(utilsClientService.getClient(reservation.getClient().getLogin()));
+            reservation.setClient(utilsClientService.getClient(reservation.getClient().getId()));
             reservation.setResource(utilsResourceService.getResource(reservation.getResource().getId()));
             startReservationService.startReservation(reservation);
         }

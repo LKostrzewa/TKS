@@ -1,39 +1,32 @@
 package pl.lodz.p.it.tks.model;
 
+import java.util.UUID;
+
 public class Client {
 
     private ClientType type;
-    private String login;
-    private String password;
-    private String matchingPassword;
+    //mozesz zmienic na longa jeszcze jak
+    private String id;
+    //zalezy od łączenia dziada tutaj wstawiam prototypa
+    private UUID key;
     private String name;
     private String surname;
     private boolean isActive;
-    //private String typeName;
 
     public Client(){
         type = new NormalClient();
     }
 
-    public Client(String login, String password, String name, String surname, ClientType type) {
-        this.login = login;
-        this.password = password;
+    public Client(String id, String name, String surname, ClientType type) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.isActive = true;
         this.type = type;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getLogin() {
-        return login;
+    public String getId() {
+        return id;
     }
 
     public String getName() {
@@ -52,8 +45,8 @@ public class Client {
         isActive = active;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setName(String name) {
@@ -64,14 +57,6 @@ public class Client {
         this.surname = surname;
     }
 
-    public String getMatchingPassword() {
-        return matchingPassword;
-    }
-
-    public void setMatchingPassword(String matchingPassword) {
-        this.matchingPassword = matchingPassword;
-    }
-
     @Override
     public String toString() {
         String tmp;
@@ -79,15 +64,8 @@ public class Client {
             tmp = "is active";
         }
         else tmp = "is inactive";
-        return "Client login " + getLogin() + " full name " + getName()
+        return "Client login " + getId() + " full name " + getName()
                 + " " + getSurname() + " " + getType() + " type " + tmp;
-        /*return "Client{" +
-                "login='" + getLogin() + '\'' +
-                ", name='" + getName() + '\'' +
-                ", surname='" + getSurname() + '\'' +
-                ", type=" + type + '\'' +
-                ", isActive='" + isActive() + '\'' +
-                '}';*/
     }
 
     public ClientType getType() {

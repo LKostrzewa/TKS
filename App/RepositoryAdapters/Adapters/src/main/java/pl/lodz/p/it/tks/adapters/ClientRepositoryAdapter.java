@@ -51,7 +51,7 @@ public class ClientRepositoryAdapter implements AddClientPort, GetClientPort, De
 
     @Override
     public void addClient(Client client) {
-        repository.add(client.getLogin(), converter.convertClient(client));
+        repository.add(client.getId(), converter.convertClient(client));
     }
 
     @Override

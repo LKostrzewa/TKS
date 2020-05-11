@@ -42,8 +42,8 @@ public class ClientViewAdapter implements AddClientUseCase, UpdateClientUseCase,
     }
 
     @Override
-    public ClientDTO getClient(String login) {
-        return clientViewConverter.convertClient(clientService.getClient(login));
+    public ClientDTO getClient(String id) {
+        return clientViewConverter.convertClient(clientService.getClient(id));
     }
 
     @Override

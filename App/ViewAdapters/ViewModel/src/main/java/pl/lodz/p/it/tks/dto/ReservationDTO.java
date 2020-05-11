@@ -1,8 +1,5 @@
 package pl.lodz.p.it.tks.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import java.time.LocalDateTime;
 
 public class ReservationDTO {
@@ -69,7 +66,7 @@ public class ReservationDTO {
         final StringBuilder sb = new StringBuilder("Reservation ");
         sb.append("id ").append(id).append(" of");
         sb.append(" resource ").append(resource.getId()).append(" by");
-        sb.append(" client ").append(client.getLogin());
+        sb.append(" client ").append(client.getId());
         sb.append(", begins ").append(beginning);
         sb.append(", ends ").append(ending);
         return sb.toString();

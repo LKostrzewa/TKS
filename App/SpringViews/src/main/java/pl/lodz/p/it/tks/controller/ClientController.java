@@ -50,7 +50,7 @@ public class ClientController {
     @PostMapping("/update-client")
     public String updateClient(@Valid @ModelAttribute ClientDTO client, BindingResult bindingResult){
         if (!bindingResult.hasErrors()){
-            updateClientService.updateClient(client.getLogin(), client);
+            updateClientService.updateClient(client.getId(), client);
             return "redirect:/users/";
         }
         return "clientUpdateForm";

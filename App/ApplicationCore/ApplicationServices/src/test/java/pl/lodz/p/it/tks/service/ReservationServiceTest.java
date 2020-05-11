@@ -21,7 +21,7 @@ class ReservationServiceTest {
     @BeforeEach
     void setUp() {
         reservationService = new ReservationService(reservationRepositoryAdapter, reservationRepositoryAdapter, reservationRepositoryAdapter, reservationRepositoryAdapter);
-        Client client = new Client("romek", "password", "Roman", "Bialek", new NormalClient());
+        Client client = new Client("romek", "Roman", "Bialek", new NormalClient());
         Resource table = new Table("test", 10, 10, 10);
         reservation = new Reservation("1", table, client, LocalDateTime.of(2002, Month.MARCH, 1, 1, 1));
     }

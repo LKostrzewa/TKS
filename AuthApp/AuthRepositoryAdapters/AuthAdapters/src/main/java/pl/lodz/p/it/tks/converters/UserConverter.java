@@ -17,28 +17,24 @@ public class UserConverter {
             userEnt = new UserEnt(user.getLogin(), user.getPassword(), user.getName(), user.getSurname());
         }
         userEnt.setActive(user.isActive());
-        userEnt.setMatchingPassword(user.getMatchingPassword());
         return userEnt;
     }
 
     public Administrator convertAdministratorEnt(AdministratorEnt administratorEnt){
         Administrator administrator = new Administrator(administratorEnt.getLogin(), administratorEnt.getPassword(), administratorEnt.getName(), administratorEnt.getSurname());
         administrator.setActive(administratorEnt.isActive());
-        administrator.setMatchingPassword(administratorEnt.getMatchingPassword());
         return administrator;
     }
 
     public Manager convertManagerEnt(ManagerEnt managerEnt){
         Manager manager = new Manager(managerEnt.getLogin(), managerEnt.getPassword(), managerEnt.getName(), managerEnt.getSurname());
         manager.setActive(managerEnt.isActive());
-        manager.setMatchingPassword(managerEnt.getMatchingPassword());
         return manager;
     }
 
     public User convertUserEnt(UserEnt userEnt) {
         User user = new User(userEnt.getLogin(), userEnt.getPassword(), userEnt.getName(), userEnt.getSurname());
         user.setActive(userEnt.isActive());
-        user.setMatchingPassword(userEnt.getMatchingPassword());
         return user;
     }
 }

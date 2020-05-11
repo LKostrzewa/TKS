@@ -5,7 +5,6 @@ import pl.lodz.p.it.tks.data.ReservationEnt;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -13,7 +12,7 @@ public class ReservationRepository extends RepositoryTemplate<ReservationEnt> {
 
     public List<ReservationEnt> getReservationsForClient(String login){
         return getAll().stream().filter(
-                r -> r.getClient().getLogin().equals(login))
+                r -> r.getClient().getId().equals(login))
                 .collect(Collectors.toList());
     }
 

@@ -27,11 +27,10 @@ public class ClientService {
         this.updateClientPort = updateClientPort;
         this.deleteClientPort = deleteClientPort;
 
-        addClient(new Client("romek", "password", "Roman", "Bialek", new NormalClient()));
+        addClient(new Client("romek", "Roman", "Bialek", new NormalClient()));
     }
 
     public void addClient(Client client){
-        client.setPassword(BCrypt.hashpw(client.getPassword(), BCrypt.gensalt()));
         addClientPort.addClient(client);
     }
 

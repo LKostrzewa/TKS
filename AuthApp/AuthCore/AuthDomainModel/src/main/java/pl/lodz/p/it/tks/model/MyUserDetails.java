@@ -62,7 +62,4 @@ public class MyUserDetails implements UserDetails {
         return user.isActive();
     }
 
-    public String getMatchingPassword() {
-        return user.getMatchingPassword();
-    }
 }

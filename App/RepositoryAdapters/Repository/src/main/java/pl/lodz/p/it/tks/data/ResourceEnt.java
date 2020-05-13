@@ -2,12 +2,20 @@ package pl.lodz.p.it.tks.data;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 
+@Entity
+@Table(name = "resource")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class ResourceEnt {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @NotBlank(message = "Empty ID given")
     private String id;
+
+    @Column(name = "price")
     @Min(value = 0, message = "Price has to be positive decimal")
     private double price;
 

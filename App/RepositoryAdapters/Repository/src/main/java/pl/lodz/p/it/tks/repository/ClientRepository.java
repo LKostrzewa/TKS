@@ -11,4 +11,5 @@ public class ClientRepository extends RepositoryTemplate<ClientEnt> {
 
     public List<ClientEnt> getAllActiveClients(){
         return getAll().stream().filter(ClientEnt::isActive).collect(Collectors.toList());
-    }}
+    }
+}

@@ -1,11 +1,18 @@
 package pl.lodz.p.it.tks.data;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.Min;
 
+@Entity
+@Table(name = "ball_room")
 public class BallRoomEnt extends ResourceEnt {
 
+    @Column(name = "description")
     private String description;
     @Min(value = 0, message = "Number of rooms has to be positive integer")
+    @Column(name = "num_of_rooms")
     private int numOfRooms;
 
     public BallRoomEnt(){

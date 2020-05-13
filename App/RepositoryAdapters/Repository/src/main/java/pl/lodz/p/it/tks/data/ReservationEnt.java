@@ -3,17 +3,30 @@ package pl.lodz.p.it.tks.data;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "reservation")
 public class ReservationEnt {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @NotBlank(message = "id cannot be blank")
     private String id;
+    @Column(name = "resource")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
     private ResourceEnt resource;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
+    @Column(name = "client")
     private ClientEnt client;
     //@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @Column(name = "beginning")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime beginning;
+    @Column(name = "ending")
     private LocalDateTime ending;
 
     public ReservationEnt(){

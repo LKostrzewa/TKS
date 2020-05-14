@@ -35,9 +35,9 @@ public class ClientApi {
         return utilsClientUseCase.getAllActiveClients();
     }
 
-    @GetMapping("/{login}")
-    public ClientDTO getClient(@PathVariable String login) {
-        return (ClientDTO) utilsClientUseCase.getClient(login);
+    @GetMapping("/{id}")
+    public ClientDTO getClient(@PathVariable String id) {
+        return utilsClientUseCase.getClient(id);
     }
 
     @PostMapping
@@ -47,11 +47,11 @@ public class ClientApi {
 
     @PutMapping
     public void updateClient(@RequestBody ClientDTO clientDTO) {
-        updateClientUseCase.updateClient(clientDTO.getLogin(), clientDTO);
+        updateClientUseCase.updateClient(clientDTO.getId(), clientDTO);
     }
 
-    @DeleteMapping("/{login}")
-    public void deleteClient(@PathVariable String login) {
-        deleteClientUseCase.deleteClient(login);
+    @DeleteMapping("/{id}")
+    public void deleteClient(@PathVariable String id) {
+        deleteClientUseCase.deleteClient(id);
     }
 }

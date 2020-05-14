@@ -1,4 +1,4 @@
-package pl.lodz.p.it.tks;
+package pl.lodz.p.it.tks.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableJdbcRepositories
-@ComponentScan(basePackages = {"pl.lodz.p.it.tks"})
+//@ComponentScan(basePackages = {"pl.lodz.p.it.tks"})
 public class AppConfig extends AbstractJdbcConfiguration {
 
     @Bean

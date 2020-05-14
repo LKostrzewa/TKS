@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Table(name = "client")
 public class ClientEnt {
 
-    private transient ClientTypeEnt type;
+   // private transient ClientTypeEnt type;
     @NotBlank(message = "Id cannot be blank")
     @Id
     private String id;
@@ -25,15 +25,15 @@ public class ClientEnt {
     private String clientType;
 
     public ClientEnt(){
-        type = new NormalClientEnt();
+        clientType = "Normal";
     }
 
-    public ClientEnt(String id, String name, String surname, ClientTypeEnt type) {
+    public ClientEnt(String id, String name, String surname, String type) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.isActive = true;
-        this.type = type;
+        this.clientType = type;
     }
 
     public String getId() {
@@ -68,6 +68,14 @@ public class ClientEnt {
         this.surname = surname;
     }
 
+    public String getClientType() {
+        return clientType;
+    }
+
+    public void setClientType(String clientType) {
+        this.clientType = clientType;
+    }
+
     @Override
     public String toString() {
         String tmp;
@@ -76,27 +84,6 @@ public class ClientEnt {
         }
         else tmp = "is inactive";
         return "Client login " + getId() + " full name " + getName()
-                + " " + getSurname() + " " + getType() + " type " + tmp;
-    }
-
-    public ClientTypeEnt getType() {
-        switch (clientType) {
-            case "Normal ":
-                return new NormalClientEnt();
-            case "Regular ":
-                return new RegularClientEnt();
-            case "Premium ":
-                return new PremiumClientEnt();
-        }
-        return type;
-    }
-
-    public void setType(ClientTypeEnt type) {
-        this.type = type;
-        this.clientType = type.toString();
-    }
-
-    public double getDiscount(double base){
-        return type.countDiscount(base);
+                + " " + getSurname() + " " + getClientType() + " type " + tmp;
     }
 }

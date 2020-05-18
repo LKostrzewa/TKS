@@ -37,12 +37,12 @@ public class ResourceViewAdapter implements AddResourceUseCase, DeleteResourceUs
     }
 
     @Override
-    public void deleteResource(String id) {
+    public void deleteResource(int id) {
         resourceService.deleteResource(id);
     }
 
     @Override
-    public void updateResource(String id, ResourceDTO resource) {
+    public void updateResource(int id, ResourceDTO resource) {
         resourceService.updateResource(id, resourceViewConverter.convertResourceDTO(resource));
     }
 
@@ -54,7 +54,7 @@ public class ResourceViewAdapter implements AddResourceUseCase, DeleteResourceUs
     }
 
     @Override
-    public ResourceDTO getResource(String id) {
+    public ResourceDTO getResource(int id) {
         if(resourceService.getResource(id) instanceof Table)
             return resourceViewConverter.convertTable((Table) resourceService.getResource(id));
         else return resourceViewConverter.convertBallRoom((BallRoom)resourceService.getResource(id));

@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class Reservation {
 
-    private String id;
+    private int id;
     private Resource resource;
     private Client client;
     private LocalDateTime beginning;
@@ -14,14 +14,14 @@ public class Reservation {
         beginning = LocalDateTime.now();
     }
 
-    public Reservation(String id, Resource resource, Client client, LocalDateTime beginning) {
+    public Reservation(int id, Resource resource, Client client, LocalDateTime beginning) {
         this.id = id;
         this.resource = resource;
         this.client = client;
         this.beginning = beginning;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -45,7 +45,7 @@ public class Reservation {
         return ending;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

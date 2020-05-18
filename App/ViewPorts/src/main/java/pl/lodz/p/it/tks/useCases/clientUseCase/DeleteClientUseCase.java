@@ -1,5 +1,5 @@
 package pl.lodz.p.it.tks.useCases.clientUseCase;
 
 public interface DeleteClientUseCase {
-    void deleteClient(String id);
+    void deleteClient(int id);
 }

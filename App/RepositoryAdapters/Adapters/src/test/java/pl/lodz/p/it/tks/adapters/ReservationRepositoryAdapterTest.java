@@ -16,7 +16,7 @@ import java.time.Month;
 class ReservationRepositoryAdapterTest {
 
     //@Mock
-    ReservationRepositoryAdapter reservationRepositoryAdapter = new ReservationRepositoryAdapter(new ReservationRepository());
+    /*ReservationRepositoryAdapter reservationRepositoryAdapter = new ReservationRepositoryAdapter(new ReservationRepository());
     Reservation reservation;
 
     @BeforeEach
@@ -33,5 +33,5 @@ class ReservationRepositoryAdapterTest {
         Reservation res1 = reservationRepositoryAdapter.getReservation("1");
         res1.setEnding(LocalDateTime.now());
         Assertions.assertNotEquals(res1.getEnding(), reservation.getEnding());
-    }
+    }*/
 }

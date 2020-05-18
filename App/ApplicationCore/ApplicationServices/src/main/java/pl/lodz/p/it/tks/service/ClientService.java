@@ -27,22 +27,22 @@ public class ClientService {
         this.updateClientPort = updateClientPort;
         this.deleteClientPort = deleteClientPort;
 
-        addClient(new Client("romek", "Roman", "Bialek", new NormalClient()));
+        //addClient(new Client("romek", "Roman", "Bialek", new NormalClient()));
     }
 
     public void addClient(Client client){
         addClientPort.addClient(client);
     }
 
-    public Client getClient(String login) {
-        return getClientPort.getClient(login);
+    public Client getClient(int id) {
+        return getClientPort.getClient(id);
     }
 
-    public void deleteClient(String id) {
+    public void deleteClient(int id) {
         deleteClientPort.deleteClient(id);
     }
 
-    public void updateClient(String id, Client client) {
+    public void updateClient(int id, Client client) {
         updateClientPort.updateClient(id, client);
     }
 
@@ -52,5 +52,9 @@ public class ClientService {
 
     public List<Client> getAllActiveClients(){
         return getClientPort.getAllActiveClients();
+    }
+
+    public Client getClientByName(String name) {
+        return getClientPort.getClientByName(name);
     }
 }

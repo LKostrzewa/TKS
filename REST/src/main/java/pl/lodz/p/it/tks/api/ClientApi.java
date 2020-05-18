@@ -36,7 +36,7 @@ public class ClientApi {
     }
 
     @GetMapping("/{id}")
-    public ClientDTO getClient(@PathVariable String id) {
+    public ClientDTO getClient(@PathVariable int id) {
         return utilsClientUseCase.getClient(id);
     }
 
@@ -51,7 +51,7 @@ public class ClientApi {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteClient(@PathVariable String id) {
+    public void deleteClient(@PathVariable int id) {
         deleteClientUseCase.deleteClient(id);
     }
 }

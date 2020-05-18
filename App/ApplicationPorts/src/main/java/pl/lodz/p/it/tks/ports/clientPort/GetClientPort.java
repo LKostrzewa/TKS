@@ -7,5 +7,6 @@ import java.util.List;
 public interface GetClientPort {
     List<Client> getAllClients();
     List<Client> getAllActiveClients();
-    Client getClient(String id);
+    Client getClient(int id);
+    Client getClientByName(String name);
 }

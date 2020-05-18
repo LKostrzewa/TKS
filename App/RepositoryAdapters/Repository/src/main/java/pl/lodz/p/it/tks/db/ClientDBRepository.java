@@ -5,8 +5,8 @@ import pl.lodz.p.it.tks.data.ClientEnt;
 
 import java.util.List;
 
-public interface ClientDBRepository extends JpaRepository<ClientEnt, String> {
+public interface ClientDBRepository extends JpaRepository<ClientEnt, Integer> {
     List<ClientEnt> getClientEntByActiveIsTrue();
-    void deleteById(String id);
-    void addClient(ClientEnt clientEnt);
+    void deleteById(Integer id);
+    ClientEnt getClientEntByName(String name);
 }

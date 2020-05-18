@@ -39,7 +39,7 @@ public class ReservationService {
         else addReservationPort.addReservation(reservation);
     }
 
-    public void endReservation(String id, LocalDateTime end){
+    public void endReservation(int id, LocalDateTime end){
         Reservation r = getReservation(id);
         if(r.getClient().isActive()){
             r.setEnding(end);
@@ -47,12 +47,12 @@ public class ReservationService {
         }
     }
 
-    public void deleteReservation(String id){
+    public void deleteReservation(int id){
         if(getReservationsPort.getReservation(id).getEnding() == null)
             deleteReservationPort.deleteReservation(id);
     }
 
-    public double countReservationPrice(String id){
+    public double countReservationPrice(int id){
         Reservation r = getReservationsPort.getReservation(id);
         Duration duration = Duration.between(r.getBeginning(), r.getEnding());
         long diff = duration.toHours();
@@ -68,7 +68,7 @@ public class ReservationService {
         return getReservationsPort.getReservationsForClient(login);
     }
 
-    public Reservation getReservation(String id){
+    public Reservation getReservation(int id){
         return getReservationsPort.getReservation(id);
     }
 }

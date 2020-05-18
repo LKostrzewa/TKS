@@ -27,7 +27,7 @@ public class ResourceSoapAdapter {
     }
 
 
-    public ResourceSOAP findResource(String id) {
+    public ResourceSOAP findResource(int id) {
         if(resourceService.getResource(id) instanceof Table){
             return modelMapper.map(resourceService.getResource(id), TableSOAP.class);
         }
@@ -57,7 +57,7 @@ public class ResourceSoapAdapter {
                 .collect(Collectors.toList());
     }
 
-    public String deleteResource(String id) {
+    public String deleteResource(int id) {
         resourceService.deleteResource(id);
         return "OK";
     }

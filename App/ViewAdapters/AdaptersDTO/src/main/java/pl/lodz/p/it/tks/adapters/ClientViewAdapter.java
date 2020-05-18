@@ -32,18 +32,23 @@ public class ClientViewAdapter implements AddClientUseCase, UpdateClientUseCase,
     }
 
     @Override
-    public void deleteClient(String id) {
+    public void deleteClient(int id) {
         clientService.deleteClient(id);
     }
 
     @Override
-    public void updateClient(String id, ClientDTO client) {
+    public void updateClient(int id, ClientDTO client) {
         clientService.updateClient(id, clientViewConverter.convertClientDTO(client));
     }
 
     @Override
-    public ClientDTO getClient(String id) {
+    public ClientDTO getClient(int id) {
         return clientViewConverter.convertClient(clientService.getClient(id));
+    }
+
+    @Override
+    public ClientDTO getClientByName(String name) {
+        return clientViewConverter.convertClient(clientService.getClientByName(name));
     }
 
     @Override

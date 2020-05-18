@@ -9,7 +9,7 @@ public class Table extends Resource {
 
     }
 
-    public Table(String id, double price, int number, int numOfPeople) {
+    public Table(int id, double price, int number, int numOfPeople) {
         super(id, price);
         this.number = number;
         this.numOfPeople = numOfPeople;

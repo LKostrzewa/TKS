@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface UtilsResourceUseCase {
     List<ResourceDTO> getAllResources();
-    ResourceDTO getResource(String id);
+    ResourceDTO getResource(int id);
     List<TableDTO> getAllTables();
     List<BallRoomDTO> getAllBallRoom();
 }

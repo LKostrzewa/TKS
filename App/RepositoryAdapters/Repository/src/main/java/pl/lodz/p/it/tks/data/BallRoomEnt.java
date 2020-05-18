@@ -19,7 +19,7 @@ public class BallRoomEnt extends ResourceEnt {
 
     }
 
-    public BallRoomEnt(String id, double price, String description, int numOfRooms) {
+    public BallRoomEnt(int id, double price, String description, int numOfRooms) {
         super(id, price);
         this.description = description;
         this.numOfRooms = numOfRooms;

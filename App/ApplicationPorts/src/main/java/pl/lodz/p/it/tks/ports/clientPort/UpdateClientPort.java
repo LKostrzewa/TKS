@@ -4,5 +4,5 @@ import pl.lodz.p.it.tks.model.Client;
 
 public interface UpdateClientPort {
 
-    void updateClient(String id, Client client);
+    void updateClient(int id, Client client);
 }

@@ -7,7 +7,7 @@ public class ClientDTO {
 
     @JsonIgnore
     private ClientTypeDTO type;
-    private String id;
+    private int id;
     private String name;
     private String surname;
     private boolean isActive;
@@ -16,7 +16,7 @@ public class ClientDTO {
         type = new NormalClientDTO();
     }
 
-    public ClientDTO(String id, String name, String surname, ClientTypeDTO type) {
+    public ClientDTO(int id, String name, String surname, ClientTypeDTO type) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -24,7 +24,7 @@ public class ClientDTO {
         this.type = type;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -44,7 +44,7 @@ public class ClientDTO {
         isActive = active;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -13,14 +13,14 @@ public class ReservationEnt {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @NotBlank(message = "id cannot be blank")
-    private String id;
-    @Column(name = "resource")
+    private int id;
+    //@Column(name = "resource")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "resource", referencedColumnName = "id")
     private ResourceEnt resource;
+    //@Column(name = "client")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
-    @Column(name = "client")
+    @JoinColumn(name = "client", referencedColumnName = "id")
     private ClientEnt client;
     //@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Column(name = "beginning")
@@ -33,14 +33,14 @@ public class ReservationEnt {
         beginning = LocalDateTime.now();
     }
 
-    public ReservationEnt(String id, ResourceEnt resource, ClientEnt client, LocalDateTime beginning) {
+    public ReservationEnt(int id, ResourceEnt resource, ClientEnt client, LocalDateTime beginning) {
         this.id = id;
         this.resource = resource;
         this.client = client;
         this.beginning = beginning;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -64,7 +64,7 @@ public class ReservationEnt {
         return ending;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

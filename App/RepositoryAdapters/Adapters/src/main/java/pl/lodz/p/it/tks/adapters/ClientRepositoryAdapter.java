@@ -46,24 +46,29 @@ public class ClientRepositoryAdapter implements AddClientPort, GetClientPort, De
     }
 
     @Override
-    public Client getClient(String id) {
+    public Client getClient(int id) {
         return converter.convertClientEnt(repository.getOne(id));
+    }
+
+    @Override
+    public Client getClientByName(String name) {
+        return converter.convertClientEnt(repository.getClientEntByName(name));
     }
 
 
     @Override
     public void addClient(Client client) {
         if(!repository.existsById(client.getId()))
-            repository.addClient(converter.convertClient(client));
+            repository.save(converter.convertClient(client));
     }
 
     @Override
-    public void deleteClient(String id) {
+    public void deleteClient(int id) {
         repository.deleteById(id);
     }
 
     @Override
-    public void updateClient(String id, Client client) {
+    public void updateClient(int id, Client client) {
         if(repository.existsById(id))
             repository.save(converter.convertClient(client));
     }

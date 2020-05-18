@@ -5,7 +5,8 @@ import pl.lodz.p.it.tks.dto.ClientDTO;
 import java.util.List;
 
 public interface UtilsClientUseCase {
-    ClientDTO getClient(String id);
+    ClientDTO getClient(int id);
+    ClientDTO getClientByName(String name);
     List<ClientDTO> getAllClients();
     List<ClientDTO> getAllActiveClients();
 }

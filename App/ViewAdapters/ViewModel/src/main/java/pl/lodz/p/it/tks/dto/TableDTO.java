@@ -9,7 +9,7 @@ public class TableDTO extends ResourceDTO {
 
     }
 
-    public TableDTO(String id, double price, int number, int numOfPeople) {
+    public TableDTO(int id, double price, int number, int numOfPeople) {
         super(id, price);
         this.number = number;
         this.numOfPeople = numOfPeople;

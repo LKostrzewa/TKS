@@ -51,7 +51,7 @@ public class ReservationController {
         if(userDetails.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))){
             modelAndView.addObject("clients", utilsClientService.getAllActiveClients());
         } else {
-            modelAndView.addObject("clients", utilsClientService.getClient(userDetails.getUsername()));
+            modelAndView.addObject("clients", utilsClientService.getClientByName(userDetails.getUsername()));
         }
         return modelAndView;
     }
@@ -64,7 +64,7 @@ public class ReservationController {
             return "reservationForm";
         }
         try{
-            reservation.setClient(utilsClientService.getClient(reservation.getClient().getId()));
+            reservation.setClient(utilsClientService.getClientByName(reservation.getClient().getName()));
             reservation.setResource(utilsResourceService.getResource(reservation.getResource().getId()));
             startReservationService.startReservation(reservation);
         }
@@ -99,13 +99,13 @@ public class ReservationController {
     }
 
     @RequestMapping("/delete-reservation/{id}")
-    public String deleteReservation(@PathVariable String id){
+    public String deleteReservation(@PathVariable int id){
         deleteReservationService.deleteReservation(id);
         return "redirect:/reservations/";
     }
 
     @RequestMapping("/end-reservation/{id}")
-    public ModelAndView endReservation(@PathVariable String id){
+    public ModelAndView endReservation(@PathVariable int id){
         endReservationService.endReservation(id, LocalDateTime.now());
         ModelAndView model = new ModelAndView("endReservation", "reservation", utilsReservationService.getReservation(id));
         model.addObject("price", utilsReservationService.countReservationPrice(id));

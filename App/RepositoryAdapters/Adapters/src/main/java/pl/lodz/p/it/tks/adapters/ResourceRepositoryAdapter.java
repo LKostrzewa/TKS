@@ -6,6 +6,9 @@ import pl.lodz.p.it.tks.converters.ResourceConverter;
 import pl.lodz.p.it.tks.data.BallRoomEnt;
 import pl.lodz.p.it.tks.data.ResourceEnt;
 import pl.lodz.p.it.tks.data.TableEnt;
+import pl.lodz.p.it.tks.db.BallRoomDBRepository;
+import pl.lodz.p.it.tks.db.ResourceDBRepository;
+import pl.lodz.p.it.tks.db.TableDBRepository;
 import pl.lodz.p.it.tks.model.BallRoom;
 import pl.lodz.p.it.tks.model.Resource;
 import pl.lodz.p.it.tks.model.Table;
@@ -21,37 +24,47 @@ import java.util.List;
 @Component
 public class ResourceRepositoryAdapter implements AddResourcePort, DeleteResourcePort, GetResourcesPort, UpdateResourcePort {
 
-    private ResourceRepository repository;
+    private ResourceDBRepository repository;
+    private TableDBRepository tableDBRepository;
+    private BallRoomDBRepository ballRoomDBRepository;
     private ResourceConverter converter;
 
     @Autowired
-    public ResourceRepositoryAdapter(ResourceRepository repository) {
+    public ResourceRepositoryAdapter(ResourceDBRepository repository, TableDBRepository tableDBRepository, BallRoomDBRepository ballRoomDBRepository) {
         this.repository = repository;
+        this.tableDBRepository = tableDBRepository;
+        this.ballRoomDBRepository = ballRoomDBRepository;
         converter = new ResourceConverter();
     }
 
     @Override
     public boolean addResource(Resource resource){
         ResourceEnt resourceEnt = converter.convertResource(resource);
-        return repository.add(resourceEnt.getId(), resourceEnt) == null;
+        if(repository.existsById(resourceEnt.getId())){
+            return false;
+        } else {
+            repository.save(resourceEnt);
+            return true;
+        }
+        //return repository.save(resourceEnt) == null;
     }
 
     @Override
-    public void deleteResource(String id) {
-        repository.delete(id);
+    public void deleteResource(int id) {
+        repository.deleteById(id);
     }
 
     @Override
-    public Resource getResource(String id){
-        if(repository.get(id) instanceof TableEnt)
-            return converter.convertTableEnt((TableEnt)repository.get(id));
-        else return converter.convertBallRoomEnt((BallRoomEnt)repository.get(id));
+    public Resource getResource(int id){
+        if(repository.getOne(id) instanceof TableEnt)
+            return converter.convertTableEnt((TableEnt)repository.getOne(id));
+        else return converter.convertBallRoomEnt((BallRoomEnt)repository.getOne(id));
     }
 
     @Override
     public List<Resource> getAllResources(){
         List<Resource> resources = new ArrayList<>();
-        for(ResourceEnt resourceEnt : repository.getAll()){
+        for(ResourceEnt resourceEnt : repository.findAll()){
             resources.add(getResource(resourceEnt.getId()));
         }
         return resources;
@@ -60,7 +73,7 @@ public class ResourceRepositoryAdapter implements AddResourcePort, DeleteResourc
     @Override
     public List<Table> getAllTables(){
         List<Table> tables = new ArrayList<>();
-        for (TableEnt tableEnt : repository.getAllTableEnts()){
+        for (TableEnt tableEnt : tableDBRepository.findAll()){
             tables.add(converter.convertTableEnt(tableEnt));
         }
         return tables;
@@ -69,14 +82,17 @@ public class ResourceRepositoryAdapter implements AddResourcePort, DeleteResourc
     @Override
     public List<BallRoom> getAllBallRooms(){
         List<BallRoom> ballRooms = new ArrayList<>();
-        for(BallRoomEnt ballRoomEnt : repository.getAllBallRoomEnts()){
+        for(BallRoomEnt ballRoomEnt : ballRoomDBRepository.findAll()){
             ballRooms.add(converter.convertBallRoomEnt(ballRoomEnt));
         }
         return ballRooms;
     }
 
     @Override
-    public void updateResource(String id, Resource resource){
-        repository.update(id, converter.convertResource(resource));
+    public void updateResource(int id, Resource resource){
+        if(repository.existsById(id)){
+            repository.save(converter.convertResource(resource));
+        }
+        //repository.update(id, converter.convertResource(resource));
     }
 }

@@ -44,7 +44,7 @@ public class ClientController {
 
     @RequestMapping("/update-client/{login}")
     public ModelAndView showClientUpdateForm(@PathVariable String login){
-        return new ModelAndView("clientUpdateForm", "client", utilsClientService.getClient(login));
+        return new ModelAndView("clientUpdateForm", "client", utilsClientService.getClientByName(login));
     }
 
     @PostMapping("/update-client")

@@ -7,8 +7,5 @@ import pl.lodz.p.it.tks.data.TableEnt;
 
 import java.util.List;
 
-public interface ResourceDBRepository extends JpaRepository<ResourceEnt, String> {
-    //Tu też nw
-    List<TableEnt> getAllTableEnts();
-    List<BallRoomEnt> getAllBallRoomEnts();
+public interface ResourceDBRepository extends JpaRepository<ResourceEnt, Integer> {
 }

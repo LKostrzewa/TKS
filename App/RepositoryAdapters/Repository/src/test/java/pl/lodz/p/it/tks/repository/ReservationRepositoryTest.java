@@ -17,9 +17,9 @@ class ReservationRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        ClientEnt client = new ClientEnt("romek", "Roman", "Bialek", "Normal");
-        ResourceEnt table = new TableEnt("test", 10, 10, 10);
-        reservation = new ReservationEnt("1", table, client, LocalDateTime.of(2002, Month.MARCH, 1, 1, 1));
+        ClientEnt client = new ClientEnt(1, "Roman", "Bialek", "Normal");
+        ResourceEnt table = new TableEnt(2, 10, 10, 10);
+        reservation = new ReservationEnt(2, table, client, LocalDateTime.of(2002, Month.MARCH, 1, 1, 1));
         reservationRepository.add("1", reservation);
     }
 

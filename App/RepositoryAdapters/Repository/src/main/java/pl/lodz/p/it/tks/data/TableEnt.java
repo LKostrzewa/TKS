@@ -18,7 +18,7 @@ public class TableEnt extends ResourceEnt {
 
     }
 
-    public TableEnt(String id, double price, int number, int numOfPeople) {
+    public TableEnt(int id, double price, int number, int numOfPeople) {
         super(id, price);
         this.number = number;
         this.numOfPeople = numOfPeople;

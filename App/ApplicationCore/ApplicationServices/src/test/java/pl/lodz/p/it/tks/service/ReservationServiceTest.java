@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ReservationServiceTest {
 
-    ReservationService reservationService;
+    /*ReservationService reservationService;
     Reservation reservation;
     ReservationRepositoryAdapter reservationRepositoryAdapter = new ReservationRepositoryAdapter(new ReservationRepository());
 
@@ -33,5 +33,5 @@ class ReservationServiceTest {
         reservationService.getReservation("1");
         reservationService.endReservation("1", LocalDateTime.of(2020, Month.MARCH, 1, 1, 1));
         Assertions.assertEquals(reservationService.getReservation("1").getEnding(), LocalDateTime.of(2020, Month.MARCH, 1, 1, 1));
-    }
+    }*/
 }

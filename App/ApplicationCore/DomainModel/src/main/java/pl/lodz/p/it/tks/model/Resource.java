@@ -3,19 +3,19 @@ package pl.lodz.p.it.tks.model;
 
 public class Resource {
 
-    private String id;
+    private int id;
     private double price;
 
     public Resource(){
 
     }
 
-    public Resource(String id, double price) {
+    public Resource(int id, double price) {
         this.id = id;
         this.price = price;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -23,7 +23,7 @@ public class Resource {
         this.price = price;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 

@@ -13,7 +13,7 @@ public class ResourceEnt {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @NotBlank(message = "Empty ID given")
-    private String id;
+    private int id;
 
     @Column(name = "price")
     @Min(value = 0, message = "Price has to be positive decimal")
@@ -23,12 +23,12 @@ public class ResourceEnt {
 
     }
 
-    public ResourceEnt(String id, double price) {
+    public ResourceEnt(int id, double price) {
         this.id = id;
         this.price = price;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -36,7 +36,7 @@ public class ResourceEnt {
         this.price = price;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 

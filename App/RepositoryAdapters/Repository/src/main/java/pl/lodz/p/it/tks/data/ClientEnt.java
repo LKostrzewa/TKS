@@ -14,13 +14,13 @@ public class ClientEnt {
    // private transient ClientTypeEnt type;
     @NotBlank(message = "Id cannot be blank")
     @Id
-    private String id;
+    private int id;
     @Column(name = "name")
     private String name;
     @Column(name = "surname")
     private String surname;
     @Column(name = "is_active")
-    private boolean isActive;
+    private boolean active;
     @Column(name = "client_type")
     private String clientType;
 
@@ -28,15 +28,15 @@ public class ClientEnt {
         clientType = "Normal";
     }
 
-    public ClientEnt(String id, String name, String surname, String type) {
+    public ClientEnt(int id, String name, String surname, String type) {
         this.id = id;
         this.name = name;
         this.surname = surname;
-        this.isActive = true;
+        this.active = true;
         this.clientType = type;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -49,14 +49,14 @@ public class ClientEnt {
     }
 
     public boolean isActive() {
-        return isActive;
+        return active;
     }
 
     public void setActive(boolean active) {
-        isActive = active;
+        active = active;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

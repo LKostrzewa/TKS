@@ -2,15 +2,27 @@ package pl.lodz.p.it.tks.data;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.persistence.*;
+
 //@PasswordMatches
+@Entity
+@Table(name = "user")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class UserEnt {
 
+    @Id
+    private int id;
     @NotBlank(message = "Login cannot be blank")
+    @Column(name = "login")
     private String login;
     @NotBlank(message = "Password cannot be blank")
+    @Column(name = "password")
     private String password;
+    @Column(name = "name")
     private String name;
+    @Column(name = "surname")
     private String surname;
+    @Column(name = "is_active")
     private boolean isActive;
 
     public UserEnt(){
@@ -23,6 +35,14 @@ public class UserEnt {
         this.name = name;
         this.surname = surname;
         this.isActive = true;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getPassword() {

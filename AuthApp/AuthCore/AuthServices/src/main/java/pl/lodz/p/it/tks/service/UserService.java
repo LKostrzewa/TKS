@@ -35,19 +35,23 @@ public class UserService  {
         addUserPort.addUser(user);
     }
 
-    public User getUser(String login){
-        return getUserPort.getUser(login);
+    public User getUser(int id){
+        return getUserPort.getUser(id);
     }
 
-    public void deleteUser(String id){
+    public void deleteUser(int id){
         deleteUserPort.deleteUser(id);
     }
 
-    public void updateUser(String id, User user){
+    public void updateUser(int id, User user){
         updateUserPort.updateUser(id, user);
     }
 
     public List<User> getAllUsers(){
         return getUserPort.getAllUsers();
+    }
+
+    public User getUserByName(String name) {
+        return getUserPort.getUserByName(name);
     }
 }

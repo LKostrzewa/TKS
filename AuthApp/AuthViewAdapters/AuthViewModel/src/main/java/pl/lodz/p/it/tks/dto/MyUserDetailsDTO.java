@@ -62,7 +62,4 @@ public class MyUserDetailsDTO implements UserDetails {
         return user.isActive();
     }
 
-    public String getMatchingPassword() {
-        return user.getMatchingPassword();
-    }
 }

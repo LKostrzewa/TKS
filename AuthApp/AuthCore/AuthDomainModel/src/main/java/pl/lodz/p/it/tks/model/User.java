@@ -2,6 +2,7 @@ package pl.lodz.p.it.tks.model;
 
 public class User {
 
+    protected int id;
     private String login;
     private String password;
     private String name;
@@ -18,6 +19,14 @@ public class User {
         this.name = name;
         this.surname = surname;
         this.isActive = true;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getPassword() {

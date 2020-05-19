@@ -33,26 +33,33 @@ public class UserViewAdapter implements AddUserUseCase, DeleteUserUseCase, Updat
     }
 
     @Override
-    public void deleteUser(String id) {
+    public void deleteUser(int id) {
         userService.deleteUser(id);
     }
 
     @Override
-    public void updateUser(String id, UserDTO user) {
+    public void updateUser(int id, UserDTO user) {
         userService.updateUser(id, userViewConverter.convertUserDTO(user));
     }
 
     @Override
-    public UserDTO getUser(String login) {
-        if (userService.getUser(login) instanceof Administrator) return userViewConverter.convertAdministrator((Administrator)userService.getUser(login));
-        else if(userService.getUser(login) instanceof Manager) return userViewConverter.convertManager((Manager)userService.getUser(login));
-        else return userViewConverter.convertUser(userService.getUser(login));
+    public UserDTO getUser(int id) {
+        if (userService.getUser(id) instanceof Administrator) return userViewConverter.convertAdministrator((Administrator)userService.getUser(id));
+        else if(userService.getUser(id) instanceof Manager) return userViewConverter.convertManager((Manager)userService.getUser(id));
+        else return userViewConverter.convertUser(userService.getUser(id));
+    }
+
+    @Override
+    public UserDTO getUserByName(String login){
+        if (userService.getUserByName(login) instanceof Administrator) return userViewConverter.convertAdministrator((Administrator)userService.getUserByName(login));
+        else if(userService.getUserByName(login) instanceof Manager) return userViewConverter.convertManager((Manager)userService.getUserByName(login));
+        else return userViewConverter.convertUser(userService.getUserByName(login));
     }
 
     @Override
     public List<UserDTO> getAllUsers() {
         List<UserDTO> userDTOS = new ArrayList<>();
-        userService.getAllUsers().forEach(user -> userDTOS.add(getUser(user.getLogin())));
+        userService.getAllUsers().forEach(user -> userDTOS.add(getUserByName(user.getLogin())));
         return userDTOS;
     }
 }

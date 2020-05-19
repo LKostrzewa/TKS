@@ -9,13 +9,15 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 
 @Configuration
-@EnableJdbcRepositories
-@ComponentScan(basePackages = {"pl.lodz.p.it.tks"})
+@EnableJdbcRepositories("pl.lodz.p.it.tks.db")
+//@ComponentScan(basePackages = {"pl.lodz.p.it.tks"})
 public class AppConfig extends AbstractJdbcConfiguration {
 
     @Bean
@@ -23,7 +25,7 @@ public class AppConfig extends AbstractJdbcConfiguration {
         //EmbeddedDatabaseBuilder embeddedDatabaseBuilder = new EmbeddedDatabaseBuilder();
         //return embeddedDatabaseBuilder.setType(EmbeddedDatabaseType.HSQL).build();
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.postgresql.jdbc.Driver");
+        dataSource.setDriverClassName("org.postgresql.Driver");
         dataSource.setUrl("jdbc:postgresql://localhost:5432/auth_app_db");
         dataSource.setUsername("auth_app_user");
         dataSource.setPassword("root");
@@ -39,5 +41,16 @@ public class AppConfig extends AbstractJdbcConfiguration {
     @Bean
     PlatformTransactionManager transactionManager() {
         return new DataSourceTransactionManager(dataSource());
+    }
+
+    @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+        LocalContainerEntityManagerFactoryBean em
+                = new LocalContainerEntityManagerFactoryBean();
+        em.setDataSource(dataSource());
+        em.setPackagesToScan("pl.lodz.p.it.tks.data");
+        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        em.setJpaVendorAdapter(vendorAdapter);
+        return em;
     }
 }

@@ -5,22 +5,25 @@ import pl.lodz.p.it.tks.model.*;
 
 public class ClientViewConverter {
 
-    public ClientType convertClientTypeDTO(ClientTypeDTO clientTypeDTO){
-        if(clientTypeDTO instanceof NormalClient) return new NormalClient();
-        else if(clientTypeDTO instanceof RegularClient) return new RegularClient();
-        else return new PremiumClient();
-    }
-
     public Client convertClientDTO(ClientDTO clientDTO) {
-        return new Client(clientDTO.getId(), clientDTO.getName(), clientDTO.getSurname(), convertClientTypeDTO((clientDTO).getType()));
+        ClientType clientType;
+        switch (clientDTO.getClientType()){
+            case "Normal":
+                clientType = new NormalClient();
+                break;
+            case "Regular":
+                clientType = new RegularClient();
+                break;
+            default:
+                clientType = new PremiumClient();
+        }
+        Client client = new Client(clientDTO.getId(), clientDTO.getName(), clientDTO.getSurname(), clientType);
+        client.setActive(clientDTO.isActive());
+        return client;
     }
 
     public ClientDTO convertClient(Client client){
-        ClientTypeDTO clientTypeDTO;
-        if(client.getType() instanceof NormalClient) clientTypeDTO = new NormalClientDTO();
-        else if(client.getType() instanceof RegularClient) clientTypeDTO = new RegularClientDTO();
-        else clientTypeDTO = new PremiumClientDTO();
-        ClientDTO clientDTO = new ClientDTO(client.getId(), client.getName(), client.getSurname(), clientTypeDTO);
+        ClientDTO clientDTO = new ClientDTO(client.getId(), client.getName(), client.getSurname(), client.getType().toString());
         clientDTO.setActive(client.isActive());
         return clientDTO;
     }

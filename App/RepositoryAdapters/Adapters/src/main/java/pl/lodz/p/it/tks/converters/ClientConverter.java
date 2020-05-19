@@ -6,7 +6,9 @@ import pl.lodz.p.it.tks.model.*;
 public class ClientConverter {
 
     public ClientEnt convertClient(Client client) {
-        return new ClientEnt(client.getId(), client.getName(), client.getSurname(), (client).getType().toString());
+        ClientEnt clientEnt = new ClientEnt(client.getId(), client.getName(), client.getSurname(), client.getType().toString());
+        clientEnt.setActive(client.isActive());
+        return clientEnt;
     }
 
     public Client convertClientEnt(ClientEnt clientEnt){

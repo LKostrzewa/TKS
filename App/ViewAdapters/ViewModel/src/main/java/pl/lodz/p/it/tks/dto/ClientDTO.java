@@ -5,23 +5,24 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 //@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class ClientDTO {
 
-    @JsonIgnore
-    private ClientTypeDTO type;
+    //@JsonIgnore
+    //private ClientTypeDTO type;
     private int id;
     private String name;
     private String surname;
     private boolean isActive;
+    private String clientType;
 
     public ClientDTO(){
-        type = new NormalClientDTO();
+        clientType = "Normal";
     }
 
-    public ClientDTO(int id, String name, String surname, ClientTypeDTO type) {
+    public ClientDTO(int id, String name, String surname, String type) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.isActive = true;
-        this.type = type;
+        this.clientType = type;
     }
 
     public int getId() {
@@ -64,18 +65,14 @@ public class ClientDTO {
         }
         else tmp = "is inactive";
         return "Client login " + getId() + " full name " + getName()
-                + " " + getSurname() + " " + getType() + " type " + tmp;
+                + " " + getSurname() + " " + getClientType() + " type " + tmp;
     }
 
-    public ClientTypeDTO getType() {
-        return type;
+    public String getClientType() {
+        return clientType;
     }
 
-    public void setType(ClientTypeDTO type) {
-        this.type = type;
-    }
-
-    public double getDiscount(double base){
-        return type.countDiscount(base);
+    public void setClientType(String clientType) {
+        this.clientType = clientType;
     }
 }

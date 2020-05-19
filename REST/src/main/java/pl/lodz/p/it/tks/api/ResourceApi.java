@@ -69,12 +69,12 @@ public class ResourceApi {
     }
 
     @GetMapping("/get-resource/{id}")
-    public ResourceDTO getResource(@PathVariable String id) {
+    public ResourceDTO getResource(@PathVariable int id) {
         return utilsResourceService.getResource(id);
     }
 
     @DeleteMapping("/delete-resource/{id}")
-    public ResponseEntity<?> deleteResource(@PathVariable String id) {
+    public ResponseEntity<?> deleteResource(@PathVariable int id) {
         deleteResourceService.deleteResource(id);
         return ResponseEntity.ok().build();
     }

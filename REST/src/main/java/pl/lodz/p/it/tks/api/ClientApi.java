@@ -11,7 +11,6 @@ import java.util.List;
 @RequestMapping("/api/clients")
 public class ClientApi {
 
-    //tutaj klienci po refaktor najak
     private AddClientUseCase addClientUseCase;
     private UpdateClientUseCase updateClientUseCase;
     private DeleteClientUseCase deleteClientUseCase;

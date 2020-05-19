@@ -37,12 +37,12 @@ public class AppConfig extends AbstractJdbcConfiguration{
     }
 
     @Bean
-    NamedParameterJdbcOperations operations() {
+    public NamedParameterJdbcOperations operations() {
         return new NamedParameterJdbcTemplate(dataSource());
     }
 
     @Bean
-    PlatformTransactionManager transactionManager() {
+    public PlatformTransactionManager transactionManager() {
         return new DataSourceTransactionManager(dataSource());
     }
 

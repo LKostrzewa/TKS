@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class ClientEnt {
 
    // private transient ClientTypeEnt type;
-    @NotBlank(message = "Id cannot be blank")
+    //@NotBlank(message = "Id cannot be blank")
     @Id
     private int id;
     @Column(name = "name")
@@ -53,7 +53,7 @@ public class ClientEnt {
     }
 
     public void setActive(boolean active) {
-        active = active;
+        this.active = active;
     }
 
     public void setId(int id) {

@@ -7,7 +7,7 @@ import javax.validation.constraints.Min;
 
 public class ResourceDTO {
 
-    @NotBlank(message = "Empty ID given")
+    //@NotBlank(message = "Empty ID given")
     private int id;
     @Min(value = 0, message = "Price has to be positive decimal")
     private double price;

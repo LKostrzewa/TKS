@@ -11,8 +11,8 @@ import javax.validation.constraints.Min;
 public class ResourceEnt {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotBlank(message = "Empty ID given")
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+   // @NotBlank(message = "Empty ID given")
     private int id;
 
     @Column(name = "price")

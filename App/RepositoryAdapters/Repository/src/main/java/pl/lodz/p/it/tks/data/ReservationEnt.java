@@ -12,7 +12,7 @@ public class ReservationEnt {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotBlank(message = "id cannot be blank")
+    //@NotBlank(message = "id cannot be blank")
     private int id;
     //@Column(name = "resource")
     @ManyToOne(fetch = FetchType.LAZY)

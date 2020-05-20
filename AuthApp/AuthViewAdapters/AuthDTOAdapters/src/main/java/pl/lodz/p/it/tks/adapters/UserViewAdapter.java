@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.lodz.p.it.tks.converters.UserViewConverter;
 import pl.lodz.p.it.tks.dto.UserDTO;
-import pl.lodz.p.it.tks.model.Administrator;
-import pl.lodz.p.it.tks.model.Manager;
 import pl.lodz.p.it.tks.service.UserService;
 import pl.lodz.p.it.tks.useCases.userUseCase.AddUserUseCase;
 import pl.lodz.p.it.tks.useCases.userUseCase.DeleteUserUseCase;
@@ -44,16 +42,12 @@ public class UserViewAdapter implements AddUserUseCase, DeleteUserUseCase, Updat
 
     @Override
     public UserDTO getUser(int id) {
-        if (userService.getUser(id) instanceof Administrator) return userViewConverter.convertAdministrator((Administrator)userService.getUser(id));
-        else if(userService.getUser(id) instanceof Manager) return userViewConverter.convertManager((Manager)userService.getUser(id));
-        else return userViewConverter.convertUser(userService.getUser(id));
+        return userViewConverter.convertUser(userService.getUser(id));
     }
 
     @Override
     public UserDTO getUserByName(String login){
-        if (userService.getUserByName(login) instanceof Administrator) return userViewConverter.convertAdministrator((Administrator)userService.getUserByName(login));
-        else if(userService.getUserByName(login) instanceof Manager) return userViewConverter.convertManager((Manager)userService.getUserByName(login));
-        else return userViewConverter.convertUser(userService.getUserByName(login));
+        return userViewConverter.convertUser(userService.getUserByName(login));
     }
 
     @Override

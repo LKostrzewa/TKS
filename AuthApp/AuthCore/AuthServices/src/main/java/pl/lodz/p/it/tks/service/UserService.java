@@ -25,9 +25,6 @@ public class UserService  {
         this.getUserPort = getUserPort;
         this.updateUserPort = updateUserPort;
         this.deleteUserPort = deleteUserPort;
-        addUser(new Administrator("admin", "password", "Jan", "Kowalski"));
-        addUser(new Manager("manager", "password", "Piotr", "Nowak"));
-        addUser(new User("romek", "password", "Roman", "Bialek"));
     }
 
     public void addUser(User user){

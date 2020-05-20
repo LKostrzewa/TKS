@@ -24,17 +24,20 @@ public class UserEnt {
     private String surname;
     @Column(name = "is_active")
     private boolean isActive;
+    @Column(name = "access_level")
+    private String accessLevel;
 
     public UserEnt(){
         this.isActive = true;
     }
 
-    public UserEnt(String login, String password, String name, String surname) {
+    public UserEnt(String login, String password, String name, String surname, String accessLevel) {
         this.login = login;
         this.password = password;
         this.name = name;
         this.surname = surname;
         this.isActive = true;
+        this.accessLevel = accessLevel;
     }
 
     public int getId() {
@@ -85,4 +88,11 @@ public class UserEnt {
         this.surname = surname;
     }
 
+    public String getAccessLevel() {
+        return accessLevel;
+    }
+
+    public void setAccessLevel(String accessLevel) {
+        this.accessLevel = accessLevel;
+    }
 }

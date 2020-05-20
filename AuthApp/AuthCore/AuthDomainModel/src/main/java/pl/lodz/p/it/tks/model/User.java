@@ -8,17 +8,19 @@ public class User {
     private String name;
     private String surname;
     private boolean isActive;
+    private String accessLevel;
 
     public User(){
         this.isActive = true;
     }
 
-    public User(String login, String password, String name, String surname) {
+    public User(String login, String password, String name, String surname, String accessLevel) {
         this.login = login;
         this.password = password;
         this.name = name;
         this.surname = surname;
         this.isActive = true;
+        this.accessLevel = accessLevel;
     }
 
     public int getId() {
@@ -69,4 +71,11 @@ public class User {
         this.surname = surname;
     }
 
+    public String getAccessLevel() {
+        return accessLevel;
+    }
+
+    public void setAccessLevel(String accessLevel) {
+        this.accessLevel = accessLevel;
+    }
 }

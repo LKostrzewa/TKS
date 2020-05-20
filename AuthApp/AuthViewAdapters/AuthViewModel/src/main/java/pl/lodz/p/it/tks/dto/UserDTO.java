@@ -7,17 +7,19 @@ public class UserDTO {
     private String name;
     private String surname;
     private boolean isActive;
+    private String accessLevel;
 
     public UserDTO(){
         this.isActive = true;
     }
 
-    public UserDTO(String login, String password, String name, String surname) {
+    public UserDTO(String login, String password, String name, String surname, String accessLevel) {
         this.login = login;
         this.password = password;
         this.name = name;
         this.surname = surname;
         this.isActive = true;
+        this.accessLevel = accessLevel;
     }
 
     public String getPassword() {
@@ -60,4 +62,11 @@ public class UserDTO {
         this.surname = surname;
     }
 
+    public String getAccessLevel() {
+        return accessLevel;
+    }
+
+    public void setAccessLevel(String accessLevel) {
+        this.accessLevel = accessLevel;
+    }
 }

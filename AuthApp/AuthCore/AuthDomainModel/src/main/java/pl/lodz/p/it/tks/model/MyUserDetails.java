@@ -20,10 +20,10 @@ public class MyUserDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        if(user instanceof Administrator){
+        if(user.getAccessLevel().equals("ADMIN")){
             authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         }
-        else if(user instanceof Manager){
+        else if(user.getAccessLevel().equals("MANAGER")){
             authorities.add(new SimpleGrantedAuthority("ROLE_MANAGER"));
         }
         else {

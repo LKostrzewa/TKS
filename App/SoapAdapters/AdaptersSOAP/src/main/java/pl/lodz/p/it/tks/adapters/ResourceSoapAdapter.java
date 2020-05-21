@@ -18,14 +18,16 @@ import java.util.stream.Collectors;
 public class ResourceSoapAdapter {
 
     private ResourceService resourceService;
+    private ModelMapper modelMapper;
 
     @Autowired
     public ResourceSoapAdapter(ResourceService resourceService) {
         this.resourceService = resourceService;
+        modelMapper = new ModelMapper();
     }
 
-    public ResourceSOAP findResource(String id) {
-        ModelMapper modelMapper = new ModelMapper();
+
+    public ResourceSOAP findResource(int id) {
         if(resourceService.getResource(id) instanceof Table){
             return modelMapper.map(resourceService.getResource(id), TableSOAP.class);
         }
@@ -36,7 +38,6 @@ public class ResourceSoapAdapter {
     }
 
     public String addBallRoom(BallRoomSOAP ballRoomSOAP){
-        ModelMapper modelMapper = new ModelMapper();
         if(resourceService.addResource(modelMapper.map(ballRoomSOAP, BallRoom.class))){
             return ballRoomSOAP.getId();
         }
@@ -44,7 +45,6 @@ public class ResourceSoapAdapter {
     }
 
     public String addTable(TableSOAP tableSOAP) {
-        ModelMapper modelMapper = new ModelMapper();
         if (resourceService.addResource(modelMapper.map(tableSOAP, Table.class))) {
             return tableSOAP.getId();
         }
@@ -52,13 +52,12 @@ public class ResourceSoapAdapter {
     }
 
     public List<TableSOAP> getTables(){
-        ModelMapper modelMapper = new ModelMapper();
         return resourceService.getAllTables().stream()
                 .map(entity -> modelMapper.map(entity, TableSOAP.class))
                 .collect(Collectors.toList());
     }
 
-    public String deleteResource(String id) {
+    public String deleteResource(int id) {
         resourceService.deleteResource(id);
         return "OK";
     }

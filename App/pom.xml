@@ -364,9 +364,6 @@
     <module>SpringViews</module>
             
     
-    <module>RestApi</module>
-            
-    
     <module>ViewAdapters</module>
             
     

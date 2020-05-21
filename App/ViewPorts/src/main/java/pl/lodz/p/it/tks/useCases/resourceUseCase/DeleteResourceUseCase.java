@@ -1,5 +1,5 @@
 package pl.lodz.p.it.tks.useCases.resourceUseCase;
 
 public interface DeleteResourceUseCase {
-    void deleteResource(String id);
+    void deleteResource(int id);
 }

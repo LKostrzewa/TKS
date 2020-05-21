@@ -8,6 +8,6 @@ public class RegularClient implements ClientType{
 
     @Override
     public String toString() {
-        return "Regular ";
+        return "Regular";
     }
 }

@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface GetReservationsPort {
-    Reservation getReservation(String id);
+    Reservation getReservation(int id);
     List<Reservation> getAllReservations();
     List<Reservation> getReservationsForClient(String login);
-    List<Reservation> getReservationsForResource(String id);
-    Optional<Reservation> getReservedReservations(String id);
+    List<Reservation> getReservationsForResource(int id);
+    Optional<Reservation> getReservedReservations(int id);
 }

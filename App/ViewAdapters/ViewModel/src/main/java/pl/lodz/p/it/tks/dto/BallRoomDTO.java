@@ -9,7 +9,7 @@ public class BallRoomDTO extends ResourceDTO {
 
     }
 
-    public BallRoomDTO(String id, double price, String description, int numOfRooms) {
+    public BallRoomDTO(int id, double price, String description, int numOfRooms) {
         super(id, price);
         this.description = description;
         this.numOfRooms = numOfRooms;

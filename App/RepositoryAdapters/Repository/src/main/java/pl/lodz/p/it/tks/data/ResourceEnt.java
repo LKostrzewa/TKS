@@ -2,12 +2,20 @@ package pl.lodz.p.it.tks.data;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 
+@Entity
+@Table(name = "resource")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class ResourceEnt {
 
-    @NotBlank(message = "Empty ID given")
-    private String id;
+    @Id
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+   // @NotBlank(message = "Empty ID given")
+    private int id;
+
+    @Column(name = "price")
     @Min(value = 0, message = "Price has to be positive decimal")
     private double price;
 
@@ -15,12 +23,12 @@ public class ResourceEnt {
 
     }
 
-    public ResourceEnt(String id, double price) {
+    public ResourceEnt(int id, double price) {
         this.id = id;
         this.price = price;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -28,7 +36,7 @@ public class ResourceEnt {
         this.price = price;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 

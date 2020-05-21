@@ -7,8 +7,8 @@ import pl.lodz.p.it.tks.dto.ReservationDTO;
 import java.util.List;
 
 public interface UtilsReservationUseCase {
-    double countReservationPrice(String id);
+    double countReservationPrice(int id);
     List<ReservationDTO> getAllReservations();
     List<ReservationDTO> getAllClientReservations(String login);
-    ReservationDTO getReservation(String id);
+    ReservationDTO getReservation(int id);
 }

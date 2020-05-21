@@ -1,17 +1,79 @@
 package pl.lodz.p.it.tks.data;
 
-public class ClientEnt extends UserEnt {
+import org.hibernate.validator.constraints.NotBlank;
 
-    private ClientTypeEnt type;
-    //private String typeName;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "client")
+public class ClientEnt {
+
+   // private transient ClientTypeEnt type;
+    //@NotBlank(message = "Id cannot be blank")
+    @Id
+    private int id;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "surname")
+    private String surname;
+    @Column(name = "is_active")
+    private boolean active;
+    @Column(name = "client_type")
+    private String clientType;
 
     public ClientEnt(){
-        type = new NormalClientEnt();
+        clientType = "Normal";
     }
 
-    public ClientEnt(String login, String password, String name, String surname, ClientTypeEnt type) {
-        super(login, password, name, surname);
-        this.type = type;
+    public ClientEnt(int id, String name, String surname, String type) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.active = true;
+        this.clientType = type;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getClientType() {
+        return clientType;
+    }
+
+    public void setClientType(String clientType) {
+        this.clientType = clientType;
     }
 
     @Override
@@ -21,26 +83,7 @@ public class ClientEnt extends UserEnt {
             tmp = "is active";
         }
         else tmp = "is inactive";
-        return "Client login " + getLogin() + " full name " + getName()
-                + " " + getSurname() + " " + getType() + " type " + tmp;
-        /*return "Client{" +
-                "login='" + getLogin() + '\'' +
-                ", name='" + getName() + '\'' +
-                ", surname='" + getSurname() + '\'' +
-                ", type=" + type + '\'' +
-                ", isActive='" + isActive() + '\'' +
-                '}';*/
-    }
-
-    public ClientTypeEnt getType() {
-        return type;
-    }
-
-    public void setType(ClientTypeEnt type) {
-        this.type = type;
-    }
-
-    public double getDiscount(double base){
-        return type.countDiscount(base);
+        return "Client login " + getId() + " full name " + getName()
+                + " " + getSurname() + " " + getClientType() + " type " + tmp;
     }
 }

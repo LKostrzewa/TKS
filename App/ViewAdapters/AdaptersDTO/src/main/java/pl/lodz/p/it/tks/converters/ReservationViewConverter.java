@@ -7,16 +7,16 @@ import pl.lodz.p.it.tks.model.*;
 
 public class ReservationViewConverter {
 
-    private UserViewConverter userViewConverter;
+    private ClientViewConverter clientViewConverter;
     private ResourceViewConverter resourceViewConverter;
 
     public ReservationViewConverter() {
-        userViewConverter = new UserViewConverter();
+        clientViewConverter = new ClientViewConverter();
         resourceViewConverter = new ResourceViewConverter();
     }
 
     public Reservation convertReservationDTO(ReservationDTO reservationDTO){
-        Client client = (Client) userViewConverter.convertUserDTO(reservationDTO.getClient());
+        Client client = clientViewConverter.convertClientDTO(reservationDTO.getClient());
         Resource resource = resourceViewConverter.convertResourceDTO(reservationDTO.getResource());
         Reservation reservation = new Reservation(reservationDTO.getId(), resource, client, reservationDTO.getBeginning());
         reservation.setEnding(reservationDTO.getEnding());
@@ -24,7 +24,7 @@ public class ReservationViewConverter {
     }
 
     public ReservationDTO convertReservation(Reservation reservation){
-        ClientDTO client = userViewConverter.convertClient(reservation.getClient());
+        ClientDTO client = clientViewConverter.convertClient(reservation.getClient());
         ResourceDTO resourceDTO;
         if(reservation.getResource() instanceof Table){
             resourceDTO = resourceViewConverter.convertTable((Table)reservation.getResource());

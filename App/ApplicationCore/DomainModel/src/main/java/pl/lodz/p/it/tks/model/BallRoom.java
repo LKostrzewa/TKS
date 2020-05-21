@@ -9,7 +9,7 @@ public class BallRoom extends Resource {
 
     }
 
-    public BallRoom(String id, double price, String description, int numOfRooms) {
+    public BallRoom(int id, double price, String description, int numOfRooms) {
         super(id, price);
         this.description = description;
         this.numOfRooms = numOfRooms;

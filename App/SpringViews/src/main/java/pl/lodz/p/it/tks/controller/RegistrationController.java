@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import pl.lodz.p.it.tks.dto.ClientDTO;
-import pl.lodz.p.it.tks.model.Client;
-import pl.lodz.p.it.tks.useCases.userUseCase.AddUserUseCase;
+import pl.lodz.p.it.tks.useCases.clientUseCase.AddClientUseCase;
+//import pl.lodz.p.it.tks.useCases.userUseCase.AddUserUseCase;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -19,11 +19,18 @@ import javax.validation.Valid;
 @Controller
 public class RegistrationController {
 
-    private AddUserUseCase addUserService;
+    /*private AddUserUseCase addUserService;
 
     @Autowired
     public RegistrationController(AddUserUseCase userService) {
         this.addUserService = userService;
+    }*/
+
+    private AddClientUseCase addClientService;
+
+    @Autowired
+    public RegistrationController(AddClientUseCase addClientService) {
+        this.addClientService = addClientService;
     }
 
     @RequestMapping
@@ -63,7 +70,7 @@ public class RegistrationController {
     @PostMapping("/register")
     public String addClient(@Valid @ModelAttribute("client") ClientDTO client, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
-            addUserService.addUser(client);
+            addClientService.addClient(client);
             //userService.addClientFromUser(client);
             return "redirect:/reservations/";
         }

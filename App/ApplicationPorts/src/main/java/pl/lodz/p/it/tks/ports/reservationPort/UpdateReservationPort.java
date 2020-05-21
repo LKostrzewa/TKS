@@ -3,5 +3,5 @@ package pl.lodz.p.it.tks.ports.reservationPort;
 import pl.lodz.p.it.tks.model.Reservation;
 
 public interface UpdateReservationPort {
-    void updateReservation(String id, Reservation reservation);
+    void updateReservation(int id, Reservation reservation);
 }

@@ -1,5 +1,5 @@
 package pl.lodz.p.it.tks.ports.reservationPort;
 
 public interface DeleteReservationPort {
-    void deleteReservation(String id);
+    void deleteReservation(int id);
 }

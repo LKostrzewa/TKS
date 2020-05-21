@@ -1,17 +1,60 @@
 package pl.lodz.p.it.tks.dto;
 
-public class ClientDTO extends UserDTO {
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-    private ClientTypeDTO type;
-    //private String typeName;
+//@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+public class ClientDTO {
+
+    //@JsonIgnore
+    //private ClientTypeDTO type;
+    private int id;
+    private String name;
+    private String surname;
+    private boolean isActive;
+    private String clientType;
 
     public ClientDTO(){
-        type = new NormalClientDTO();
+        clientType = "Normal";
     }
 
-    public ClientDTO(String login, String password, String name, String surname, ClientTypeDTO type) {
-        super(login, password, name, surname);
-        this.type = type;
+    public ClientDTO(int id, String name, String surname, String type) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.isActive = true;
+        this.clientType = type;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     @Override
@@ -21,26 +64,15 @@ public class ClientDTO extends UserDTO {
             tmp = "is active";
         }
         else tmp = "is inactive";
-        return "Client login " + getLogin() + " full name " + getName()
-                + " " + getSurname() + " " + getType() + " type " + tmp;
-        /*return "Client{" +
-                "login='" + getLogin() + '\'' +
-                ", name='" + getName() + '\'' +
-                ", surname='" + getSurname() + '\'' +
-                ", type=" + type + '\'' +
-                ", isActive='" + isActive() + '\'' +
-                '}';*/
+        return "Client login " + getId() + " full name " + getName()
+                + " " + getSurname() + " " + getClientType() + " type " + tmp;
     }
 
-    public ClientTypeDTO getType() {
-        return type;
+    public String getClientType() {
+        return clientType;
     }
 
-    public void setType(ClientTypeDTO type) {
-        this.type = type;
-    }
-
-    public double getDiscount(double base){
-        return type.countDiscount(base);
+    public void setClientType(String clientType) {
+        this.clientType = clientType;
     }
 }

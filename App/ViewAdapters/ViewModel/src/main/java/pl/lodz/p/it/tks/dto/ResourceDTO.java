@@ -7,8 +7,8 @@ import javax.validation.constraints.Min;
 
 public class ResourceDTO {
 
-    @NotBlank(message = "Empty ID given")
-    private String id;
+    //@NotBlank(message = "Empty ID given")
+    private int id;
     @Min(value = 0, message = "Price has to be positive decimal")
     private double price;
 
@@ -16,12 +16,12 @@ public class ResourceDTO {
 
     }
 
-    public ResourceDTO(String id, double price) {
+    public ResourceDTO(int id, double price) {
         this.id = id;
         this.price = price;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -29,7 +29,7 @@ public class ResourceDTO {
         this.price = price;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 

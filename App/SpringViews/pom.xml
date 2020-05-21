@@ -42,12 +42,6 @@
         </dependency>
         <dependency>
             <groupId>pl.lodz.p.it.tks</groupId>
-            <artifactId>RestApi</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>pl.lodz.p.it.tks</groupId>
             <artifactId>Adapters</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>

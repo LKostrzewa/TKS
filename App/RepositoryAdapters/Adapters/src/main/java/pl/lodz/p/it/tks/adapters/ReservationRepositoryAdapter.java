@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.lodz.p.it.tks.converters.ReservationConverter;
 import pl.lodz.p.it.tks.data.ReservationEnt;
+import pl.lodz.p.it.tks.db.ReservationDBRepository;
 import pl.lodz.p.it.tks.model.Reservation;
 import pl.lodz.p.it.tks.ports.reservationPort.AddReservationPort;
 import pl.lodz.p.it.tks.ports.reservationPort.DeleteReservationPort;
@@ -19,35 +20,35 @@ import java.util.stream.Collectors;
 
 @Component
 public class ReservationRepositoryAdapter implements AddReservationPort, DeleteReservationPort, GetReservationsPort, UpdateReservationPort {
-    private ReservationRepository repository;
+    private ReservationDBRepository repository;
     private ReservationConverter converter;
 
     @Autowired
-    public ReservationRepositoryAdapter(ReservationRepository repository) {
+    public ReservationRepositoryAdapter(ReservationDBRepository repository) {
         this.repository = repository;
         converter = new ReservationConverter();
     }
 
     @Override
     public void addReservation(Reservation reservation){
-        repository.add(reservation.getId(), converter.convertReservation(reservation));
+        repository.save(converter.convertReservation(reservation));
     }
 
 
     @Override
-    public void deleteReservation(String id) {
-        repository.delete(id);
+    public void deleteReservation(int id) {
+        repository.deleteById(id);
     }
 
     @Override
-    public Reservation getReservation(String id) {
-        return converter.convertReservationEnt(repository.get(id));
+    public Reservation getReservation(int id) {
+        return converter.convertReservationEnt(repository.getOne(id));
     }
 
     @Override
     public List<Reservation> getAllReservations() {
         List<Reservation> reservations = new ArrayList<>();
-        for(ReservationEnt reservationEnt : repository.getAll()){
+        for(ReservationEnt reservationEnt : repository.findAll()){
             reservations.add(converter.convertReservationEnt(reservationEnt));
         }
         return reservations;
@@ -56,25 +57,26 @@ public class ReservationRepositoryAdapter implements AddReservationPort, DeleteR
     @Override
     public List<Reservation> getReservationsForClient(String login) {
         List<Reservation> reservations = new ArrayList<>();
-        for(ReservationEnt reservationEnt : repository.getReservationsForClient(login)){
+        //nw czy nie powinno być getReservationEntByClient_Name czy costakiego - login to chyba nie id
+        for(ReservationEnt reservationEnt : repository.getReservationEntByClient_Name(login)){
             reservations.add(converter.convertReservationEnt(reservationEnt));
         }
         return reservations;
     }
 
     @Override
-    public List<Reservation> getReservationsForResource(String id) {
+    public List<Reservation> getReservationsForResource(int id) {
         List<Reservation> reservations = new ArrayList<>();
-        for(ReservationEnt reservationEnt : repository.getReservationsForResource(id)){
+        for(ReservationEnt reservationEnt : repository.getReservationEntByResource_Id(id)){
             reservations.add(converter.convertReservationEnt(reservationEnt));
         }
         return reservations;
     }
 
     @Override
-    public Optional<Reservation> getReservedReservations(String id) {
+    public Optional<Reservation> getReservedReservations(int id) {
         List<Reservation> reservations = new ArrayList<>();
-        List<ReservationEnt> reservationsEnts = repository.getReservedReservations(id);
+        List<ReservationEnt> reservationsEnts = repository.getReservationEntByEndingIsNullAndResource_Id(id);
         //Java 9+ version
         //List<ReservationEnt> reservationsEnts = repository.getReservedReservations(id).stream().collect(Collectors.toList());
         for(ReservationEnt reservationEnt : reservationsEnts){
@@ -84,7 +86,9 @@ public class ReservationRepositoryAdapter implements AddReservationPort, DeleteR
     }
 
     @Override
-    public void updateReservation(String id, Reservation reservation) {
-        repository.update(id, converter.convertReservation(reservation));
+    public void updateReservation(int id, Reservation reservation) {
+        if(repository.existsById(id)){
+            repository.save(converter.convertReservation(reservation));
+        }
     }
 }

@@ -26,12 +26,12 @@ public class ReservationViewAdapter implements StartReservationUseCase, EndReser
     }
 
     @Override
-    public void deleteReservation(String id) {
+    public void deleteReservation(int id) {
         reservationService.deleteReservation(id);
     }
 
     @Override
-    public void endReservation(String id, LocalDateTime end) {
+    public void endReservation(int id, LocalDateTime end) {
         reservationService.endReservation(id, end);
     }
 
@@ -41,7 +41,7 @@ public class ReservationViewAdapter implements StartReservationUseCase, EndReser
     }
 
     @Override
-    public double countReservationPrice(String id) {
+    public double countReservationPrice(int id) {
         return reservationService.countReservationPrice(id);
     }
 
@@ -60,7 +60,7 @@ public class ReservationViewAdapter implements StartReservationUseCase, EndReser
     }
 
     @Override
-    public ReservationDTO getReservation(String id) {
+    public ReservationDTO getReservation(int id) {
         return reservationViewConverter.convertReservation(reservationService.getReservation(id));
     }
 }

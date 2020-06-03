@@ -1,5 +1,7 @@
 package pl.lodz.p.it.tks.model;
 
+import java.util.UUID;
+
 public class User {
 
     protected int id;
@@ -9,18 +11,20 @@ public class User {
     private String surname;
     private boolean isActive;
     private String accessLevel;
+    private UUID key;
 
     public User(){
         this.isActive = true;
     }
 
-    public User(String login, String password, String name, String surname, String accessLevel) {
+    public User(String login, String password, String name, String surname, String accessLevel, UUID key) {
         this.login = login;
         this.password = password;
         this.name = name;
         this.surname = surname;
         this.isActive = true;
         this.accessLevel = accessLevel;
+        this.key = key;
     }
 
     public int getId() {
@@ -77,5 +81,13 @@ public class User {
 
     public void setAccessLevel(String accessLevel) {
         this.accessLevel = accessLevel;
+    }
+
+    public UUID getKey() {
+        return key;
+    }
+
+    public void setKey(UUID key) {
+        this.key = key;
     }
 }

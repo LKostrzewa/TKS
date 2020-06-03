@@ -15,7 +15,7 @@
   <dependencies>
     <dependency>
       <groupId>pl.lodz.p.it.tks</groupId>
-      <artifactId>AuthServices</artifactId>
+      <artifactId>AuthDTOAdapters</artifactId>
       <version>1.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>

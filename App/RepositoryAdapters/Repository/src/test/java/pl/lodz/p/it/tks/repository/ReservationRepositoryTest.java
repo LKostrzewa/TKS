@@ -7,6 +7,7 @@ import pl.lodz.p.it.tks.data.*;
 
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,7 +18,7 @@ class ReservationRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        ClientEnt client = new ClientEnt(1, "Roman", "Bialek", "Normal");
+        ClientEnt client = new ClientEnt(1, "Roman", "Bialek", "Normal", UUID.randomUUID());
         ResourceEnt table = new TableEnt(2, 10, 10, 10);
         reservation = new ReservationEnt(2, table, client, LocalDateTime.of(2002, Month.MARCH, 1, 1, 1));
         reservationRepository.add("1", reservation);

@@ -3,6 +3,7 @@ package pl.lodz.p.it.tks.data;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 //@PasswordMatches
 @Entity
@@ -26,18 +27,21 @@ public class UserEnt {
     private boolean isActive;
     @Column(name = "access_level")
     private String accessLevel;
+    @Column
+    private UUID key;
 
     public UserEnt(){
         this.isActive = true;
     }
 
-    public UserEnt(String login, String password, String name, String surname, String accessLevel) {
+    public UserEnt(String login, String password, String name, String surname, String accessLevel, UUID key) {
         this.login = login;
         this.password = password;
         this.name = name;
         this.surname = surname;
         this.isActive = true;
         this.accessLevel = accessLevel;
+        this.key = key;
     }
 
     public int getId() {
@@ -94,5 +98,13 @@ public class UserEnt {
 
     public void setAccessLevel(String accessLevel) {
         this.accessLevel = accessLevel;
+    }
+
+    public UUID getKey() {
+        return key;
+    }
+
+    public void setKey(UUID key) {
+        this.key = key;
     }
 }

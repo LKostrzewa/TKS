@@ -2,6 +2,8 @@ package pl.lodz.p.it.tks.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.UUID;
+
 //@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class ClientDTO {
 
@@ -12,6 +14,7 @@ public class ClientDTO {
     private String surname;
     private boolean isActive;
     private String clientType;
+    private UUID key;
 
     public ClientDTO(){
         clientType = "Normal";
@@ -23,6 +26,7 @@ public class ClientDTO {
         this.surname = surname;
         this.isActive = true;
         this.clientType = type;
+        this.key = UUID.randomUUID();
     }
 
     public int getId() {
@@ -74,5 +78,13 @@ public class ClientDTO {
 
     public void setClientType(String clientType) {
         this.clientType = clientType;
+    }
+
+    public UUID getKey() {
+        return key;
+    }
+
+    public void setKey(UUID key) {
+        this.key = key;
     }
 }

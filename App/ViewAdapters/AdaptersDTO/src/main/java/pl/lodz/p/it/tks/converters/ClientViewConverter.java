@@ -17,7 +17,7 @@ public class ClientViewConverter {
             default:
                 clientType = new PremiumClient();
         }
-        Client client = new Client(clientDTO.getId(), clientDTO.getName(), clientDTO.getSurname(), clientType);
+        Client client = new Client(clientDTO.getId(), clientDTO.getName(), clientDTO.getSurname(), clientType, clientDTO.getKey());
         client.setActive(clientDTO.isActive());
         return client;
     }
@@ -25,6 +25,7 @@ public class ClientViewConverter {
     public ClientDTO convertClient(Client client){
         ClientDTO clientDTO = new ClientDTO(client.getId(), client.getName(), client.getSurname(), client.getType().toString());
         clientDTO.setActive(client.isActive());
+        clientDTO.setKey(client.getKey());
         return clientDTO;
     }
 }

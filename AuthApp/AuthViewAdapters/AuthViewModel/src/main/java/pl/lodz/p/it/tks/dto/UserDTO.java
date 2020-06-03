@@ -1,5 +1,7 @@
 package pl.lodz.p.it.tks.dto;
 
+import java.util.UUID;
+
 public class UserDTO {
 
     private String login;
@@ -8,6 +10,8 @@ public class UserDTO {
     private String surname;
     private boolean isActive;
     private String accessLevel;
+    //TODO w którym miejscu go ustawiamy ?
+    private UUID key;
 
     public UserDTO(){
         this.isActive = true;
@@ -20,6 +24,7 @@ public class UserDTO {
         this.surname = surname;
         this.isActive = true;
         this.accessLevel = accessLevel;
+        this.key = UUID.randomUUID();
     }
 
     public String getPassword() {
@@ -68,5 +73,13 @@ public class UserDTO {
 
     public void setAccessLevel(String accessLevel) {
         this.accessLevel = accessLevel;
+    }
+
+    public UUID getKey() {
+        return key;
+    }
+
+    public void setKey(UUID key) {
+        this.key = key;
     }
 }

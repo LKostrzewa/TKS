@@ -6,7 +6,7 @@ import pl.lodz.p.it.tks.model.*;
 public class ClientConverter {
 
     public ClientEnt convertClient(Client client) {
-        ClientEnt clientEnt = new ClientEnt(client.getId(), client.getName(), client.getSurname(), client.getType().toString());
+        ClientEnt clientEnt = new ClientEnt(client.getId(), client.getName(), client.getSurname(), client.getType().toString(), client.getKey());
         clientEnt.setActive(client.isActive());
         return clientEnt;
     }
@@ -16,7 +16,7 @@ public class ClientConverter {
         if(clientEnt.getClientType().equals("Normal")) clientType = new NormalClient();
         else if(clientEnt.getClientType().equals("Regular")) clientType = new RegularClient();
         else clientType = new PremiumClient();
-        Client client = new Client(clientEnt.getId(), clientEnt.getName(), clientEnt.getSurname(), clientType);
+        Client client = new Client(clientEnt.getId(), clientEnt.getName(), clientEnt.getSurname(), clientType, clientEnt.getKey());
         client.setActive(clientEnt.isActive());
         return client;
     }

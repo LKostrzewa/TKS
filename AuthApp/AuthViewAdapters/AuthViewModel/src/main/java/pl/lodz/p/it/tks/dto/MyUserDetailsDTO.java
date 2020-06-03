@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-//TODO na 99% niepotrzebne przy 100% usunąć
-//@PasswordMatches
 public class MyUserDetailsDTO implements UserDetails {
 
     private UserDTO user;
@@ -20,18 +18,17 @@ public class MyUserDetailsDTO implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        /*List<GrantedAuthority> authorities = new ArrayList<>();
-        if(user instanceof AdministratorDTO){
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        if(user.getAccessLevel().equals("ADMIN")){
             authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         }
-        else if(user instanceof ManagerDTO){
+        else if(user.getAccessLevel().equals("MANAGER")){
             authorities.add(new SimpleGrantedAuthority("ROLE_MANAGER"));
         }
         else {
             authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
         }
-        return authorities;*/
-        return null;
+        return authorities;
     }
 
     @Override

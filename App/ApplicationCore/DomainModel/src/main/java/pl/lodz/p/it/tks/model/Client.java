@@ -7,7 +7,6 @@ public class Client {
     private ClientType type;
     //mozesz zmienic na longa jeszcze jak
     private int id;
-    //zalezy od łączenia dziada tutaj wstawiam prototypa
     private UUID key;
     private String name;
     private String surname;
@@ -17,12 +16,13 @@ public class Client {
         type = new NormalClient();
     }
 
-    public Client(int id, String name, String surname, ClientType type) {
+    public Client(int id, String name, String surname, ClientType type, UUID key) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.isActive = true;
         this.type = type;
+        this.key = key;
     }
 
     public int getId() {
@@ -74,6 +74,14 @@ public class Client {
 
     public void setType(ClientType type) {
         this.type = type;
+    }
+
+    public UUID getKey() {
+        return key;
+    }
+
+    public void setKey(UUID key) {
+        this.key = key;
     }
 
     public double getDiscount(double base){

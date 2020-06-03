@@ -11,17 +11,17 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import pl.lodz.p.it.tks.service.MyUserDetailsService;
+import pl.lodz.p.it.tks.adapters.MyUserDetailsAdapter;
 
 @Configuration
 @EnableWebSecurity
 @ComponentScan(basePackages = "pl.lodz.p.it.tks")
 public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private MyUserDetailsService myUserDetailsService;
+    private MyUserDetailsAdapter myUserDetailsService;
 
     @Autowired
-    public SecSecurityConfig(MyUserDetailsService myUserDetailsService) {
+    public SecSecurityConfig(MyUserDetailsAdapter myUserDetailsService) {
         this.myUserDetailsService = myUserDetailsService;
     }
 

@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.UUID;
 
 @Entity
 @Table(name = "client")
@@ -23,17 +24,20 @@ public class ClientEnt {
     private boolean active;
     @Column(name = "client_type")
     private String clientType;
+    @Column
+    private UUID key;
 
     public ClientEnt(){
         clientType = "Normal";
     }
 
-    public ClientEnt(int id, String name, String surname, String type) {
+    public ClientEnt(int id, String name, String surname, String type, UUID key) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.active = true;
         this.clientType = type;
+        this.key = key;
     }
 
     public int getId() {
@@ -85,5 +89,13 @@ public class ClientEnt {
         else tmp = "is inactive";
         return "Client login " + getId() + " full name " + getName()
                 + " " + getSurname() + " " + getClientType() + " type " + tmp;
+    }
+
+    public UUID getKey() {
+        return key;
+    }
+
+    public void setKey(UUID key) {
+        this.key = key;
     }
 }

@@ -1,4 +1,4 @@
-package pl.lodz.p.it.tks.publisherrabbitmq;
+package pl.lodz.p.it.tks.payloads;
 
 import javax.sql.rowset.serial.SerialArray;
 import java.io.Serializable;

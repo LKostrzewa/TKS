@@ -1,9 +1,12 @@
 package pl.lodz.p.it.tks.api;
 
+import com.google.gson.Gson;
+import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.lodz.p.it.tks.dto.ClientDTO;
+import pl.lodz.p.it.tks.payloads.UserPayload;
 import pl.lodz.p.it.tks.useCases.clientUseCase.*;
 
 import java.util.List;
@@ -58,8 +61,12 @@ public class ClientApi {
     }*/
 
     @GetMapping("/add-user")
-    public ClientDTO addClient() {
-        return (ClientDTO) rabbitTemplate.receiveAndConvert("add-user");
+    public void addClient() {
+        UserPayload userPayload = (UserPayload) rabbitTemplate.receiveAndConvert("add-user");
+        /*return new ClientDTO(userPayload.getKey(), userPayload.getName(), userPayload.getSurname(),
+                userPayload.isActive());*/
+        addClientUseCase.addClient(new ClientDTO(userPayload.getKey(), userPayload.getName(), userPayload.getSurname(),
+                userPayload.isActive()));
     }
 
     @PutMapping

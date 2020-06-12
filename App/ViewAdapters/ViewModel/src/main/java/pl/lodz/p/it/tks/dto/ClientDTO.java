@@ -29,6 +29,14 @@ public class ClientDTO {
         this.key = UUID.randomUUID();
     }
 
+    public ClientDTO(UUID key, String name, String surname, boolean isActive) {
+        this.name = name;
+        this.surname = surname;
+        this.isActive = isActive;
+        this.clientType = "Normal";
+        this.key = key;
+    }
+
     public int getId() {
         return id;
     }

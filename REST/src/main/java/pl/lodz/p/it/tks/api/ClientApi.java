@@ -49,12 +49,17 @@ public class ClientApi {
         addClientUseCase.addClient(clientDTO);
     }*/
 
-    @RabbitListener(queues = "add-user")
+    /*@RabbitListener(queues = "add-user")
     public void addClient(Object clientDTO) {
         //ciekawe czy zadziała :)
         //ClientDTO clientDTO = (ClientDTO) rabbitTemplate.receiveAndConvert("add-user");
         //ClientDTO
         addClientUseCase.addClient((ClientDTO) clientDTO);
+    }*/
+
+    @GetMapping("/add-user")
+    public ClientDTO addClient() {
+        return (ClientDTO) rabbitTemplate.receiveAndConvert("add-user");
     }
 
     @PutMapping

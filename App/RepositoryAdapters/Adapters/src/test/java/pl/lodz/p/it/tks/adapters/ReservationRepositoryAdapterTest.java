@@ -5,7 +5,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
+import pl.lodz.p.it.tks.db.ReservationDBRepository;
 import pl.lodz.p.it.tks.model.*;
 import pl.lodz.p.it.tks.repository.ReservationRepository;
 
@@ -15,11 +18,11 @@ import java.time.Month;
 
 class ReservationRepositoryAdapterTest {
 
-    //@Mock
-    /*ReservationRepositoryAdapter reservationRepositoryAdapter = new ReservationRepositoryAdapter(new ReservationRepository());
+    @Autowired
+    ReservationRepositoryAdapter reservationRepositoryAdapter;
     Reservation reservation;
 
-    @BeforeEach
+    /*@BeforeEach
     void init() {
         Client client = new Client("romek", "Roman", "Bialek", new NormalClient());
         Resource table = new Table("test", 10, 10, 10);
@@ -34,4 +37,9 @@ class ReservationRepositoryAdapterTest {
         res1.setEnding(LocalDateTime.now());
         Assertions.assertNotEquals(res1.getEnding(), reservation.getEnding());
     }*/
+
+    @Test
+    void getAllReservationTest() {
+
+    }
 }

@@ -12,7 +12,6 @@ import java.util.UUID;
 @Table(name = "client")
 public class ClientEnt {
 
-   // private transient ClientTypeEnt type;
     //@NotBlank(message = "Id cannot be blank")
     @Id
     private int id;

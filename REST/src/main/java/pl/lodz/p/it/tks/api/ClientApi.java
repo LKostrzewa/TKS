@@ -6,6 +6,7 @@ import pl.lodz.p.it.tks.dto.ClientDTO;
 import pl.lodz.p.it.tks.useCases.clientUseCase.*;
 
 import java.util.List;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
 @RestController
 @RequestMapping("/api/clients")
@@ -15,13 +16,16 @@ public class ClientApi {
     private UpdateClientUseCase updateClientUseCase;
     private DeleteClientUseCase deleteClientUseCase;
     private UtilsClientUseCase utilsClientUseCase;
+    private RabbitTemplate rabbitTemplate;
 
     @Autowired
-    public ClientApi(AddClientUseCase addClientUseCase, UpdateClientUseCase updateClientUseCase, DeleteClientUseCase deleteClientUseCase, UtilsClientUseCase utilsClientUseCase) {
+    public ClientApi(AddClientUseCase addClientUseCase, UpdateClientUseCase updateClientUseCase, DeleteClientUseCase deleteClientUseCase
+            , UtilsClientUseCase utilsClientUseCase, RabbitTemplate rabbitTemplate) {
         this.addClientUseCase = addClientUseCase;
         this.updateClientUseCase = updateClientUseCase;
         this.deleteClientUseCase = deleteClientUseCase;
         this.utilsClientUseCase = utilsClientUseCase;
+        this.rabbitTemplate = rabbitTemplate;
     }
 
     @GetMapping
@@ -39,8 +43,15 @@ public class ClientApi {
         return utilsClientUseCase.getClient(id);
     }
 
-    @PostMapping
+    /*@PostMapping
     public void addClient(@RequestBody ClientDTO clientDTO) {
+        addClientUseCase.addClient(clientDTO);
+    }*/
+
+    @PostMapping
+    public void addClient() {
+        //ciekawe czy zadziała :)
+        ClientDTO clientDTO = (ClientDTO) rabbitTemplate.receiveAndConvert("add-user");
         addClientUseCase.addClient(clientDTO);
     }
 

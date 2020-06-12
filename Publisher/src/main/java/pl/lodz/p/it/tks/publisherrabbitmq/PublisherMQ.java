@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @RestController
 public class PublisherMQ {
 
@@ -19,6 +21,7 @@ public class PublisherMQ {
 
     @PostMapping
     public void publishUser(@RequestBody UserPayload userPayload) {
+        userPayload.setKey(UUID.randomUUID());
         rabbitTemplate.convertAndSend("add-user", userPayload);
     }
 }

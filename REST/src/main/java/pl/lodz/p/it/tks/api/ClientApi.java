@@ -1,5 +1,6 @@
 package pl.lodz.p.it.tks.api;
 
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.lodz.p.it.tks.dto.ClientDTO;
@@ -48,11 +49,12 @@ public class ClientApi {
         addClientUseCase.addClient(clientDTO);
     }*/
 
-    @PostMapping
-    public void addClient() {
+    @RabbitListener(queues = "add-user")
+    public void addClient(Object clientDTO) {
         //ciekawe czy zadziała :)
-        ClientDTO clientDTO = (ClientDTO) rabbitTemplate.receiveAndConvert("add-user");
-        addClientUseCase.addClient(clientDTO);
+        //ClientDTO clientDTO = (ClientDTO) rabbitTemplate.receiveAndConvert("add-user");
+        //ClientDTO
+        addClientUseCase.addClient((ClientDTO) clientDTO);
     }
 
     @PutMapping

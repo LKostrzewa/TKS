@@ -47,26 +47,33 @@ public class ClientApi {
         return utilsClientUseCase.getClient(id);
     }
 
-    /*@PostMapping
+    @PostMapping
     public void addClient(@RequestBody ClientDTO clientDTO) {
         addClientUseCase.addClient(clientDTO);
-    }*/
+    }
 
-    /*@RabbitListener(queues = "add-user")
-    public void addClient(Object clientDTO) {
-        //ciekawe czy zadziała :)
-        //ClientDTO clientDTO = (ClientDTO) rabbitTemplate.receiveAndConvert("add-user");
-        //ClientDTO
-        addClientUseCase.addClient((ClientDTO) clientDTO);
-    }*/
-
-    @GetMapping("/add-user")
-    public void addClient() {
+    /*@GetMapping("/queue")
+    public ClientDTO addClient() {
         UserPayload userPayload = (UserPayload) rabbitTemplate.receiveAndConvert("add-user");
-        /*return new ClientDTO(userPayload.getKey(), userPayload.getName(), userPayload.getSurname(),
+        ClientDTO clientDTO = new ClientDTO(userPayload.getKey(), userPayload.getName(), userPayload.getSurname(),
+                userPayload.isActive());
+        addClientUseCase.addClient(clientDTO);
+        return clientDTO;
+    }*/
+
+    @RabbitListener(queues = "add-user")
+    public void addClient(Message message) throws InterruptedException {
+        /*UserPayload userPayload = (UserPayload) rabbitTemplate.receiveAndConvert("add-user");
+        return new ClientDTO(userPayload.getKey(), userPayload.getName(), userPayload.getSurname(),
                 userPayload.isActive());*/
-        addClientUseCase.addClient(new ClientDTO(userPayload.getKey(), userPayload.getName(), userPayload.getSurname(),
-                userPayload.isActive()));
+        System.out.println(message);
+        UserPayload userPayload = (UserPayload) rabbitTemplate.getMessageConverter().fromMessage(message);
+        System.out.println(userPayload.getName());
+        ClientDTO clientDTO = new ClientDTO(userPayload.getKey(), userPayload.getName(), userPayload.getSurname(),
+                userPayload.isActive());
+        addClientUseCase.addClient(clientDTO);
+        Thread.sleep(1000);
+        System.out.println(clientDTO);
     }
 
     @PutMapping

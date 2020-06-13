@@ -43,7 +43,7 @@ class ResourceApiTest {
     }*/
 
 
-    @Test
+    /*@Test
     @Order(1)
     void simpleTest() throws Exception {
 
@@ -174,6 +174,6 @@ class ResourceApiTest {
         JSONArray test = new JSONArray(responseJSON);
 
         Assertions.assertEquals(3, test.length());
-    }
+    }*/
 
 }

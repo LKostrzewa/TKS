@@ -30,6 +30,7 @@ public class ClientDTO {
     }
 
     public ClientDTO(UUID key, String name, String surname, boolean isActive) {
+        this.id = 100;
         this.name = name;
         this.surname = surname;
         this.isActive = isActive;

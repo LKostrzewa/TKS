@@ -28,6 +28,7 @@ public class ClientViewAdapter implements AddClientUseCase, UpdateClientUseCase,
 
     @Override
     public void addClient(ClientDTO client) {
+        //System.out.println("WITAM");
         clientService.addClient(clientViewConverter.convertClientDTO(client));
     }
 

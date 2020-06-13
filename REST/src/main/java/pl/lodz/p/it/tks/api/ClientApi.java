@@ -91,6 +91,13 @@ public class ClientApi {
         deleteClientUseCase.deleteClientByKey(uuid);
     }
 
+    //wzorzecz listnera do usuwania
+    /*@RabbitListener(queues = "delete-user")
+    public void deleteClient(String message) {
+        UUID uuid = UUID.fromString(message);
+        deleteClientUseCase.deleteClientByKey(uuid);
+    }*/
+
     @PutMapping
     public void updateClient(@RequestBody ClientDTO clientDTO) {
         updateClientUseCase.updateClient(clientDTO.getId(), clientDTO);

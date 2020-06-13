@@ -14,6 +14,7 @@ import pl.lodz.p.it.tks.repository.ClientRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class ClientRepositoryAdapter implements AddClientPort, GetClientPort, DeleteClientPort, UpdateClientPort {
@@ -67,6 +68,11 @@ public class ClientRepositoryAdapter implements AddClientPort, GetClientPort, De
     @Override
     public void deleteClient(int id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public void deleteByKey(UUID uuid) {
+        repository.deleteByKey(uuid);
     }
 
     @Override

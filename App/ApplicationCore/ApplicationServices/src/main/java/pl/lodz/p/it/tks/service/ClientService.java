@@ -12,6 +12,7 @@ import pl.lodz.p.it.tks.ports.clientPort.UpdateClientPort;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ClientService {
@@ -41,6 +42,10 @@ public class ClientService {
 
     public void deleteClient(int id) {
         deleteClientPort.deleteClient(id);
+    }
+
+    public void deleteClientByKey(UUID key) {
+        deleteClientPort.deleteByKey(key);
     }
 
     public void updateClient(int id, Client client) {

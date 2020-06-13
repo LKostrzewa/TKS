@@ -13,6 +13,7 @@ import pl.lodz.p.it.tks.useCases.clientUseCase.UtilsClientUseCase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class ClientViewAdapter implements AddClientUseCase, UpdateClientUseCase, DeleteClientUseCase, UtilsClientUseCase {
@@ -34,6 +35,11 @@ public class ClientViewAdapter implements AddClientUseCase, UpdateClientUseCase,
     @Override
     public void deleteClient(int id) {
         clientService.deleteClient(id);
+    }
+
+    @Override
+    public void deleteClientByKey(UUID key) {
+        clientService.deleteClientByKey(key);
     }
 
     @Override

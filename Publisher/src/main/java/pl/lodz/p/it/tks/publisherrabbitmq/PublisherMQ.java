@@ -2,10 +2,7 @@ package pl.lodz.p.it.tks.publisherrabbitmq;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.lodz.p.it.tks.payloads.UserPayload;
 
 import java.util.UUID;
@@ -24,5 +21,10 @@ public class PublisherMQ {
     public void publishUser(@RequestBody UserPayload userPayload) {
         userPayload.setKey(UUID.randomUUID());
         rabbitTemplate.convertAndSend("add-user", userPayload);
+    }
+
+    @PostMapping("/delete")
+    public void publishBusinessKey(@RequestParam String key) {
+        rabbitTemplate.convertAndSend("delete-user", key);
     }
 }

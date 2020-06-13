@@ -10,6 +10,8 @@ import pl.lodz.p.it.tks.payloads.UserPayload;
 import pl.lodz.p.it.tks.useCases.clientUseCase.*;
 
 import java.util.List;
+import java.util.UUID;
+
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
 @RestController
@@ -79,6 +81,15 @@ public class ClientApi {
         Thread.sleep(1000);
         System.out.println(clientDTO);
     }*/
+
+    @GetMapping("/queue-delete")
+    public void deleteClient() {
+        String msg = (String)rabbitTemplate.receiveAndConvert("delete-user");
+        //byte[] bytes = msg.getBody();
+        //pobiera wiadomosc dobrze problem z transakcjami (TransactionRequiredException), tak jak przy uzywanie saveAndFlush
+        UUID uuid = UUID.fromString(msg);
+        deleteClientUseCase.deleteClientByKey(uuid);
+    }
 
     @PutMapping
     public void updateClient(@RequestBody ClientDTO clientDTO) {

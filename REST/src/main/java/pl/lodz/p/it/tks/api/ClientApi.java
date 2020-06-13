@@ -51,22 +51,26 @@ public class ClientApi {
     public void addClient(@RequestBody ClientDTO clientDTO) {
         addClientUseCase.addClient(clientDTO);
     }
-
-    /*@GetMapping("/queue")
+    //dziala
+    @GetMapping("/queue")
     public ClientDTO addClient() {
         UserPayload userPayload = (UserPayload) rabbitTemplate.receiveAndConvert("add-user");
         ClientDTO clientDTO = new ClientDTO(userPayload.getKey(), userPayload.getName(), userPayload.getSurname(),
                 userPayload.isActive());
         addClientUseCase.addClient(clientDTO);
         return clientDTO;
-    }*/
+    }
 
-    @RabbitListener(queues = "add-user")
+
+    //to odczytuje automatycznie z kolejki taki wzorzec projektowy obserwator ale nie działa
+    //(musi działać tak że leci rządanie na kolejke z potencjalnego front ten to odbiera i potem dodaje i do auth i do rent service
+    //i tak że jak któryś serwis nei działa to musi być to cofnięcie dodania (tak jak w treści zad))
+    /*@RabbitListener(queues = "add-user")
     public void addClient(Message message) throws InterruptedException {
         /*UserPayload userPayload = (UserPayload) rabbitTemplate.receiveAndConvert("add-user");
         return new ClientDTO(userPayload.getKey(), userPayload.getName(), userPayload.getSurname(),
                 userPayload.isActive());*/
-        System.out.println(message);
+        /*System.out.println(message);
         UserPayload userPayload = (UserPayload) rabbitTemplate.getMessageConverter().fromMessage(message);
         System.out.println(userPayload.getName());
         ClientDTO clientDTO = new ClientDTO(userPayload.getKey(), userPayload.getName(), userPayload.getSurname(),
@@ -74,7 +78,7 @@ public class ClientApi {
         addClientUseCase.addClient(clientDTO);
         Thread.sleep(1000);
         System.out.println(clientDTO);
-    }
+    }*/
 
     @PutMapping
     public void updateClient(@RequestBody ClientDTO clientDTO) {

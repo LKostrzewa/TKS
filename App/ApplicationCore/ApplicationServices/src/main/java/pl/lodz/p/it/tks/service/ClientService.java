@@ -10,6 +10,7 @@ import pl.lodz.p.it.tks.ports.clientPort.DeleteClientPort;
 import pl.lodz.p.it.tks.ports.clientPort.GetClientPort;
 import pl.lodz.p.it.tks.ports.clientPort.UpdateClientPort;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service

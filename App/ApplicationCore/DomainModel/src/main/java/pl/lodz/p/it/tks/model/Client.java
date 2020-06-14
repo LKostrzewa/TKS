@@ -10,7 +10,7 @@ public class Client {
     private UUID key;
     private String name;
     private String surname;
-    private boolean isActive;
+    private boolean active;
 
     public Client(){
         type = new NormalClient();
@@ -20,7 +20,7 @@ public class Client {
         this.id = id;
         this.name = name;
         this.surname = surname;
-        this.isActive = true;
+        this.active = true;
         this.type = type;
         this.key = key;
     }
@@ -38,11 +38,11 @@ public class Client {
     }
 
     public boolean isActive() {
-        return isActive;
+        return active;
     }
 
     public void setActive(boolean active) {
-        isActive = active;
+        this.active = active;
     }
 
     public void setId(int id) {

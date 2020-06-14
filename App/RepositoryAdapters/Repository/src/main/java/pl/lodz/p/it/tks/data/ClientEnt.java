@@ -18,7 +18,7 @@ public class ClientEnt {
     private String name;
     @Column(name = "surname")
     private String surname;
-    @Column(name = "is_active")
+    @Column(name = "active")
     private boolean active;
     @Column(name = "client_type")
     private String clientType;

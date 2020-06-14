@@ -2,6 +2,7 @@ package pl.lodz.p.it.tks.adapters;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import pl.lodz.p.it.tks.converters.ClientConverter;
 import pl.lodz.p.it.tks.data.ClientEnt;
 import pl.lodz.p.it.tks.db.ClientDBRepository;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Component
+@Transactional
 public class ClientRepositoryAdapter implements AddClientPort, GetClientPort, DeleteClientPort, UpdateClientPort {
     //private ClientRepository repository;
     private ClientDBRepository repository;
@@ -62,7 +64,7 @@ public class ClientRepositoryAdapter implements AddClientPort, GetClientPort, De
         if(!repository.existsById(client.getId()))
             //to sie wywoluje ale nie dodaje do bazy -> czemu ?
             //zrobienie saveAndFlush daje wyjątek że nie ma transakcji otagowanie w @Transactional nie pomaga
-            repository.save(converter.convertClient(client));
+            repository.saveAndFlush(converter.convertClient(client));
     }
 
     @Override

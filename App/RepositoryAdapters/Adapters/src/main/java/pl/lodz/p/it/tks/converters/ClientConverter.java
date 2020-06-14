@@ -1,8 +1,12 @@
 package pl.lodz.p.it.tks.converters;
 
+import org.springframework.transaction.annotation.Transactional;
 import pl.lodz.p.it.tks.data.*;
 import pl.lodz.p.it.tks.model.*;
 
+//tu dodalem z nadzieja ze pomoze w dodawaniu
+//ale nie pomoglo to zakomentowuje
+//@Transactional
 public class ClientConverter {
 
     public ClientEnt convertClient(Client client) {

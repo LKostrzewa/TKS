@@ -53,6 +53,7 @@ public class ClientApi {
     public void addClient(@RequestBody ClientDTO clientDTO) {
         addClientUseCase.addClient(clientDTO);
     }
+
     //dziala
     @GetMapping("/queue")
     public ClientDTO addClient() {
@@ -65,6 +66,8 @@ public class ClientApi {
 
 
     //to odczytuje automatycznie z kolejki taki wzorzec projektowy obserwator ale nie działa
+    //przy save wywoluje sie normalnie bez zadnego bledu tylko nie dodaje klienta do bazy
+    //przy save and flush pokazuje ze nie ma transakcji ale nie wiadomo czy w tym problem
     //(musi działać tak że leci rządanie na kolejke z potencjalnego front ten to odbiera i potem dodaje i do auth i do rent service
     //i tak że jak któryś serwis nei działa to musi być to cofnięcie dodania (tak jak w treści zad))
     /*@RabbitListener(queues = "add-user")
@@ -78,24 +81,24 @@ public class ClientApi {
         ClientDTO clientDTO = new ClientDTO(userPayload.getKey(), userPayload.getName(), userPayload.getSurname(),
                 userPayload.isActive());
         addClientUseCase.addClient(clientDTO);
-        Thread.sleep(1000);
+        //Thread.sleep(1000);
         System.out.println(clientDTO);
     }*/
 
     @GetMapping("/queue-delete")
     public void deleteClient() {
         String msg = (String)rabbitTemplate.receiveAndConvert("delete-user");
-        //byte[] bytes = msg.getBody();
-        //pobiera wiadomosc dobrze problem z transakcjami (TransactionRequiredException), tak jak przy uzywanie saveAndFlush
         UUID uuid = UUID.fromString(msg);
         deleteClientUseCase.deleteClientByKey(uuid);
     }
 
-    //wzorzecz listnera do usuwania
+    //Listener nie działa tak samo ja ten do dodawania co jest jeszcze dziwniejsze.
+    // Odpala się normalnie nie pokazuje zadnego bledu tylko nie usuwa kurwysyna z bazy
     /*@RabbitListener(queues = "delete-user")
     public void deleteClient(String message) {
         UUID uuid = UUID.fromString(message);
         deleteClientUseCase.deleteClientByKey(uuid);
+        System.out.println(message);
     }*/
 
     @PutMapping

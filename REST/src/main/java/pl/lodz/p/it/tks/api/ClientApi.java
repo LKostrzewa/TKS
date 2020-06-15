@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import pl.lodz.p.it.tks.dto.ClientDTO;
 import pl.lodz.p.it.tks.payloads.UserPayload;
@@ -11,6 +12,7 @@ import pl.lodz.p.it.tks.useCases.clientUseCase.*;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
@@ -55,14 +57,14 @@ public class ClientApi {
     }
 
     //dziala
-    @GetMapping("/queue")
+    /*@GetMapping("/queue")
     public ClientDTO addClient() {
         UserPayload userPayload = (UserPayload) rabbitTemplate.receiveAndConvert("add-user");
         ClientDTO clientDTO = new ClientDTO(userPayload.getKey(), userPayload.getName(), userPayload.getSurname(),
                 userPayload.isActive());
         addClientUseCase.addClient(clientDTO);
         return clientDTO;
-    }
+    }*/
 
 
     //to odczytuje automatycznie z kolejki taki wzorzec projektowy obserwator ale nie działa
@@ -70,36 +72,37 @@ public class ClientApi {
     //przy save and flush pokazuje ze nie ma transakcji ale nie wiadomo czy w tym problem
     //(musi działać tak że leci rządanie na kolejke z potencjalnego front ten to odbiera i potem dodaje i do auth i do rent service
     //i tak że jak któryś serwis nei działa to musi być to cofnięcie dodania (tak jak w treści zad))
-    /*@RabbitListener(queues = "add-user")
+    @RabbitListener(queues = "add-user")
     public void addClient(Message message) throws InterruptedException {
         /*UserPayload userPayload = (UserPayload) rabbitTemplate.receiveAndConvert("add-user");
         return new ClientDTO(userPayload.getKey(), userPayload.getName(), userPayload.getSurname(),
                 userPayload.isActive());*/
-        /*System.out.println(message);
+        //System.out.println(message);
         UserPayload userPayload = (UserPayload) rabbitTemplate.getMessageConverter().fromMessage(message);
-        System.out.println(userPayload.getName());
+        //System.out.println(userPayload.getName());
         ClientDTO clientDTO = new ClientDTO(userPayload.getKey(), userPayload.getName(), userPayload.getSurname(),
                 userPayload.isActive());
+        //Thread.sleep(1000);
         addClientUseCase.addClient(clientDTO);
         //Thread.sleep(1000);
-        System.out.println(clientDTO);
-    }*/
+        //System.out.println(clientDTO);
+    }
 
-    @GetMapping("/queue-delete")
+    /*@GetMapping("/queue-delete")
     public void deleteClient() {
         String msg = (String)rabbitTemplate.receiveAndConvert("delete-user");
         UUID uuid = UUID.fromString(msg);
         deleteClientUseCase.deleteClientByKey(uuid);
-    }
+    }*/
 
     //Listener nie działa tak samo ja ten do dodawania co jest jeszcze dziwniejsze.
     // Odpala się normalnie nie pokazuje zadnego bledu tylko nie usuwa kurwysyna z bazy
-    /*@RabbitListener(queues = "delete-user")
+    @RabbitListener(queues = "delete-user")
     public void deleteClient(String message) {
         UUID uuid = UUID.fromString(message);
         deleteClientUseCase.deleteClientByKey(uuid);
-        System.out.println(message);
-    }*/
+        //Logger.getGlobal().info(message);
+    }
 
     @PutMapping
     public void updateClient(@RequestBody ClientDTO clientDTO) {

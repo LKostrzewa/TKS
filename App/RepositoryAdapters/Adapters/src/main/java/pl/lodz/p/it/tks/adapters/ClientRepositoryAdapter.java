@@ -60,6 +60,7 @@ public class ClientRepositoryAdapter implements AddClientPort, GetClientPort, De
 
 
     @Override
+    @Transactional
     public void addClient(Client client) {
         if(!repository.existsById(client.getId()))
             //to sie wywoluje ale nie dodaje do bazy -> czemu ?
@@ -73,8 +74,10 @@ public class ClientRepositoryAdapter implements AddClientPort, GetClientPort, De
     }
 
     @Override
+    @Transactional
     public void deleteByKey(UUID uuid) {
         repository.deleteByKey(uuid);
+        repository.flush();
     }
 
     @Override

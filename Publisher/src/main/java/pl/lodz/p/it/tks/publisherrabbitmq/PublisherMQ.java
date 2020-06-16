@@ -19,14 +19,11 @@ public class PublisherMQ {
     }
 
     @PostMapping
-    public void publishUser(@RequestBody UserDTO userDTO) {
-        userDTO.setKey(UUID.randomUUID());
+    public void publishUser(@RequestBody UserPayload userPayload) {
+        UUID uuid = UUID.randomUUID();
+        UserDTO userDTO = new UserDTO(userPayload.getLogin(), userPayload.getPassword(), userPayload.getName(), userPayload.getSurname(), userPayload.isActive(), uuid);
+        ClientDTO clientDTO = new ClientDTO(uuid, userPayload.getName(), userPayload.getSurname(), userPayload.isActive());
         rabbitTemplate.convertAndSend("auth", userDTO);
-    }
-
-    @PostMapping("/client")
-    public void publishClient(@RequestBody ClientDTO clientDTO) {
-        clientDTO.setKey(UUID.randomUUID());
         rabbitTemplate.convertAndSend("app", clientDTO);
     }
 

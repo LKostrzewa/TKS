@@ -17,7 +17,8 @@ public class User {
         this.isActive = true;
     }
 
-    public User(String login, String password, String name, String surname, String accessLevel, UUID key) {
+    public User(int id, String login, String password, String name, String surname, String accessLevel, UUID key) {
+        this.id = id;
         this.login = login;
         this.password = password;
         this.name = name;

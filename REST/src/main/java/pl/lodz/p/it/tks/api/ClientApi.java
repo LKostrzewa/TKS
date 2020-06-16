@@ -68,21 +68,16 @@ public class ClientApi {
         return clientDTO;
     }*/
 
-
-    //to odczytuje automatycznie z kolejki taki wzorzec projektowy obserwator ale nie działa
-    //przy save wywoluje sie normalnie bez zadnego bledu tylko nie dodaje klienta do bazy
-    //przy save and flush pokazuje ze nie ma transakcji ale nie wiadomo czy w tym problem
-    //(musi działać tak że leci rządanie na kolejke z potencjalnego front ten to odbiera i potem dodaje i do auth i do rent service
-    //i tak że jak któryś serwis nei działa to musi być to cofnięcie dodania (tak jak w treści zad))
-    @RabbitListener(queues = "add-user")
+    @RabbitListener(queues = "auth")
     public void addClient(Message message) {
 
-        UserPayload userPayload = (UserPayload) rabbitTemplate.getMessageConverter().fromMessage(message);
+        //UserPayload userPayload = (UserPayload) rabbitTemplate.getMessageConverter().fromMessage(message);
+        UserDTO userDTO = (UserDTO) rabbitTemplate.getMessageConverter().fromMessage(message);
         //ClientDTO clientDTO = new ClientDTO(userPayload.getKey(), userPayload.getName(), userPayload.getSurname(),
         //        userPayload.isActive());
         //addClientUseCase.addClient(clientDTO);
-        UserDTO userDTO = new UserDTO(userPayload.getLogin(), userPayload.getPassword(), userPayload.getName(),
-                userPayload.getSurname(), "Normal");
+        /*UserDTO userDTO = new UserDTO(userPayload.getLogin(), userPayload.getPassword(), userPayload.getName(),
+                userPayload.getSurname(), userPayload.isActive(), userPayload.getKey());*/
         addUserUseCase.addUser(userDTO);
     }
 

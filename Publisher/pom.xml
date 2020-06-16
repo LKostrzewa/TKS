@@ -41,7 +41,13 @@
         </dependency>
         <dependency>
             <groupId>pl.lodz.p.it.tks</groupId>
-            <artifactId>MQPayloads</artifactId>
+            <artifactId>AuthViewModel</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>pl.lodz.p.it.tks</groupId>
+            <artifactId>ViewModel</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

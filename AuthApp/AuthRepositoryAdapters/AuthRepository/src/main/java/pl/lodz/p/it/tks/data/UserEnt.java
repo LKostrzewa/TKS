@@ -5,13 +5,13 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import java.util.UUID;
 
-//@PasswordMatches
 @Entity
-@Table(name = "user")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Table(name = "user_table")
 public class UserEnt {
 
     @Id
+    @SequenceGenerator(name = "UserSeqGen", sequenceName = "user_table_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "UserSeqGen")
     private int id;
     @NotBlank(message = "Login cannot be blank")
     @Column(name = "login")

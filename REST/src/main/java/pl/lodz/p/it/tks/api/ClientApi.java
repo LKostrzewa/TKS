@@ -1,42 +1,44 @@
 package pl.lodz.p.it.tks.api;
 
-import com.google.gson.Gson;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import pl.lodz.p.it.tks.dto.ClientDTO;
+//import pl.lodz.p.it.tks.dto.ClientDTO;
+import pl.lodz.p.it.tks.dto.UserDTO;
 import pl.lodz.p.it.tks.payloads.UserPayload;
-import pl.lodz.p.it.tks.useCases.clientUseCase.*;
+//import pl.lodz.p.it.tks.useCases.clientUseCase.*;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Logger;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import pl.lodz.p.it.tks.useCases.userUseCase.AddUserUseCase;
 
 @RestController
 @RequestMapping("/api/clients")
 public class ClientApi {
 
-    private AddClientUseCase addClientUseCase;
-    private UpdateClientUseCase updateClientUseCase;
-    private DeleteClientUseCase deleteClientUseCase;
-    private UtilsClientUseCase utilsClientUseCase;
+    //private AddClientUseCase addClientUseCase;
+    private AddUserUseCase addUserUseCase;
+    //private UpdateClientUseCase updateClientUseCase;
+    //private DeleteClientUseCase deleteClientUseCase;
+    //private UtilsClientUseCase utilsClientUseCase;
     private RabbitTemplate rabbitTemplate;
 
     @Autowired
-    public ClientApi(AddClientUseCase addClientUseCase, UpdateClientUseCase updateClientUseCase, DeleteClientUseCase deleteClientUseCase
-            , UtilsClientUseCase utilsClientUseCase, RabbitTemplate rabbitTemplate) {
-        this.addClientUseCase = addClientUseCase;
-        this.updateClientUseCase = updateClientUseCase;
-        this.deleteClientUseCase = deleteClientUseCase;
-        this.utilsClientUseCase = utilsClientUseCase;
+    public ClientApi(//AddClientUseCase addClientUseCase, UpdateClientUseCase updateClientUseCase, DeleteClientUseCase deleteClientUseCase
+            //, UtilsClientUseCase utilsClientUseCase,
+                     RabbitTemplate rabbitTemplate, AddUserUseCase addUserUseCase) {
+        //this.addClientUseCase = addClientUseCase;
+        //this.updateClientUseCase = updateClientUseCase;
+        //this.deleteClientUseCase = deleteClientUseCase;
+        //this.utilsClientUseCase = utilsClientUseCase;
         this.rabbitTemplate = rabbitTemplate;
+        this.addUserUseCase = addUserUseCase;
     }
 
-    @GetMapping
+    /*@GetMapping
     public List<ClientDTO> getAllClient(){
         return utilsClientUseCase.getAllClients();
     }
@@ -54,7 +56,7 @@ public class ClientApi {
     @PostMapping
     public void addClient(@RequestBody ClientDTO clientDTO) {
         addClientUseCase.addClient(clientDTO);
-    }
+    }*/
 
     //dziala
     /*@GetMapping("/queue")
@@ -73,19 +75,15 @@ public class ClientApi {
     //(musi działać tak że leci rządanie na kolejke z potencjalnego front ten to odbiera i potem dodaje i do auth i do rent service
     //i tak że jak któryś serwis nei działa to musi być to cofnięcie dodania (tak jak w treści zad))
     @RabbitListener(queues = "add-user")
-    public void addClient(Message message) throws InterruptedException {
-        /*UserPayload userPayload = (UserPayload) rabbitTemplate.receiveAndConvert("add-user");
-        return new ClientDTO(userPayload.getKey(), userPayload.getName(), userPayload.getSurname(),
-                userPayload.isActive());*/
-        //System.out.println(message);
+    public void addClient(Message message) {
+
         UserPayload userPayload = (UserPayload) rabbitTemplate.getMessageConverter().fromMessage(message);
-        //System.out.println(userPayload.getName());
-        ClientDTO clientDTO = new ClientDTO(userPayload.getKey(), userPayload.getName(), userPayload.getSurname(),
-                userPayload.isActive());
-        //Thread.sleep(1000);
-        addClientUseCase.addClient(clientDTO);
-        //Thread.sleep(1000);
-        //System.out.println(clientDTO);
+        //ClientDTO clientDTO = new ClientDTO(userPayload.getKey(), userPayload.getName(), userPayload.getSurname(),
+        //        userPayload.isActive());
+        //addClientUseCase.addClient(clientDTO);
+        UserDTO userDTO = new UserDTO(userPayload.getLogin(), userPayload.getPassword(), userPayload.getName(),
+                userPayload.getSurname(), "Normal");
+        addUserUseCase.addUser(userDTO);
     }
 
     /*@GetMapping("/queue-delete")
@@ -97,7 +95,7 @@ public class ClientApi {
 
     //Listener nie działa tak samo ja ten do dodawania co jest jeszcze dziwniejsze.
     // Odpala się normalnie nie pokazuje zadnego bledu tylko nie usuwa kurwysyna z bazy
-    @RabbitListener(queues = "delete-user")
+    /*@RabbitListener(queues = "delete-user")
     public void deleteClient(String message) {
         UUID uuid = UUID.fromString(message);
         deleteClientUseCase.deleteClientByKey(uuid);
@@ -112,5 +110,5 @@ public class ClientApi {
     @DeleteMapping("/{id}")
     public void deleteClient(@PathVariable int id) {
         deleteClientUseCase.deleteClient(id);
-    }
+    }*/
 }

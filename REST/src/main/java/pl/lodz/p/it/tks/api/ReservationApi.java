@@ -1,6 +1,6 @@
 package pl.lodz.p.it.tks.api;
 
-import org.springframework.beans.factory.annotation.Autowired;
+/*import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.lodz.p.it.tks.dto.ReservationDTO;
 import pl.lodz.p.it.tks.useCases.reservationUseCase.StartReservationUseCase;
@@ -31,4 +31,4 @@ public class ReservationApi {
     public void addReservations(@RequestBody ReservationDTO reservationDTO) {
         startReservationUseCase.startReservation(reservationDTO);
     }
-}
+}*/

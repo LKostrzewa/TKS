@@ -1,6 +1,6 @@
 package pl.lodz.p.it.tks.api;
 
-import org.apache.http.HttpResponse;
+/*import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.*;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
@@ -176,4 +176,4 @@ class ResourceApiTest {
         Assertions.assertEquals(3, test.length());
     }*/
 
-}
+//}

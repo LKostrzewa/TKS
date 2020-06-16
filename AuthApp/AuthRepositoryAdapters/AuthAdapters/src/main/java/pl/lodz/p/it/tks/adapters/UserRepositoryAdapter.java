@@ -2,6 +2,7 @@ package pl.lodz.p.it.tks.adapters;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import pl.lodz.p.it.tks.converters.UserConverter;
 import pl.lodz.p.it.tks.data.UserEnt;
 import pl.lodz.p.it.tks.db.UserDBRepository;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Transactional
 public class UserRepositoryAdapter implements AddUserPort, DeleteUserPort, GetUserPort, UpdateUserPort {
     private UserDBRepository repository;
     private UserConverter converter;

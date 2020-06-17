@@ -36,23 +36,26 @@ public class ClientApi {
         this.utilsClientUseCase = utilsClientUseCase;
     }
 
-    @RabbitListener(bindings = @QueueBinding(
+    /*@RabbitListener(bindings = @QueueBinding(
             value = @Queue(value = "app"),
             exchange = @Exchange(value = "master"),
             key = "app.addClient"
-    ))
+    ))*/
+    @RabbitListener(queues = "app")
     public void addClient(Message message) {
         ClientDTO clientDto = (ClientDTO) rabbitTemplate.getMessageConverter().fromMessage(message);
         if(!addClientUseCase.addClient(clientDto)) {
-            rabbitTemplate.convertAndSend("master", "auth.delete", clientDto.getKey());
+            //rabbitTemplate.convertAndSend("master", "auth.delete", clientDto.getKey());
+            rabbitTemplate.convertAndSend("auth-delete", clientDto.getKey());
         }
     }
 
-    @RabbitListener(bindings = @QueueBinding(
+    /*@RabbitListener(bindings = @QueueBinding(
             value = @Queue(value = "app"),
             exchange = @Exchange(value = "master"),
             key = "app.delete"
-    ))
+    ))*/
+    @RabbitListener(queues = "app-delete")
     public void deleteClient(String message) {
         UUID uuid = UUID.fromString(message);
         deleteClientUseCase.deleteClientByKey(uuid);

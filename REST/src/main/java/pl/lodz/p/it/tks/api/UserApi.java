@@ -43,23 +43,26 @@ public class UserApi {
         }
     }*/
 
-    @RabbitListener(bindings = @QueueBinding(
+    /*@RabbitListener(bindings = @QueueBinding(
             value = @Queue(value = "auth"),
             exchange = @Exchange(value = "master"),
             key = "auth.addUser"
-    ))
+    ))*/
+    @RabbitListener(queues = "auth")
     public void addUser(Message message){
         UserDTO userDTO = (UserDTO) rabbitTemplate.getMessageConverter().fromMessage(message);
         if(!addUserUseCase.addUser(userDTO)){
-            rabbitTemplate.convertAndSend("master","app.delete",userDTO.getKey());
+            //rabbitTemplate.convertAndSend("master","app.delete",userDTO.getKey());
+            rabbitTemplate.convertAndSend("app-delete", userDTO.getKey());
         }
     }
 
-    @RabbitListener(bindings = @QueueBinding(
+    /*@RabbitListener(bindings = @QueueBinding(
             value = @Queue(value = "auth"),
             exchange = @Exchange(value = "master"),
             key = "auth.delete"
-    ))
+    ))*/
+    @RabbitListener(queues = "auth-delete")
     public void deleteUser(String message){
         UUID key = UUID.fromString(message);
         deleteUserUseCase.deleteUserByKey(key);

@@ -22,27 +22,19 @@ public class PublisherMQ {
     }
 
     @PostMapping
-    public void publishUser(@RequestBody UserPayload userPayload) {
+    public void publishUser(@RequestBody UserPayload userPayload) throws InterruptedException {
         UUID uuid = UUID.randomUUID();
         UserDTO userDTO = new UserDTO(userPayload.getLogin(), userPayload.getPassword(), userPayload.getName(), userPayload.getSurname(), userPayload.isActive(), uuid);
         ClientDTO clientDTO = new ClientDTO(uuid, userPayload.getName(), userPayload.getSurname(), userPayload.isActive());
-        rabbitTemplate.convertAndSend("master","auth.addUser", userDTO);
-        rabbitTemplate.convertAndSend("master","app.addClient", clientDTO);
+        //rabbitTemplate.convertAndSend("master","app.addClient", clientDTO);
+        //rabbitTemplate.convertAndSend("master","auth.addUser", userDTO);
+        rabbitTemplate.convertAndSend("app", clientDTO);
+        rabbitTemplate.convertAndSend("auth", userDTO);
     }
 
     @PostMapping("/delete")
     public void publishBusinessKey(@RequestParam String key) {
         rabbitTemplate.convertAndSend("master","auth.delete", key);
         rabbitTemplate.convertAndSend("master","app.delete", key);
-
-        //rabbitTemplate.convertAndSend("master",".delete", key);
-    }
-
-    @PostMapping("/test")
-    public void test(@RequestBody UserPayload userPayload) {
-        UUID uuid = UUID.randomUUID();
-        UserDTO userDTO = new UserDTO(userPayload.getLogin(), userPayload.getPassword(), userPayload.getName(), userPayload.getSurname(), userPayload.isActive(), uuid);
-        //rabbitTemplate.convertAndSend("test","auth.addUser", userDTO);
-        //rabbitTemplate.convertAndSend("test","auth.deleteUser", uuid);
     }
 }

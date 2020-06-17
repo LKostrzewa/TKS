@@ -1,8 +1,9 @@
 package pl.lodz.p.it.tks.dto;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class UserDTO {
+public class UserDTO implements Serializable {
 
     private int id;
     private String login;

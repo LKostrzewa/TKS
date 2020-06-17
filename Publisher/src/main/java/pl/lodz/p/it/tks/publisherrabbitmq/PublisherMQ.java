@@ -1,5 +1,8 @@
 package pl.lodz.p.it.tks.publisherrabbitmq;
 
+
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,12 +26,23 @@ public class PublisherMQ {
         UUID uuid = UUID.randomUUID();
         UserDTO userDTO = new UserDTO(userPayload.getLogin(), userPayload.getPassword(), userPayload.getName(), userPayload.getSurname(), userPayload.isActive(), uuid);
         ClientDTO clientDTO = new ClientDTO(uuid, userPayload.getName(), userPayload.getSurname(), userPayload.isActive());
-        rabbitTemplate.convertAndSend("auth", userDTO);
-        rabbitTemplate.convertAndSend("app", clientDTO);
+        rabbitTemplate.convertAndSend("master","auth.addUser", userDTO);
+        rabbitTemplate.convertAndSend("master","app.addClient", clientDTO);
     }
 
     @PostMapping("/delete")
     public void publishBusinessKey(@RequestParam String key) {
-        rabbitTemplate.convertAndSend("delete-user", key);
+        rabbitTemplate.convertAndSend("master","auth.delete", key);
+        rabbitTemplate.convertAndSend("master","app.delete", key);
+
+        //rabbitTemplate.convertAndSend("master",".delete", key);
+    }
+
+    @PostMapping("/test")
+    public void test(@RequestBody UserPayload userPayload) {
+        UUID uuid = UUID.randomUUID();
+        UserDTO userDTO = new UserDTO(userPayload.getLogin(), userPayload.getPassword(), userPayload.getName(), userPayload.getSurname(), userPayload.isActive(), uuid);
+        //rabbitTemplate.convertAndSend("test","auth.addUser", userDTO);
+        //rabbitTemplate.convertAndSend("test","auth.deleteUser", uuid);
     }
 }

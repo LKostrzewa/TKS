@@ -11,4 +11,5 @@ public interface UserDBRepository extends JpaRepository<UserEnt, Integer> {
     UserEnt getByName(String name);
     boolean existsByKey(UUID key);
     boolean existsByLogin(String name);
+    void deleteByKey(UUID key);
 }

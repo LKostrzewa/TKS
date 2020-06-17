@@ -1,6 +1,9 @@
 package pl.lodz.p.it.tks.restrent;
 
 import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.annotation.Exchange;
+import org.springframework.amqp.rabbit.annotation.Queue;
+import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,28 +36,27 @@ public class ClientApi {
         this.utilsClientUseCase = utilsClientUseCase;
     }
 
-    @RabbitListener(queues = "app")
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(value = "app"),
+            exchange = @Exchange(value = "master"),
+            key = "app.addClient"
+    ))
     public void addClient(Message message) {
-
-        //UserPayload userPayload = (UserPayload) rabbitTemplate.getMessageConverter().fromMessage(message);
         ClientDTO clientDto = (ClientDTO) rabbitTemplate.getMessageConverter().fromMessage(message);
-        //ClientDTO clientDTO = new ClientDTO(userPayload.getKey(), userPayload.getName(), userPayload.getSurname(),
-        //        userPayload.isActive());
-        //addClientUseCase.addClient(clientDTO);
-        /*UserDTO userDTO = new UserDTO(userPayload.getLogin(), userPayload.getPassword(), userPayload.getName(),
-                userPayload.getSurname(), userPayload.isActive(), userPayload.getKey());*/
-        if(addClientUseCase.addClient(clientDto)){
-            System.out.println("success");
-        } else {
-            System.out.println("failure");
+        if(!addClientUseCase.addClient(clientDto)) {
+            rabbitTemplate.convertAndSend("master", "auth.delete", clientDto.getKey());
         }
     }
 
-    /*@RabbitListener(queues = "delete-user")
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(value = "app"),
+            exchange = @Exchange(value = "master"),
+            key = "app.delete"
+    ))
     public void deleteClient(String message) {
         UUID uuid = UUID.fromString(message);
         deleteClientUseCase.deleteClientByKey(uuid);
-    }*/
+    }
 
     @GetMapping
     public List<ClientDTO> getAllClient(){

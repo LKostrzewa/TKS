@@ -1,9 +1,10 @@
 package pl.lodz.p.it.tks.dto;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 //@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-public class ClientDTO {
+public class ClientDTO implements Serializable {
 
     //@JsonIgnore
     //private ClientTypeDTO type;

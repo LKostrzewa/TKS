@@ -14,6 +14,7 @@ import pl.lodz.p.it.tks.ports.userPort.UpdateUserPort;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 @Transactional
@@ -40,6 +41,11 @@ public class UserRepositoryAdapter implements AddUserPort, DeleteUserPort, GetUs
     @Override
     public void deleteUser(int id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public void deleteUserByKey(UUID key){
+        repository.deleteByKey(key);
     }
 
 

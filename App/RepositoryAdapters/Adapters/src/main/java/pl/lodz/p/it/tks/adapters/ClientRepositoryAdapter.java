@@ -62,10 +62,10 @@ public class ClientRepositoryAdapter implements AddClientPort, GetClientPort, De
     @Override
     @Transactional
     public void addClient(Client client) {
-        if(!repository.existsById(client.getId()))
-            //to sie wywoluje ale nie dodaje do bazy -> czemu ?
-            //zrobienie saveAndFlush daje wyjątek że nie ma transakcji otagowanie w @Transactional nie pomaga
-            repository.save(converter.convertClient(client));
+        repository.save(converter.convertClient(client));
+        //sugestia sprawdzanie czy dodawanie przebiegło pomyślnie
+        // moze jakis wyjatek ze nie ma polaczenia z baza tez ciezko powiedziec :(?
+        repository.existsByKey(client.getKey());
     }
 
     @Override

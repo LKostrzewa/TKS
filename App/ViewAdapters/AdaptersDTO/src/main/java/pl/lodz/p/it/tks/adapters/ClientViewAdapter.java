@@ -28,8 +28,8 @@ public class ClientViewAdapter implements AddClientUseCase, UpdateClientUseCase,
     }
 
     @Override
-    public void addClient(ClientDTO client) {
-        clientService.addClient(clientViewConverter.convertClientDTO(client));
+    public boolean addClient(ClientDTO client) {
+        return clientService.addClient(clientViewConverter.convertClientDTO(client));
     }
 
     @Override

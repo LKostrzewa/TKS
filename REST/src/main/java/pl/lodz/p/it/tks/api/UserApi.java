@@ -1,6 +1,7 @@
 package pl.lodz.p.it.tks.api;
 
 import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +10,8 @@ import pl.lodz.p.it.tks.dto.UserDTO;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import pl.lodz.p.it.tks.useCases.userUseCase.AddUserUseCase;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/users")
@@ -33,6 +36,10 @@ public class UserApi {
         //addClientUseCase.addClient(clientDTO);
         /*UserDTO userDTO = new UserDTO(userPayload.getLogin(), userPayload.getPassword(), userPayload.getName(),
                 userPayload.getSurname(), userPayload.isActive(), userPayload.getKey());*/
-        addUserUseCase.addUser(userDTO);
+        if(addUserUseCase.addUser(userDTO)){
+            System.out.println("success");
+        } else {
+            System.out.println("failure");
+        }
     }
 }

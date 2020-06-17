@@ -27,9 +27,9 @@ public class UserService  {
         this.deleteUserPort = deleteUserPort;
     }
 
-    public void addUser(User user){
+    public boolean addUser(User user){
         user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
-        addUserPort.addUser(user);
+        return addUserPort.addUser(user);
     }
 
     public User getUser(int id){

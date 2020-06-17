@@ -26,8 +26,8 @@ public class UserViewAdapter implements AddUserUseCase, DeleteUserUseCase, Updat
     }
 
     @Override
-    public void addUser(UserDTO user) {
-        userService.addUser(userViewConverter.convertUserDTO(user));
+    public boolean addUser(UserDTO user) {
+        return userService.addUser(userViewConverter.convertUserDTO(user));
     }
 
     @Override

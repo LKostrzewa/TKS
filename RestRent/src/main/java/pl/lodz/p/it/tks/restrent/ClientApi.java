@@ -43,14 +43,18 @@ public class ClientApi {
         //addClientUseCase.addClient(clientDTO);
         /*UserDTO userDTO = new UserDTO(userPayload.getLogin(), userPayload.getPassword(), userPayload.getName(),
                 userPayload.getSurname(), userPayload.isActive(), userPayload.getKey());*/
-        addClientUseCase.addClient(clientDto);
+        if(addClientUseCase.addClient(clientDto)){
+            System.out.println("success");
+        } else {
+            System.out.println("failure");
+        }
     }
 
-    @RabbitListener(queues = "delete-user")
+    /*@RabbitListener(queues = "delete-user")
     public void deleteClient(String message) {
         UUID uuid = UUID.fromString(message);
         deleteClientUseCase.deleteClientByKey(uuid);
-    }
+    }*/
 
     @GetMapping
     public List<ClientDTO> getAllClient(){

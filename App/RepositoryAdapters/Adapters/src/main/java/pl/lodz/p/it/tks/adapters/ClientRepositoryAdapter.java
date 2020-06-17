@@ -61,11 +61,11 @@ public class ClientRepositoryAdapter implements AddClientPort, GetClientPort, De
 
     @Override
     @Transactional
-    public void addClient(Client client) {
+    public boolean addClient(Client client) {
         repository.save(converter.convertClient(client));
         //sugestia sprawdzanie czy dodawanie przebiegło pomyślnie
         // moze jakis wyjatek ze nie ma polaczenia z baza tez ciezko powiedziec :(?
-        repository.existsByKey(client.getKey());
+        return repository.existsByKey(client.getKey());
     }
 
     @Override

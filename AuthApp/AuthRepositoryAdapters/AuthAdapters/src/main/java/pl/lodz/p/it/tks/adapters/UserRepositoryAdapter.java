@@ -28,9 +28,13 @@ public class UserRepositoryAdapter implements AddUserPort, DeleteUserPort, GetUs
     }
 
     @Override
-    public void addUser(User user) {
-        if(!repository.existsById(user.getId()))
-            repository.save(converter.convertUser(user));
+    public boolean addUser(User user) {
+        if(repository.existsByLogin(user.getLogin())){
+            return false;
+        }
+        repository.save(converter.convertUser(user));
+
+        return repository.existsByKey(user.getKey());
     }
 
     @Override

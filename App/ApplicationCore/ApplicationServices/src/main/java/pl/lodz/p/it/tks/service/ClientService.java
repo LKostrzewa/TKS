@@ -32,8 +32,8 @@ public class ClientService {
         //addClient(new Client("romek", "Roman", "Bialek", new NormalClient()));
     }
 
-    public void addClient(Client client){
-        addClientPort.addClient(client);
+    public boolean addClient(Client client){
+        return addClientPort.addClient(client);
     }
 
     public Client getClient(int id) {

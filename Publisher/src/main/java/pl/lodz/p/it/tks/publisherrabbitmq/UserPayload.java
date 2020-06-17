@@ -8,7 +8,7 @@ public class UserPayload implements Serializable {
     private String password;
     private String name;
     private String surname;
-    private boolean isActive;
+    private boolean active;
     private UUID key;
 
     public String getLogin() {
@@ -44,11 +44,11 @@ public class UserPayload implements Serializable {
     }
 
     public boolean isActive() {
-        return isActive;
+        return active;
     }
 
     public void setActive(boolean active) {
-        isActive = active;
+        this.active = active;
     }
 
     public UUID getKey() {

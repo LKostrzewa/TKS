@@ -30,7 +30,7 @@ public class ReservationService {
         this.updateReservationPort = updateReservationPort;
     }
 
-    public void startReservation(Reservation reservation) /*Runtime bo w testach wygoniej :)*/throws RuntimeException {
+    public void startReservation(Reservation reservation) throws RuntimeException {
         if(getReservationsPort.getReservedReservations(reservation.getResource().getId()).isPresent())
             throw new ResourceTakenException("Reservation impossible, that resource is already taken");
         if(!reservation.getClient().isActive()){

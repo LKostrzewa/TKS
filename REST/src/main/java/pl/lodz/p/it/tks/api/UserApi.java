@@ -32,17 +32,6 @@ public class UserApi {
         this.deleteUserUseCase = deleteUserUseCase;
     }
 
-    /*@RabbitListener(queues = "auth")
-    public void addClient(Message message) {
-
-        UserDTO userDTO = (UserDTO) rabbitTemplate.getMessageConverter().fromMessage(message);
-        if(addUserUseCase.addUser(userDTO)){
-            System.out.println("success");
-        } else {
-            System.out.println("failure");
-        }
-    }*/
-
     /*@RabbitListener(bindings = @QueueBinding(
             value = @Queue(value = "auth"),
             exchange = @Exchange(value = "master"),

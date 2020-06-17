@@ -13,7 +13,7 @@ public class UserConverter {
 
     public UserEnt convertUser(User user) {
         UserEnt userEnt = new UserEnt(user.getId(), user.getLogin(), user.getPassword(), user.getName(), user.getSurname(), user.getAccessLevel(), user.getKey());
-        userEnt.setActive(userEnt.isActive());
+        userEnt.setActive(user.isActive());
         return userEnt;
     }
 }

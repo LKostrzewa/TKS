@@ -28,6 +28,16 @@ public class UserDTO {
         this.key = UUID.randomUUID();
     }
 
+    public UserDTO(String login, String password, String name, String surname, boolean active, UUID key) {
+        this.login = login;
+        this.password = password;
+        this.name = name;
+        this.surname = surname;
+        this.accessLevel = "CLIENT";
+        this.active = active;
+        this.key = key;
+    }
+
     public int getId() {
         return id;
     }

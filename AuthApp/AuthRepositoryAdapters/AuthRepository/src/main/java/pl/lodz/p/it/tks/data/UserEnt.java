@@ -5,13 +5,13 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import java.util.UUID;
 
-//@PasswordMatches
 @Entity
-@Table(name = "user")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Table(name = "user_table")
 public class UserEnt {
 
     @Id
+    @SequenceGenerator(name = "UserSeqGen", sequenceName = "user_table_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "UserSeqGen")
     private int id;
     @NotBlank(message = "Login cannot be blank")
     @Column(name = "login")
@@ -24,22 +24,23 @@ public class UserEnt {
     @Column(name = "surname")
     private String surname;
     @Column(name = "is_active")
-    private boolean isActive;
+    private boolean active;
     @Column(name = "access_level")
     private String accessLevel;
     @Column
     private UUID key;
 
     public UserEnt(){
-        this.isActive = true;
+        this.active = true;
     }
 
-    public UserEnt(String login, String password, String name, String surname, String accessLevel, UUID key) {
+    public UserEnt(int id, String login, String password, String name, String surname, String accessLevel, UUID key) {
+        this.id = id;
         this.login = login;
         this.password = password;
         this.name = name;
         this.surname = surname;
-        this.isActive = true;
+        this.active = true;
         this.accessLevel = accessLevel;
         this.key = key;
     }
@@ -73,11 +74,11 @@ public class UserEnt {
     }
 
     public boolean isActive() {
-        return isActive;
+        return active;
     }
 
     public void setActive(boolean active) {
-        isActive = active;
+        this.active = active;
     }
 
     public void setLogin(String login) {

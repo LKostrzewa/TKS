@@ -2,6 +2,7 @@ package pl.lodz.p.it.tks.adapters;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import pl.lodz.p.it.tks.converters.ClientConverter;
 import pl.lodz.p.it.tks.data.ClientEnt;
 import pl.lodz.p.it.tks.db.ClientDBRepository;
@@ -14,8 +15,10 @@ import pl.lodz.p.it.tks.repository.ClientRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Component
+@Transactional
 public class ClientRepositoryAdapter implements AddClientPort, GetClientPort, DeleteClientPort, UpdateClientPort {
     //private ClientRepository repository;
     private ClientDBRepository repository;
@@ -57,14 +60,24 @@ public class ClientRepositoryAdapter implements AddClientPort, GetClientPort, De
 
 
     @Override
-    public void addClient(Client client) {
-        if(!repository.existsById(client.getId()))
-            repository.save(converter.convertClient(client));
+    @Transactional
+    public boolean addClient(Client client) {
+        repository.save(converter.convertClient(client));
+        //sugestia sprawdzanie czy dodawanie przebiegło pomyślnie
+        // moze jakis wyjatek ze nie ma polaczenia z baza tez ciezko powiedziec :(?
+        return repository.existsByKey(client.getKey());
     }
 
     @Override
     public void deleteClient(int id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteByKey(UUID uuid) {
+        repository.deleteByKey(uuid);
+        repository.flush();
     }
 
     @Override

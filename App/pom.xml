@@ -361,9 +361,6 @@
     <module>ApplicationPorts</module>
             
     
-    <module>SpringViews</module>
-            
-    
     <module>ViewAdapters</module>
             
     

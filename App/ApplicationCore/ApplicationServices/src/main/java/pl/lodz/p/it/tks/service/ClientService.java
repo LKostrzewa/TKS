@@ -10,7 +10,9 @@ import pl.lodz.p.it.tks.ports.clientPort.DeleteClientPort;
 import pl.lodz.p.it.tks.ports.clientPort.GetClientPort;
 import pl.lodz.p.it.tks.ports.clientPort.UpdateClientPort;
 
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ClientService {
@@ -30,8 +32,8 @@ public class ClientService {
         //addClient(new Client("romek", "Roman", "Bialek", new NormalClient()));
     }
 
-    public void addClient(Client client){
-        addClientPort.addClient(client);
+    public boolean addClient(Client client){
+        return addClientPort.addClient(client);
     }
 
     public Client getClient(int id) {
@@ -40,6 +42,10 @@ public class ClientService {
 
     public void deleteClient(int id) {
         deleteClientPort.deleteClient(id);
+    }
+
+    public void deleteClientByKey(UUID key) {
+        deleteClientPort.deleteByKey(key);
     }
 
     public void updateClient(int id, Client client) {

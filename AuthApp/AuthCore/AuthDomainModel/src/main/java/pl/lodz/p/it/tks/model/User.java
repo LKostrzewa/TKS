@@ -9,20 +9,21 @@ public class User {
     private String password;
     private String name;
     private String surname;
-    private boolean isActive;
+    private boolean active;
     private String accessLevel;
     private UUID key;
 
     public User(){
-        this.isActive = true;
+        this.active = true;
     }
 
-    public User(String login, String password, String name, String surname, String accessLevel, UUID key) {
+    public User(int id, String login, String password, String name, String surname, String accessLevel, UUID key) {
+        this.id = id;
         this.login = login;
         this.password = password;
         this.name = name;
         this.surname = surname;
-        this.isActive = true;
+        this.active = true;
         this.accessLevel = accessLevel;
         this.key = key;
     }
@@ -56,11 +57,11 @@ public class User {
     }
 
     public boolean isActive() {
-        return isActive;
+        return active;
     }
 
     public void setActive(boolean active) {
-        isActive = active;
+        this.active = active;
     }
 
     public void setLogin(String login) {

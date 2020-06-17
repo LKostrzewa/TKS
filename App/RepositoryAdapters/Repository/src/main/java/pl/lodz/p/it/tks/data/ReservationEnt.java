@@ -1,6 +1,5 @@
 package pl.lodz.p.it.tks.data;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -14,13 +13,11 @@ public class ReservationEnt {
     @GeneratedValue(strategy = GenerationType.AUTO)
     //@NotBlank(message = "id cannot be blank")
     private int id;
-    //@Column(name = "resource")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "resource", referencedColumnName = "id")
+    @JoinColumn(name = "resource_id", referencedColumnName = "id")
     private ResourceEnt resource;
-    //@Column(name = "client")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "client", referencedColumnName = "id")
+    @JoinColumn(name = "client_id", referencedColumnName = "id")
     private ClientEnt client;
     //@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Column(name = "beginning")

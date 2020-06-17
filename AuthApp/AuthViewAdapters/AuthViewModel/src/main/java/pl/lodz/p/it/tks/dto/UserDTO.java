@@ -1,30 +1,50 @@
 package pl.lodz.p.it.tks.dto;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class UserDTO {
+public class UserDTO implements Serializable {
 
+    private int id;
     private String login;
     private String password;
     private String name;
     private String surname;
-    private boolean isActive;
+    private boolean active;
     private String accessLevel;
-    //TODO w którym miejscu go ustawiamy ?
     private UUID key;
 
     public UserDTO(){
-        this.isActive = true;
+        this.active = true;
     }
 
-    public UserDTO(String login, String password, String name, String surname, String accessLevel) {
+    public UserDTO(int id, String login, String password, String name, String surname, String accessLevel) {
+        this.id = id;
         this.login = login;
         this.password = password;
         this.name = name;
         this.surname = surname;
-        this.isActive = true;
+        this.active = true;
         this.accessLevel = accessLevel;
         this.key = UUID.randomUUID();
+    }
+
+    public UserDTO(String login, String password, String name, String surname, boolean active, UUID key) {
+        this.login = login;
+        this.password = password;
+        this.name = name;
+        this.surname = surname;
+        this.accessLevel = "CLIENT";
+        this.active = active;
+        this.key = key;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getPassword() {
@@ -48,11 +68,11 @@ public class UserDTO {
     }
 
     public boolean isActive() {
-        return isActive;
+        return active;
     }
 
     public void setActive(boolean active) {
-        isActive = active;
+        this.active = active;
     }
 
     public void setLogin(String login) {

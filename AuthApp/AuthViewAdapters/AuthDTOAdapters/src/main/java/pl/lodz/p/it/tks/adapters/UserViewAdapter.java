@@ -12,6 +12,7 @@ import pl.lodz.p.it.tks.useCases.userUseCase.UtilsUserUseCase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class UserViewAdapter implements AddUserUseCase, DeleteUserUseCase, UpdateUserUseCase, UtilsUserUseCase {
@@ -26,13 +27,18 @@ public class UserViewAdapter implements AddUserUseCase, DeleteUserUseCase, Updat
     }
 
     @Override
-    public void addUser(UserDTO user) {
-        userService.addUser(userViewConverter.convertUserDTO(user));
+    public boolean addUser(UserDTO user) {
+        return userService.addUser(userViewConverter.convertUserDTO(user));
     }
 
     @Override
     public void deleteUser(int id) {
         userService.deleteUser(id);
+    }
+
+    @Override
+    public void deleteUserByKey(UUID key){
+        userService.deleteUserByKey(key);
     }
 
     @Override

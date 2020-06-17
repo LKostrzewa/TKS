@@ -10,6 +10,7 @@ import pl.lodz.p.it.tks.ports.userPort.GetUserPort;
 import pl.lodz.p.it.tks.ports.userPort.UpdateUserPort;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserService  {
@@ -27,9 +28,9 @@ public class UserService  {
         this.deleteUserPort = deleteUserPort;
     }
 
-    public void addUser(User user){
+    public boolean addUser(User user){
         user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
-        addUserPort.addUser(user);
+        return addUserPort.addUser(user);
     }
 
     public User getUser(int id){
@@ -38,6 +39,10 @@ public class UserService  {
 
     public void deleteUser(int id){
         deleteUserPort.deleteUser(id);
+    }
+
+    public void deleteUserByKey(UUID key){
+        deleteUserPort.deleteUserByKey(key);
     }
 
     public void updateUser(int id, User user){

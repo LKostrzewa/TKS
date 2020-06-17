@@ -2,25 +2,23 @@ package pl.lodz.p.it.tks.data;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
 @Table(name = "client")
 public class ClientEnt {
 
-   // private transient ClientTypeEnt type;
     //@NotBlank(message = "Id cannot be blank")
     @Id
+    @SequenceGenerator(name = "UserSeqGen", sequenceName = "client_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "UserSeqGen")
     private int id;
     @Column(name = "name")
     private String name;
     @Column(name = "surname")
     private String surname;
-    @Column(name = "is_active")
+    @Column(name = "active")
     private boolean active;
     @Column(name = "client_type")
     private String clientType;

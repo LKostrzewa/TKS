@@ -2,6 +2,7 @@ package pl.lodz.p.it.tks.adapters;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import pl.lodz.p.it.tks.converters.UserConverter;
 import pl.lodz.p.it.tks.data.UserEnt;
 import pl.lodz.p.it.tks.db.UserDBRepository;
@@ -13,8 +14,10 @@ import pl.lodz.p.it.tks.ports.userPort.UpdateUserPort;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Component
+@Transactional
 public class UserRepositoryAdapter implements AddUserPort, DeleteUserPort, GetUserPort, UpdateUserPort {
     private UserDBRepository repository;
     private UserConverter converter;
@@ -26,14 +29,23 @@ public class UserRepositoryAdapter implements AddUserPort, DeleteUserPort, GetUs
     }
 
     @Override
-    public void addUser(User user) {
-        if(!repository.existsById(user.getId()))
-            repository.save(converter.convertUser(user));
+    public boolean addUser(User user) {
+        if(repository.existsByLogin(user.getLogin())){
+            return false;
+        }
+        repository.save(converter.convertUser(user));
+
+        return repository.existsByKey(user.getKey());
     }
 
     @Override
     public void deleteUser(int id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public void deleteUserByKey(UUID key){
+        repository.deleteByKey(key);
     }
 
 

@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping
+@RequestMapping("/api/clients")
 public class ClientApi {
 
     private RabbitTemplate rabbitTemplate;
@@ -61,7 +61,7 @@ public class ClientApi {
         deleteClientUseCase.deleteClientByKey(uuid);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<ClientDTO> getAllClient(){
         return utilsClientUseCase.getAllClients();
     }
@@ -71,7 +71,7 @@ public class ClientApi {
         return utilsClientUseCase.getAllActiveClients();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("byId/{id}")
     public ClientDTO getClient(@PathVariable int id) {
         return utilsClientUseCase.getClient(id);
     }
@@ -89,5 +89,10 @@ public class ClientApi {
     @DeleteMapping("/{id}")
     public void deleteClient(@PathVariable int id) {
         deleteClientUseCase.deleteClient(id);
+    }
+
+    @GetMapping("/{key}")
+    public ClientDTO getClientByKey(@PathVariable UUID key) {
+        return utilsClientUseCase.getClientByKey(key);
     }
 }

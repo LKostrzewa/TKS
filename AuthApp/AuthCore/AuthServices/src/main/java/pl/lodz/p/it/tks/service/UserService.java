@@ -56,4 +56,8 @@ public class UserService  {
     public User getUserByName(String name) {
         return getUserPort.getUserByName(name);
     }
+
+    public User getUserByKey(UUID key) {
+        return getUserPort.getUserByKey(key);
+    }
 }

@@ -14,6 +14,7 @@ import pl.lodz.p.it.tks.dto.UserDTO;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import pl.lodz.p.it.tks.useCases.userUseCase.AddUserUseCase;
 import pl.lodz.p.it.tks.useCases.userUseCase.DeleteUserUseCase;
+import pl.lodz.p.it.tks.useCases.userUseCase.UtilsUserUseCase;
 
 import java.util.UUID;
 
@@ -22,14 +23,16 @@ import java.util.UUID;
 public class UserApi {
 
     private AddUserUseCase addUserUseCase;
+    private UtilsUserUseCase utilsUserUseCase;
     private RabbitTemplate rabbitTemplate;
     private DeleteUserUseCase deleteUserUseCase;
 
     @Autowired
-    public UserApi(RabbitTemplate rabbitTemplate, AddUserUseCase addUserUseCase, DeleteUserUseCase deleteUserUseCase) {
+    public UserApi(RabbitTemplate rabbitTemplate, AddUserUseCase addUserUseCase, DeleteUserUseCase deleteUserUseCase, UtilsUserUseCase utilsUserUseCase) {
         this.rabbitTemplate = rabbitTemplate;
         this.addUserUseCase = addUserUseCase;
         this.deleteUserUseCase = deleteUserUseCase;
+        this.utilsUserUseCase = utilsUserUseCase;
     }
 
     /*@RabbitListener(bindings = @QueueBinding(
@@ -55,5 +58,10 @@ public class UserApi {
     public void deleteUser(String message){
         UUID key = UUID.fromString(message);
         deleteUserUseCase.deleteUserByKey(key);
+    }
+
+    @GetMapping("/{key}")
+    public UserDTO getUser(@PathVariable UUID key) {
+        return utilsUserUseCase.getUserByKey(key);
     }
 }

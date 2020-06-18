@@ -70,4 +70,9 @@ public class ClientViewAdapter implements AddClientUseCase, UpdateClientUseCase,
         clientService.getAllActiveClients().forEach(client -> clientDTOS.add(clientViewConverter.convertClient(client)));
         return clientDTOS;
     }
+
+    @Override
+    public ClientDTO getClientByKey(UUID key) {
+        return clientViewConverter.convertClient(clientService.getClientByKey(key));
+    }
 }

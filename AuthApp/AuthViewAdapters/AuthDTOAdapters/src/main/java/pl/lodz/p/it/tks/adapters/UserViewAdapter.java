@@ -57,6 +57,11 @@ public class UserViewAdapter implements AddUserUseCase, DeleteUserUseCase, Updat
     }
 
     @Override
+    public UserDTO getUserByKey(UUID key) {
+        return userViewConverter.convertUser(userService.getUserByKey(key));
+    }
+
+    @Override
     public List<UserDTO> getAllUsers() {
         List<UserDTO> userDTOS = new ArrayList<>();
         userService.getAllUsers().forEach(user -> userDTOS.add(getUserByName(user.getLogin())));

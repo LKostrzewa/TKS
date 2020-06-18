@@ -14,4 +14,5 @@ public interface ClientDBRepository extends JpaRepository<ClientEnt, Integer> {
     void deleteByKey(UUID key);
     ClientEnt getClientEntByName(String name);
     boolean existsByKey(UUID key);
+    ClientEnt getByKey(UUID key);
 }

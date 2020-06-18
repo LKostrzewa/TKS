@@ -58,6 +58,11 @@ public class ClientRepositoryAdapter implements AddClientPort, GetClientPort, De
         return converter.convertClientEnt(repository.getClientEntByName(name));
     }
 
+    @Override
+    public Client getClientByKey(UUID uuid) {
+        return converter.convertClientEnt(repository.getByKey(uuid));
+    }
+
 
     @Override
     @Transactional

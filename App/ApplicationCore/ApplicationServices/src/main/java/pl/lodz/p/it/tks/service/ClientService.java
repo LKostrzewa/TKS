@@ -28,8 +28,6 @@ public class ClientService {
         this.getClientPort = getClientPort;
         this.updateClientPort = updateClientPort;
         this.deleteClientPort = deleteClientPort;
-
-        //addClient(new Client("romek", "Roman", "Bialek", new NormalClient()));
     }
 
     public boolean addClient(Client client){
@@ -62,5 +60,9 @@ public class ClientService {
 
     public Client getClientByName(String name) {
         return getClientPort.getClientByName(name);
+    }
+
+    public Client getClientByKey(UUID key) {
+        return getClientPort.getClientByKey(key);
     }
 }

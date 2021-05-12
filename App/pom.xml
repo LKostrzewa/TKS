@@ -24,7 +24,7 @@
   <properties>
             
     
-    <spring-security.version>5.3.3.RELEASE</spring-security.version>
+    <spring-security.version>5.3.9.RELEASE</spring-security.version>
             
     
     <spring.version>5.2.8.RELEASE</spring.version>

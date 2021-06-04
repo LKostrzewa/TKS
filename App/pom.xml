@@ -268,7 +268,7 @@
       <artifactId>httpclient</artifactId>
                   
       
-      <version>4.5.9</version>
+      <version>4.5.13</version>
                 
     
     </dependency>
